@@ -6,10 +6,7 @@ import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.UUID;
@@ -53,6 +50,12 @@ public class LoginController extends HttpServlet {
                 // 현재 로그인한 memberDTO, uuid 업데이트가 안된 상태임.
                 // 업데이트 해주고, 세션에 저장할 예정.
                 memberDTO.setUuid(uuid);
+
+                // 쿠키를 생성해서, 웹브라우저에게 전달.
+                Cookie rememberCookie = new Cookie("rememberMe", uuid);
+                rememberCookie.setPath("/");
+                rememberCookie.setMaxAge(60*60*24*7);
+                response.addCookie(rememberCookie);
             }
 
             // 세션에, 위의 로그인 정보를 저장,
