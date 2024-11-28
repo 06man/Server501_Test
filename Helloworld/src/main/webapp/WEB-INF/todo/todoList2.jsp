@@ -15,6 +15,7 @@
 <body>
   <h1>jdbcex의 todoList 목록화면. </h1>
 <%--  로그인 한 유저 표시--%>
+  <h2>${loginInfo.mname}님 환영합니다.</h2>
   임시 로그인한 유저 정보: ${loginInfo}
 
   <form action="/logout" method="post">
