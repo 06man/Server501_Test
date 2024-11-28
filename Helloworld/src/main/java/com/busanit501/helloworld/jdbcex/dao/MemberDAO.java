@@ -26,6 +26,7 @@ public class MemberDAO {
         memberVO = MemberVO.builder()
                 .mid(resultSet.getString("mid"))
                 .mpw(resultSet.getString("mpw"))
+                .mname(resultSet.getString("mname"))
                 .build();
 
         return memberVO;
