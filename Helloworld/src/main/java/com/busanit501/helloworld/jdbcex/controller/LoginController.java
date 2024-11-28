@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.UUID;
 
 @Log4j2
 @WebServlet(name = "LoginController", urlPatterns = "/login")
@@ -29,6 +30,15 @@ public class LoginController extends HttpServlet {
         log.info("LoginController doPost ");
         String mid = request.getParameter("mid");
         String mpw = request.getParameter("mpw");
+        // auto, 자동로그인 체크 여부, -> 결과 문자열 : "on"
+        String auto = request.getParameter("auto");
+        // 상태 변수,
+        boolean rememberMe = auto != null && auto.equals("on");
+
+        // 랜덤한 문자열 생성. UUID, 중복 되지 않는 문자열을 랜덤하게 생성.
+        if(rememberMe) {
+           String uuid = UUID.randomUUID().toString();
+        }
 
         // 디비에가서, 해당 유저가 있으면, 임시로 세션에 저장,
         // 예외처리도 없음.
