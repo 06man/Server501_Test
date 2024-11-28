@@ -2,8 +2,10 @@ package com.busanit501.helloworld.jdbcex.service;
 
 import com.busanit501.helloworld.jdbcex.dao.MemberDAO;
 import com.busanit501.helloworld.jdbcex.dao.TodoDAO;
+import com.busanit501.helloworld.jdbcex.dto.MemberDTO;
 import com.busanit501.helloworld.jdbcex.dto.TodoDTO;
 import com.busanit501.helloworld.jdbcex.util.MapperUtil;
+import com.busanit501.helloworld.jdbcex.vo.MemberVO;
 import com.busanit501.helloworld.jdbcex.vo.TodoVO;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -24,6 +26,13 @@ public enum MemberService {
     MemberService() {
         memberDAO = new MemberDAO();
         modelMapper = MapperUtil.INSTANCE.get();
+    }
+
+    // 로그인 확인용.
+    public MemberDTO login(String mid, String mpw) throws SQLException {
+      MemberVO memberVO = memberDAO.getMemberWithMpw(mid,mpw);
+      MemberDTO memberDTO = modelMapper.map(memberVO, MemberDTO.class);
+      return memberDTO;
     }
 
 
