@@ -14,6 +14,9 @@
 </head>
 <body>
   <h1>jdbcex의 todoList 목록화면. </h1>
+  <form action="/logout" method="post">
+    <button type="submit">로그아웃테스트</button>
+  </form>
     <a href="/todo/register2">글쓰기 폼이동</a>
   <h2>todoRead 하나 조회 더미 </h2>
   <a href="/todo/read2?tno=5">하나 조회</a>
