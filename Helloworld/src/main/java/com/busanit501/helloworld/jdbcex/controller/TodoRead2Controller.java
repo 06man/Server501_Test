@@ -52,6 +52,7 @@ public class TodoRead2Controller extends HttpServlet {
     // findCookie , 메서드 추가.
     private Cookie findCookie(Cookie[] cookies, String name) {
         Cookie findCookie = null;
+        // 쿠키가 있는 경우
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
                 // cookie.getName(): 전체 쿠키 목록 요소의 이름
@@ -59,12 +60,19 @@ public class TodoRead2Controller extends HttpServlet {
                 if (cookie.getName().equals(name)) {
                     findCookie = cookie;
                     break;
-                }
-            }
+                } //if
+            } // for
+        } // if
+
+        // 2, 쿠키가 없다면, -> 생성하기.
+        if (findCookie == null) {
+            findCookie = new Cookie("viewTodos", "");
+            findCookie.setPath("/");
+            findCookie.setMaxAge(60*60*24);
         }
 
         return findCookie;
-    }
+    } // method
 
 
 }// class
