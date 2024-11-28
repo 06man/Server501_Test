@@ -39,6 +39,12 @@ public enum MemberService {
         memberDAO.updateUuid(mid,uuid);
     }
 
+    public MemberDTO getMemberWithUuidService(String uuid) throws SQLException {
+        MemberVO memberVO= memberDAO.getMemberWithUuid(uuid);
+        MemberDTO memberDTO = modelMapper.map(memberVO, MemberDTO.class);
+        return memberDTO;
+    }
+
 
 }
 
