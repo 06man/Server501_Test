@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 public class MemberServiceTest {
@@ -27,6 +28,13 @@ public class MemberServiceTest {
     public void loginTest() throws SQLException {
      MemberDTO memberDTO = memberService.login("lsy", "1234");
      log.info("MemberService loginTest : " + memberDTO.toString());
+    }
+
+    // 등록
+    @Test
+    public void updateUuidTest() throws SQLException {
+        String uuid = UUID.randomUUID().toString();
+        memberService.updateUuid("lsy",uuid);
     }
 
 

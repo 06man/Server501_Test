@@ -35,6 +35,9 @@ public enum MemberService {
       return memberDTO;
     }
 
+    public void updateUuid(String mid, String uuid) throws SQLException {
+        memberDAO.updateUuid(mid,uuid);
+    }
 
 
 }
