@@ -34,7 +34,7 @@ public class MemberServiceTest {
     @Test
     public void updateUuidTest() throws SQLException {
         String uuid = UUID.randomUUID().toString();
-        memberService.updateUuid("lsy",uuid);
+        memberService.updateUuid("lsy2",uuid);
     }
 
 
