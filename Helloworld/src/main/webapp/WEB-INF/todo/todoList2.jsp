@@ -17,6 +17,7 @@
 <%--  로그인 한 유저 표시--%>
   <h2>${loginInfo.mname}님 환영합니다.</h2>
   임시 로그인한 유저 정보: ${loginInfo}
+  임시 조회한 게시글 번호 정보 : ${cookie.viewTodos.value}
 
   <form action="/logout" method="post">
     <button type="submit">로그아웃테스트</button>
