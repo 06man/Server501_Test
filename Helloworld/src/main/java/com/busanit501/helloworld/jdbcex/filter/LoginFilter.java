@@ -44,6 +44,7 @@ public class LoginFilter implements Filter {
             log.info("2번째 이후로 서버에 요청을했고, 하지만, 로그인 정보는 없는 경우.");
             // 로그인 컨트롤러가 아직 없음, 곧 만들 예정.
 //            response.sendRedirect("/login");
+            // 필터 동작을 계속 진행한다.
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
@@ -75,6 +76,8 @@ public class LoginFilter implements Filter {
                 throw new Exception("쿠키값이 유효하지 않습니다.");
             }
             // 회원정보를 , 세션에 추가하기.
+            // 우리는 현재 시스템에서, 세션에 loginInfo가 등록이 되면,
+            // 로그인 된걸로 하고 있으.ㅁ
             session.setAttribute("loginInfo", memberDTO);
             //계속 필터 동작을 진행하겠다.
             // 만약 필터가 더이상 없다면, 원래대로 서버에서 나타내는 화면으로 이동함.
