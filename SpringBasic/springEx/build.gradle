@@ -78,6 +78,23 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
     implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.19'
 
+    //9 spring-jdbc
+    // https://mvnrepository.com/artifact/org.springframework/spring-jdbc
+    implementation group: 'org.springframework', name: 'spring-jdbc', version: '5.3.19'
+
+    //10 spring-tx
+    // https://mvnrepository.com/artifact/org.springframework/spring-tx
+    implementation group: 'org.springframework', name: 'spring-tx', version: '5.3.19'
+
+    // 11 mybatis
+    // https://mvnrepository.com/artifact/org.mybatis/mybatis
+    implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.17'
+
+    //12 mybatis-spring
+    // https://mvnrepository.com/artifact/org.mybatis/mybatis-spring
+    implementation group: 'org.mybatis', name: 'mybatis-spring', version: '3.0.4'
+
+
 }
 
 test {
