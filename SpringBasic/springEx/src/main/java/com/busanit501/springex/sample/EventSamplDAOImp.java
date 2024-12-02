@@ -1,5 +1,6 @@
 package com.busanit501.springex.sample;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -7,7 +8,8 @@ import org.springframework.stereotype.Repository;
 // 시스템에게 2개를 알려줌, -> 시스템 입장에서, 어느 것을 선택 해야하는 문제점.
 
 @Repository
-@Primary // 주 클래스로 이용하겠다. 시스템에게 알려줌.
+//@Primary // 주 클래스로 이용하겠다. 시스템에게 알려줌.
+@Qualifier("event")
 public class EventSamplDAOImp implements SampleDAO{
 
 }

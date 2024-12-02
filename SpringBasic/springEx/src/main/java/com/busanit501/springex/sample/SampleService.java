@@ -3,6 +3,7 @@ package com.busanit501.springex.sample;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,7 @@ public class SampleService {
     // 클래스 상단에 , 애너테이션 @RequiredArgsConstructor 붙이면 됨.
     // SampleDAO -> 타입: 인터페이스, sampleDAO,
     // 구현한 클래스 2개가 시스템 상에 등록이 되었다.
+    @Qualifier("normal")
     private final SampleDAO sampleDAO;
 
 
