@@ -31,6 +31,7 @@ public class SampleController {
 
     @GetMapping("/ex1")
     // 파라미터 수집 여부만 확인, 뷰없이, 콘솔에서 확인.
+    // localhost:8080/ex1?name=lsy&age=41
     public void ex1(String name, int age) {
         log.info("ex1 name:" + name);
         log.info("ex1 age:" + age);
