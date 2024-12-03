@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+
 // 1) 화면제공 2) 데이터제공
 @Controller
 @Log4j2
@@ -44,10 +46,15 @@ public class SampleController {
     // localhost:8080/ex2?name=lsy&age=41
     public void ex2(@RequestParam(name = "name", defaultValue = "LSY") String name,
                     @RequestParam(name = "age", defaultValue = "30")int age) {
-
         log.info("ex2 name:" + name);
         log.info("ex2 age:" + age);
+    }
 
+    @GetMapping("/ex3")
+    // 웹브라우저에서 넘어온 데이터 타입은 문자열이어서,
+    // 받을 때 타입 불일치 오류 확인.
+    public void ex3(LocalDate dueDate) {
+        log.info("ex3 dueDate:" + dueDate);
     }
 
 }
