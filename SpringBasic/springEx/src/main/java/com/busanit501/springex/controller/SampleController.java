@@ -102,6 +102,11 @@ public class SampleController {
         //
         return "redirect:/ex7";
     }
+
+    @GetMapping("/ex7")
+    public void ex7() {
+        log.info("ex7");
+    }
 }
 
 
