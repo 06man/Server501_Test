@@ -28,4 +28,13 @@ public class SampleController {
         log.info("hello2");
         return "helloTest";
     }
+
+    @GetMapping("/ex1")
+    // 파라미터 수집 여부만 확인, 뷰없이, 콘솔에서 확인.
+    public void ex1(String name, int age) {
+        log.info("ex1 name:" + name);
+        log.info("ex1 age:" + age);
+
+    }
+
 }
