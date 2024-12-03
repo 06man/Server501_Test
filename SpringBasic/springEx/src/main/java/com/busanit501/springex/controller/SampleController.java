@@ -69,7 +69,9 @@ public class SampleController {
     @GetMapping("/ex4")
     public void ex4(Model model) {
         log.info("ex4 Model 서버에서 -> 데이터 전달하기. :");
-        model.addAttribute("msg","안녕하세요");
+        model.addAttribute("msg"," <script>\n" +
+                "                    alert('이것은 JavaScript alert 테스트입니다!, 만약, 공격자가 악성 코드를 이런식으로 문자열에 포함하면 안 좋은일이 생김');\n" +
+                "                </script>");
     }
 
 }
