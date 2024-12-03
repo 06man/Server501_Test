@@ -53,6 +53,9 @@ public class SampleController {
     @GetMapping("/ex3")
     // 웹브라우저에서 넘어온 데이터 타입은 문자열이어서,
     // 받을 때 타입 불일치 오류 확인.
+    // localhost:8080/ex3?dueDate=2024-12-03
+    // 대책은, 미리, 형이 다른 문자열에 대해서,
+    // LocalDate <-> String  , 미리 만들어두기.
     public void ex3(LocalDate dueDate) {
         log.info("ex3 dueDate:" + dueDate);
     }
