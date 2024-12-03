@@ -3,6 +3,7 @@ package com.busanit501.springex.controller;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 // 1) 화면제공 2) 데이터제공
 @Controller
@@ -35,6 +36,17 @@ public class SampleController {
     public void ex1(String name, int age) {
         log.info("ex1 name:" + name);
         log.info("ex1 age:" + age);
+
+    }
+
+    @GetMapping("/ex2")
+    // 파라미터 수집 여부만 확인, 뷰없이, 콘솔에서 확인.
+    // localhost:8080/ex2?name=lsy&age=41
+    public void ex2(@RequestParam(name = "name", defaultValue = "LSY") String name,
+                    @RequestParam(name = "age", defaultValue = "30")int age) {
+
+        log.info("ex2 name:" + name);
+        log.info("ex2 age:" + age);
 
     }
 
