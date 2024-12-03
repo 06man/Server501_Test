@@ -13,14 +13,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Log4j2
 public class TodoController {
 
+    // localhost:8080/todo/list
     @RequestMapping("/list")
     public void list() {
         log.info("TodoController list : 화면제공은 해당 메서드 명으로 제공함.");
     }
 
+    // localhost:8080/todo/register
+    // 1) 글작성 폼, 화면 -> get
+    // 2) 글작성 로직 처리 -> post
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public void register() {
         log.info("TodoController register : 화면제공은 해당 메서드 명으로 제공함.");
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public void registerPost() {
+        log.info("TodoController register post 로직처리: ");
     }
 }
 
