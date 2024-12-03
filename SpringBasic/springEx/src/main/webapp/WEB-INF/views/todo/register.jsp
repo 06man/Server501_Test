@@ -1,4 +1,5 @@
 <!doctype html>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -77,8 +78,8 @@
                             </div>
                             <div class="my-4">
                                 <div class="float-end">
-                                    <button type="submit">글작성</button>
-                                    <button type="reset">초기화</button>
+                                    <button type="submit" class="btn btn-primary">글작성</button>
+                                    <button type="reset" class="btn btn-secondary">초기화</button>
                                 </div>
                             </div>
                         </form>
