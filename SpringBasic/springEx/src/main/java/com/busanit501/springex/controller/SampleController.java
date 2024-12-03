@@ -56,6 +56,9 @@ public class SampleController {
     // localhost:8080/ex3?dueDate=2024-12-03
     // 대책은, 미리, 형이 다른 문자열에 대해서,
     // LocalDate <-> String  , 미리 만들어두기.
+    //
+    // 시스템에 , 빈으로 등록해서,
+    // LocalDate가 문자열로 전송되어도, 시스템이 자동으로  LocalDate 형 변환해줌.
     public void ex3(LocalDate dueDate) {
         log.info("ex3 dueDate:" + dueDate);
     }
