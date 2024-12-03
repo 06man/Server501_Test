@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 
@@ -87,4 +88,22 @@ public class SampleController {
         log.info("ex5 : " + todoDTO);
     }
 
+    //리다이렉트 시, 데이터 전달
+    // 1) 키, 값의 형태로 데이터 전달,
+    // 2) 일회용으로 데이터 전달 예시,
+    @GetMapping("/ex6")
+    public String ex6(RedirectAttributes redirectAttributes) {
+        log.info("ex6  :");
+        // 키, 값의 구조로 데이터 전달.
+        // 서버 -> 웹 브라우저로 전달,  화면에 데이터를 탑재해서 전달.
+        redirectAttributes.addAttribute("msg","잘보고 있나요?");
+        redirectAttributes.addFlashAttribute("msg2","1회용으로 사용하는 데이터");
+
+        //
+        return "redirect:/ex7";
+    }
 }
+
+
+
+
