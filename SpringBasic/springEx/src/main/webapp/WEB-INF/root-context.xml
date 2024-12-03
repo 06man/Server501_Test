@@ -61,6 +61,7 @@
 
 <!--    모델 맵퍼 설정 클래스 경로 추가 -> @Configuration 애너테이션이용 가능.-->
     <context:component-scan base-package="com.busanit501.springex.config"/>
+    <context:component-scan base-package="com.busanit501.springex.service"/>
 
 
 </beans>
