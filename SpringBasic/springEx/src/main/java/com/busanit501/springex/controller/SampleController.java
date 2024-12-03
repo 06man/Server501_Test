@@ -1,5 +1,6 @@
 package com.busanit501.springex.controller;
 
+import com.busanit501.springex.dto.TodoDTO;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,6 +73,18 @@ public class SampleController {
         model.addAttribute("msg"," <script>\n" +
                 "                    alert('이것은 JavaScript alert 테스트입니다!, 만약, 공격자가 악성 코드를 이런식으로 문자열에 포함하면 안 좋은일이 생김');\n" +
                 "                </script>");
+    }
+
+    @GetMapping("/ex5")
+    // 웹브라우저에서 TodoDTO 멤버 타입 형식으로 받고,
+    // 다시 서버 -> 웹브라우저로 전달 하는 방법.
+    // 파라미터 , TodoDTO todoDTO 선언되어있으면,
+    // 화면에서 , 그대로 사용가능., 예시) ${todoDTO}
+    // localhost:8080/ex5?title=lsy&writer=이상용
+    // 모델 Model model 사용안해도, 스프링 프레임워크에서 자동으로 화면에서 사용가능.
+    public void ex5(TodoDTO todoDTO , Model model) {
+        log.info("ex5  :");
+        log.info("ex5 : " + todoDTO);
     }
 
 }
