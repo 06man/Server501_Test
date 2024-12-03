@@ -96,7 +96,9 @@ public class SampleController {
         log.info("ex6  :");
         // 키, 값의 구조로 데이터 전달.
         // 서버 -> 웹 브라우저로 전달,  화면에 데이터를 탑재해서 전달.
-        redirectAttributes.addAttribute("msg","잘보고 있나요?");
+        // 주의사항, 쿼리스트링으로 보냄. -> ex7에서 받는 변수가 필요함.
+        redirectAttributes.addAttribute("msg","test");
+        // 화면에서 일회용으로 바로 사용가능.
         redirectAttributes.addFlashAttribute("msg2","1회용으로 사용하는 데이터");
 
         //
@@ -104,8 +106,10 @@ public class SampleController {
     }
 
     @GetMapping("/ex7")
-    public void ex7() {
+    public void ex7(String msg, Model model) {
         log.info("ex7");
+        log.info("msg:" + msg);
+        model.addAttribute("msg",msg);
     }
 }
 
