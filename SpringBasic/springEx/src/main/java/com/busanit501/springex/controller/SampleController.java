@@ -112,6 +112,15 @@ public class SampleController {
         log.info("msg:" + msg);
         model.addAttribute("msg",msg);
     }
+
+    // 타입 불일치로 강제로 예외 발생 하는 예시
+    @GetMapping("/ex8")
+    public void ex8(String name, int age) {
+        log.info("ex8 name :" + name);
+        log.info("ex8 age :" + age);
+
+    }
+
 }
 
 
