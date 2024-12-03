@@ -1,5 +1,6 @@
-package com.busanit501.springex.sample.mapper;
+package com.busanit501.springex.mapper;
 
+import com.busanit501.springex.domain.TodoVO;
 import com.busanit501.springex.mapper.TimeMapper2;
 import com.busanit501.springex.mapper.TodoMapper;
 import lombok.extern.log4j.Log4j2;
@@ -8,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.time.LocalDate;
 
 @Log4j2
 @ExtendWith(SpringExtension.class) //JUnit5 테스트 설정.
@@ -24,6 +27,17 @@ public class TodoMapperTest {
     @Test
     public void testGetTime() {
         log.info("getTime : " + todoMapper.getTime());
+    }
+
+    @Test
+    public void testInsert() {
+        // 더미 데이터 , TodoVO 담아서, 진행.
+        TodoVO todoVO = TodoVO.builder()
+                .title("샘플 테스트")
+                .dueDate(LocalDate.now())
+                .writer("이상용")
+                .build();
+        todoMapper.insert(todoVO);
     }
 
 }

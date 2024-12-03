@@ -1,4 +1,4 @@
-package com.busanit501.springex.sample.mapper;
+package com.busanit501.springex.mapper;
 
 import com.busanit501.springex.mapper.TimeMapper;
 import com.busanit501.springex.mapper.TimeMapper2;
