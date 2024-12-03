@@ -4,6 +4,7 @@ import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller// 1)화면 2)데이터 제공.
 @RequestMapping("/todo")
@@ -15,6 +16,11 @@ public class TodoController {
     @RequestMapping("/list")
     public void list() {
         log.info("TodoController list : 화면제공은 해당 메서드 명으로 제공함.");
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public void register() {
+        log.info("TodoController register : 화면제공은 해당 메서드 명으로 제공함.");
     }
 }
 
