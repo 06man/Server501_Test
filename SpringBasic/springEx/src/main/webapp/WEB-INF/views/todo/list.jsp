@@ -59,28 +59,32 @@
                     <div class="card-body">
                         <%--                        Todo List 부분 작성--%>
                         <h5 class="card-title">리스트 목록</h5>
-                            <table class="table">
-                                <thead>
-<%--                                소제목--%>
-                                 <tr>
-                                     <th scope="col">Tno</th>
-                                     <th scope="col">Title</th>
-                                     <th scope="col">Writer</th>
-                                     <th scope="col">DueDate</th>
-                                     <th scope="col">Finished</th>
-                                 </tr>
-                                </thead>
-<%--                                본문--%>
-                                <tbody>
-                                    <c:forEach items="${list}" var="dto">
-                                        <th scope="row"><c:out value="${dto.tno}"></c:out> </th>
-                                        <td><c:out value="${dto.title}"></c:out></td>
-                                        <td><c:out value="${dto.writer}"></c:out></td>
-                                        <td><c:out value="${dto.dueDate}"></c:out></td>
-                                        <td><c:out value="${dto.finished}"></c:out></td>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
+                        <table class="table">
+                            <thead>
+                            <%--                                소제목--%>
+                            <tr>
+                                <th scope="col">Tno</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Writer</th>
+                                <th scope="col">DueDate</th>
+                                <th scope="col">Finished</th>
+                            </tr>
+                            </thead>
+                            <%--                                본문--%>
+                            <tbody>
+
+                                <c:forEach items="${list}" var="dto">
+                                <tr>
+                                    <th scope="row"><c:out value="${dto.tno}"></c:out></th>
+                                    <td><c:out value="${dto.title}"></c:out></td>
+                                    <td><c:out value="${dto.writer}"></c:out></td>
+                                    <td><c:out value="${dto.dueDate}"></c:out></td>
+                                    <td><c:out value="${dto.finished}"></c:out></td>
+                                </tr>
+                                </c:forEach>
+
+                            </tbody>
+                        </table>
                         <%--                       Todo List 부분 작성--%>
 
                     </div>
@@ -106,7 +110,7 @@
 <%--입력 폼에 관련 유효성 체크, 서버로부터  erros 키로 값을 받아오면, --%>
 <%--자바스크립 콘솔에 임시 출력.--%>
 <script>
-    const serverValidResult = {    };
+    const serverValidResult = {};
     // jstl , 반복문으로, 서버로부터 넘어온 여러 에러 종류가 많습니다.
     //     하나씩 꺼내서, 출력하는 용도.,
     <c:forEach items="${errors}" var="error">
