@@ -69,6 +69,20 @@ public class TodoController {
 
         return "redirect:/todo/list";
     }
+
+    // 상세조회, 컨트롤러, 서비스 연결 부분,
+
+
+    // 수정 1) 폼 2) 로직 처리
+
+    // 삭제
+
+    // 페이징,
+
+    // 검색,
+
+    // 필터
+
 }
 
 
