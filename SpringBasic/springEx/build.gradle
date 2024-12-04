@@ -60,6 +60,8 @@ dependencies {
 
     //6
     // logging 라이브러리,Log4j2,
+    // 서블릿 옛날 버전을 사용해서, 버전 충돌 발생 3.0.0-beta -> 2.19.0
+    // 이슈가 많지만, 정상 동작 확인.
     implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
     implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
     implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.19.0'
