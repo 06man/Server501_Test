@@ -1,8 +1,11 @@
 package com.busanit501.springex.controller;
 
 import com.busanit501.springex.dto.TodoDTO;
+import com.busanit501.springex.service.TodoService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +19,15 @@ import javax.validation.Valid;
 // 웹브라우저에서 아래의 경로로 오는 url 전부 여기 컨트롤러가 받아서 작업함.
 // localhost:8080/todo/
 @Log4j2
+@RequiredArgsConstructor
 public class TodoController {
+
+//    @Autowired
+//    private TodoService todoService;
+
+    private final TodoService todoService;
+
+
 
     // localhost:8080/todo/list
     @RequestMapping("/list")
@@ -49,6 +60,8 @@ public class TodoController {
             return "redirect:/todo/register";
         }
         //검사가 통과가 되고, 정상 입력
+        todoService.register(todoDTO);
+
         return "redirect:/todo/list";
     }
 }
