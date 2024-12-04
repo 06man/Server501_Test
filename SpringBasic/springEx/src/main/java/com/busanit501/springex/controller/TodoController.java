@@ -4,8 +4,12 @@ import com.busanit501.springex.dto.TodoDTO;
 import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller// 1)화면 2)데이터 제공.
 @RequestMapping("/todo")
@@ -29,9 +33,22 @@ public class TodoController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void registerPost(TodoDTO todoDTO) {
+    //@Valid TodoDTO todoDTO : 검사 대상 클래스,
+    // BindingResult bindingResult : 검사 결과의 오류를 모아두는 임시 공간
+    // RedirectAttributes redirectAttributes : 서버 -> 웹 , 데이터 전달하는 도구
+    public String registerPost(@Valid TodoDTO todoDTO, BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
         log.info("TodoController register post 로직처리: ");
         log.info("TodoController register post  todoDTO : " + todoDTO);
+
+        // 유효성 체크 -> 유효성 검증시, 통과 안된 원인이 있다면,
+        if (bindingResult.hasErrors()) {
+            // 1회용으로, 웹 브라우저에서, errors , 키로 조회 가능함. -> 뷰 ${errors}
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/todo/register";
+        }
+        //검사가 통과가 되고, 정상 입력
+        return "redirect:/todo/list";
     }
 }
 
