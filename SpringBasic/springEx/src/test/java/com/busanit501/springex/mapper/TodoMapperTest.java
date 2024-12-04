@@ -56,7 +56,6 @@ public class TodoMapperTest {
     @Test
     public void testDelete() {
         todoMapper.delete(9L);
-
     }
 
 }

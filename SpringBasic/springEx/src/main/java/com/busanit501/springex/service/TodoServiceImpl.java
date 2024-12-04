@@ -42,4 +42,10 @@ public class TodoServiceImpl implements TodoService{
         return todoDTO;
     }
 
+    @Override
+    public void delete(Long tno) {
+        todoMapper.delete(tno);
+    }
+
+
 }

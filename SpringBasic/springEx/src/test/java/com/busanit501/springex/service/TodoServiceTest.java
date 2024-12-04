@@ -40,7 +40,7 @@ public class TodoServiceTest {
     @Test
     public void testGetAll() {
         List<TodoDTO> list = todoService.getAll();
-        for (TodoDTO todoDTO:list) {
+        for (TodoDTO todoDTO : list) {
             log.info("todoDTO : " + todoDTO);
         }
     } //
@@ -48,8 +48,13 @@ public class TodoServiceTest {
     @Test
     public void testGetOne() {
         TodoDTO todoDTO = todoService.getOne(9L);
-            log.info("todoDTO : " + todoDTO);
+        log.info("todoDTO : " + todoDTO);
 
+    } //
+
+    @Test
+    public void testDelete() {
+        todoService.delete(8L);
     } //
 
 
