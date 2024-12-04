@@ -89,6 +89,15 @@ public class TodoController {
 
 
     // 수정 1) 폼 2) 로직 처리
+    @RequestMapping("/update")
+    public void update(Long tno, Model model) {
+        log.info("TodoController read :");
+        TodoDTO todoDTO = todoService.getOne(tno);
+        log.info("TodoController read 데이터 유무 확인 :" + todoDTO);
+        //데이터 탑재. 서버 -> 웹
+        model.addAttribute("todoDTO", todoDTO);
+
+    }
 
     // 삭제
 
