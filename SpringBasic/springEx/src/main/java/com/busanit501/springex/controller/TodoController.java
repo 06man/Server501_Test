@@ -71,6 +71,21 @@ public class TodoController {
     }
 
     // 상세조회, 컨트롤러, 서비스 연결 부분,
+    // http://localhost:8080/todo/read?tno=9
+    // 파라미터 자동 수집 부분 많이 활용.
+    // tno, 서버에서 바로 이용가능.
+    // 파리미터로 (TodoDTO todoDTO), 웹에서 넘어온 정보는
+    //model.addAttribute("todoDTO", todoDTO) 없이도,
+    // 뷰에서 -> EL 표기법으로 바로 사용가능 ${todoDTO}
+    @RequestMapping("/read")
+    public void read(Long tno, Model model) {
+        log.info("TodoController read :");
+        TodoDTO todoDTO = todoService.getOne(tno);
+        log.info("TodoController read 데이터 유무 확인 :" + todoDTO);
+        //데이터 탑재. 서버 -> 웹
+        model.addAttribute("todoDTO", todoDTO);
+
+    }
 
 
     // 수정 1) 폼 2) 로직 처리
