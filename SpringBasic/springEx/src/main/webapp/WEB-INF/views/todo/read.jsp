@@ -58,7 +58,7 @@
                     </div>
                     <div class="card-body">
                         <%--                        Todo 입력 폼 여기에 작성--%>
-                        <form action="/todo/register" method="post">
+<%--                        <form action="/todo/register" method="post">--%>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Tno</span>
                                 <input type="text" name="tno" class="form-control" readonly
@@ -88,11 +88,11 @@
                             </div>
                             <div class="my-4">
                                 <div class="float-end">
-                                    <button type="submit" class="btn btn-primary">글작성</button>
-                                    <button type="reset" class="btn btn-secondary">초기화</button>
+                                    <button type="button" class="btn btn-primary">수정하기</button>
+                                    <button type="button" class="btn btn-secondary">목록가기</button>
                                 </div>
                             </div>
-                        </form>
+<%--                        </form>--%>
                         <%--                        Todo 입력 폼 여기에 작성--%>
 
                     </div>
@@ -125,6 +125,22 @@
     serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
     </c:forEach>
     console.log(serverValidResult)
+</script>
+
+<%--목록가기 및 수정폼 가기 이벤트 리스너--%>
+<script>
+    // 수정폼
+    document.querySelector(".btn-primary").addEventListener("click",
+    function (e){
+        // 수정폼으로 가야함. 그러면, 필요한 준비물 tno 번호가 필요함
+        self.location = "/todo/update?tno="+${todoDTO.tno}
+    ,false})
+    // 목록
+    document.querySelector(".btn-secondary").addEventListener("click",
+        function (e){
+            // 수정폼으로 가야함. 그러면, 필요한 준비물 tno 번호가 필요함
+            self.location = "/todo/list"
+                ,false})
 </script>
 
 
