@@ -1,5 +1,6 @@
 <!doctype html>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -105,6 +106,17 @@
         </div>
     </div>
 </div>
+<%--입력 폼에 관련 유효성 체크, 서버로부터  erros 키로 값을 받아오면, --%>
+<%--자바스크립 콘솔에 임시 출력.--%>
+<script>
+    const serverValidResult = {    };
+    // jstl , 반복문으로, 서버로부터 넘어온 여러 에러 종류가 많습니다.
+    //     하나씩 꺼내서, 출력하는 용도.,
+    <c:forEach items="${errors}" var="error">
+    serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
+    </c:forEach>
+    console.log(serverValidResult)
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
