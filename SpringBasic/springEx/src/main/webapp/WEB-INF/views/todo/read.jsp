@@ -82,9 +82,9 @@
                                        value=<c:out value="${todoDTO.writer}"></c:out>>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="form-check-label">Finished</span>
+                                <label class="form-check-label">Finished &nbsp</label>
                                 <input type="checkbox" name="finished" class="form-check-input" readonly
-                                       value=<c:out value="${todoDTO.finished}"></c:out>>
+                                       ${todoDTO.finished ? "checked" : ""}>
                             </div>
                             <div class="my-4">
                                 <div class="float-end">
