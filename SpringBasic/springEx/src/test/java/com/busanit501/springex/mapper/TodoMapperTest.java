@@ -53,4 +53,10 @@ public class TodoMapperTest {
             log.info("todoVo : " + todoVo);
     }
 
+    @Test
+    public void testDelete() {
+        todoMapper.delete(9L);
+
+    }
+
 }
