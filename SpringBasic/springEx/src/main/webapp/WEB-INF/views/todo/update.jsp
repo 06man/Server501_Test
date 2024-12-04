@@ -58,11 +58,12 @@
                     </div>
                     <div class="card-body">
                         <%--                        Todo 입력 폼 여기에 작성--%>
-<%--                        <form action="/todo/register" method="post">--%>
+                        <form action="/todo/update" method="post">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Tno</span>
                                 <input type="text" name="tno" class="form-control" readonly
-                                       value=<c:out value="${todoDTO.tno}"></c:out> >
+                                       value=
+                                       <c:out value="${todoDTO.tno}"></c:out>>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Title</span>
@@ -84,7 +85,7 @@
                             <div class="input-group mb-3">
                                 <label class="form-check-label">Finished &nbsp</label>
                                 <input type="checkbox" name="finished" class="form-check-input"
-                                       ${todoDTO.finished ? "checked" : ""}>
+                                ${todoDTO.finished ? "checked" : ""}>
                             </div>
                             <div class="my-4">
                                 <div class="float-end">
@@ -93,7 +94,7 @@
                                     <button type="button" class="btn btn-secondary">목록가기</button>
                                 </div>
                             </div>
-<%--                        </form>--%>
+                        </form>
                         <%--                        Todo 입력 폼 여기에 작성--%>
 
                     </div>
@@ -104,9 +105,9 @@
         </div>
         <!--        class="row content"-->
     </div>
-<%--    <div class="row content">--%>
-<%--        <h1>Content</h1>--%>
-<%--    </div>--%>
+    <%--    <div class="row content">--%>
+    <%--        <h1>Content</h1>--%>
+    <%--    </div>--%>
     <div class="row footer">
         <!--        <h1>Footer</h1>-->
         <div class="row fixed-bottom" style="z-index: -100">
@@ -119,7 +120,7 @@
 <%--입력 폼에 관련 유효성 체크, 서버로부터  erros 키로 값을 받아오면, --%>
 <%--자바스크립 콘솔에 임시 출력.--%>
 <script>
-    const serverValidResult = {    };
+    const serverValidResult = {};
     // jstl , 반복문으로, 서버로부터 넘어온 여러 에러 종류가 많습니다.
     //     하나씩 꺼내서, 출력하는 용도.,
     <c:forEach items="${errors}" var="error">
@@ -132,16 +133,38 @@
 <script>
     // 수정폼
     document.querySelector(".btn-primary").addEventListener("click",
-    function (e){
-        // 수정폼으로 가야함. 그러면, 필요한 준비물 tno 번호가 필요함
-        self.location = "/todo/update?tno="+${todoDTO.tno}
-    ,false})
+        function (e) {
+            // 수정폼으로 가야함. 그러면, 필요한 준비물 tno 번호가 필요함
+            self.location = "/todo/update?tno=" +${todoDTO.tno}
+                , false
+        })
     // 목록
     document.querySelector(".btn-secondary").addEventListener("click",
-        function (e){
+        function (e) {
             // 수정폼으로 가야함. 그러면, 필요한 준비물 tno 번호가 필요함
             self.location = "/todo/list"
-                ,false})
+                , false
+        })
+
+    // 삭제기능.
+    document.querySelector(".btn-danger").addEventListener("click",
+        function (e) {
+            // 폼에서, 필요한  tno가져오기.
+            const formObj = document.querySelector("form")
+
+            // 기본 폼 방식으로 전달하는 기본 기능 제거 하고,
+            e.preventDefault()
+            e.stopPropagation() // 상위 태그로 전파 방지
+
+            // 삭제시 포스트로, tno 번호를 전달하는 방식.
+            // formObj , 원래 action: /todo/update
+            // 속성을 변경 가능해서, 임시로, 삭제 url 변경.
+            formObj.action = "/todo/delete"
+            formObj.method = "post"
+            // todoDTO 모든 멤버가 같이 전달됨.
+            // tno, title, dueDate, finished, writer
+            formObj.submit()
+        },false)
 </script>
 
 
