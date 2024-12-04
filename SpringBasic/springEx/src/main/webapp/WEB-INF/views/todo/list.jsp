@@ -59,6 +59,7 @@
                     <div class="card-body">
                         <%--                        Todo List 부분 작성--%>
                         <h5 class="card-title">리스트 목록</h5>
+                        <button type="button" class="btn btn-primary insertTodoBtn">글쓰기</button>
                         <table class="table">
                             <thead>
                             <%--                                소제목--%>
@@ -73,7 +74,7 @@
                             <%--                                본문--%>
                             <tbody>
 
-                                <c:forEach items="${list}" var="dto">
+                            <c:forEach items="${list}" var="dto">
                                 <tr>
                                     <th scope="row"><c:out value="${dto.tno}"></c:out></th>
                                     <td><a href="/todo/read?tno=${dto.tno}" class="text-decoration-none">
@@ -83,7 +84,7 @@
                                     <td><c:out value="${dto.dueDate}"></c:out></td>
                                     <td><c:out value="${dto.finished}"></c:out></td>
                                 </tr>
-                                </c:forEach>
+                            </c:forEach>
 
                             </tbody>
                         </table>
@@ -119,6 +120,15 @@
     serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
     </c:forEach>
     console.log(serverValidResult)
+</script>
+
+<script>
+    document.querySelector(".insertTodoBtn").addEventListener("click",
+        function (e) {
+// 글쓰기 폼으로 가야함.
+            self.location = "/todo/register"
+                , false
+        })
 </script>
 
 
