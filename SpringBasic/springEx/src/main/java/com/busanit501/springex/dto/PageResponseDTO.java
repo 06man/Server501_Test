@@ -8,7 +8,6 @@ import java.util.List;
 // <E> 제너릭으로, Element, 해당 타입을 유연하게 설정.
 // PageResponseDTO 응답을 하는 건, 페이징 처리
 // 페이징 처리 도메인(예시, Todo, Member, Reply, Product 등.)
-@Builder
 @Data
 public class PageResponseDTO<E> {
     // 서버 -> 웹 , 페이징 준비물 전달.
