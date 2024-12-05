@@ -86,4 +86,15 @@ public class TodoMapperTest {
         list.forEach(vo -> log.info("vo : " + vo));
     }
 
+    // 페이징 처리해서 전체 갯수 조회
+    @Test
+    public void testGetCount() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .build();
+        int total = todoMapper.getCount(pageRequestDTO);
+        log.info("total : " + total);
+    }
+
 }
