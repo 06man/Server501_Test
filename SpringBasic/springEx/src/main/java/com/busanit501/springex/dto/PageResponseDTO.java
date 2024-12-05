@@ -1,10 +1,15 @@
 package com.busanit501.springex.dto;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.util.List;
 
 // <E> 제너릭으로, Element, 해당 타입을 유연하게 설정.
 // PageResponseDTO 응답을 하는 건, 페이징 처리
 // 페이징 처리 도메인(예시, Todo, Member, Reply, Product 등.)
+@Builder
+@Data
 public class PageResponseDTO<E> {
     // 서버 -> 웹 , 페이징 준비물 전달.
     // 준비물
@@ -27,6 +32,19 @@ public class PageResponseDTO<E> {
 
     // 웹에 전달할 페이징 처리된 게시글 10개, 임의로
     private List<E> dtoList;
+
+    //방법2,
+    // 생성자를 특정이름으로 직접 정의해서, 호출해서 사용함.
+    @Builder(builderMethodName = "withAll")
+    public PageResponseDTO(List<E> dtoList, int total,
+                           PageRequestDTO pageRequestDTO) {
+        this.page = pageRequestDTO.getPage();
+        this.size = pageRequestDTO.getSize();
+        this.total = total;
+        this.dtoList = dtoList;
+    }
+
+
 
 
 
