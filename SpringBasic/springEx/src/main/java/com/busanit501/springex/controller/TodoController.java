@@ -42,10 +42,10 @@ public class TodoController {
         if(bindingResult.hasErrors()) {
             pageRequestDTO = PageRequestDTO.builder().build();
         }
-        PageResponseDTO<TodoDTO> dtoList = todoService.getListWithPage(pageRequestDTO);
-        log.info("TodoController list 데이터 유무 확인 :" + dtoList);
+        PageResponseDTO<TodoDTO> pageResponseDTO = todoService.getListWithPage(pageRequestDTO);
+        log.info("TodoController list 데이터 유무 확인 :" + pageResponseDTO);
         //데이터 탑재. 서버 -> 웹
-        model.addAttribute("dtoList", dtoList);
+        model.addAttribute("pageResponseDTO", pageResponseDTO);
 
     }
 

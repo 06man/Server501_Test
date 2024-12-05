@@ -74,7 +74,7 @@
                             <%--                                본문--%>
                             <tbody>
 
-                            <c:forEach items="${list}" var="dto">
+                            <c:forEach items="${pageResponseDTO.dtoList}" var="dto">
                                 <tr>
                                     <th scope="row"><c:out value="${dto.tno}"></c:out></th>
                                     <td><a href="/todo/read?tno=${dto.tno}" class="text-decoration-none">
