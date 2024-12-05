@@ -68,7 +68,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Title</span>
                                 <input type="text" name="title" class="form-control" placeholder="제목을 입력해주세요"
-                                       value=<c:out value="${todoDTO.title}"></c:out>>
+                                       value='<c:out value="${todoDTO.title}"></c:out>'>
                             </div>
 
                             <div class="input-group mb-3">
