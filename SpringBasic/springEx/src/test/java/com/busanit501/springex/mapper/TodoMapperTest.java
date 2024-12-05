@@ -78,7 +78,7 @@ public class TodoMapperTest {
         // 페이징 준비물을 담은 PageRequestDTO 필요함,
         // 더미로 PageRequestDTO 만들고,
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
-                .page(1)
+                .page(2)
                 .size(10)
                 .build();
 

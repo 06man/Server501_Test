@@ -49,3 +49,10 @@ select * from tbl_todo order by tno desc limit  20, 10;
 
 # select * from tbl_todo order by tno desc limit (n-1)페이지, (페이지당 출력할 갯수);
 # select * from tbl_todo order by tno desc limit (n-1), 10;
+
+#페이징 할 때, 필요한 준비물 중에서, 전체갯수 필요함.
+페이징당 10개 출력 조건.
+예) 전체 갯수 total : 75개,
+페이지 표시 할 때, 1 ~  8페이지,
+
+

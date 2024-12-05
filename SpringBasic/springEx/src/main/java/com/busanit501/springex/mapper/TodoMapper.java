@@ -21,6 +21,9 @@ public interface TodoMapper {
 
     //페이징한 전체 목록
     List<TodoVO> selectList(PageRequestDTO pageRequestDTO);
+
+    // 페이징 위해서, 전체갯수,
+    int getCount(PageRequestDTO pageRequestDTO);
 }
 
 
