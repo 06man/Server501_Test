@@ -108,7 +108,7 @@
 <%--                                    현재 페이지 번호, 표시하는 페이지 번호가 일치한다면, 액티브 속성 추가 --%>
 
                                     <li class="page-item ${pageResponseDTO.page == num ? "active" : ""}"
-                                        data-num = "${num}"><a class="page-link" href="#">${num}</a></li>
+                                        ><a class="page-link" data-num = "${num}" href="#">${num}</a></li>
                                 </c:forEach>
 
 
