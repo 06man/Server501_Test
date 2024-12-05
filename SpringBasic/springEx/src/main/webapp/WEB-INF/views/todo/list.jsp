@@ -89,21 +89,27 @@
                             </tbody>
                         </table>
                         <%--                       Todo List 부분 작성--%>
-                            <nav aria-label="...">
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <a class="page-link">Previous</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active" aria-current="page">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
+                        <div class="float-end">
+                            <ul class="pagination">
+                                <%--                                    이전 버튼--%>
+                                <li class="page-item disabled">
+                                    <a class="page-link">Previous</a>
+                                </li>
+
+                                <%--    출력할 페이지 갯수, 10개 할 예정.--%>
+                                <%--                                    반복문을 이용해서, 출력하기--%>
+                                <c:forEach begin="${pageResponseDTO.start}"
+                                           end="${pageResponseDTO.end}" var="num">
+                                    <li class="page-item"><a class="page-link" href="#">${num}</a></li>
+                                </c:forEach>
+
+
+                                <%--    다음 버튼 부분--%>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </div>
 
                     </div>
                 </div>
