@@ -160,6 +160,28 @@
             self.location = "/todo/register"
                 , false
         })
+
+    // 페이지네이션 , 이동할 페이지 번호를 data-num 이름으로 작업.
+    // 해당 번호를 가지고, 링크 이동하는 이벤트 추가.
+    // <ul class="pagination"> ,기준으로 하위 a 태그에 접근 하기.
+    document.querySelector(".pagination").addEventListener("click",
+    function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        // a 태그에 접근 할려면, 해당 요소 선택자 필요.
+        const target = e.target
+        //  a 태그 인경우에 이벤트 리스너 동작을하고,
+        // a 태그 가 아니면, 이벤트 처리 안함.
+        if(target.tagName !== "A") {
+            return
+        }
+        const num = target.getAttribute("data-num")
+
+        // 백틱, 숫자 키보드 1번 왼쪽에 보면.
+        self.location = `/todo/list?page=\${num}`
+    },false)
+
+
 </script>
 
 
