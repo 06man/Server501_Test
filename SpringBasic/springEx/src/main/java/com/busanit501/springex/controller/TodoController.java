@@ -102,11 +102,23 @@ public class TodoController {
 
     //수정 로직 처리
     @PostMapping("/update")
-    public String updateLogic(Long tno) {
+    // 수정할 항목을 모두 받아서, TodoDTO 담습니다. 여기에 tno 도 포함 시키기
+    public String updateLogic(@Valid TodoDTO todoDTO, BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) {
+
+        // 유효성 체크 -> 유효성 검증시, 통과 안된 원인이 있다면,
+        if (bindingResult.hasErrors()) {
+            log.info("has errors : 유효성 에러가 발생함.");
+            // 1회용으로, 웹 브라우저에서, errors , 키로 조회 가능함. -> 뷰 ${errors}
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/todo/update";
+        }
+
         // 수정하는 로직 필요함.
         // 주의사항, 체크박스의 값의 문자열 on 전달 받습니다.
+        log.info("todoDTO확인 finished의 변환 여부 확인. : " + todoDTO);
 
-        todoService.delete(tno);
+        todoService.update(todoDTO);
         return "redirect:/todo/list";
     }
 
