@@ -92,10 +92,11 @@
                         <div class="float-end">
                             <ul class="pagination">
                                 <%--                                    이전 버튼--%>
-                                <li class="page-item disabled">
-                                    <a class="page-link">Previous</a>
-                                </li>
-
+                                <c:if test="${pageResponseDTO.prev}">
+                                    <li class="page-item">
+                                        <a class="page-link">Previous</a>
+                                    </li>
+                                </c:if>
                                 <%--    출력할 페이지 갯수, 10개 할 예정.--%>
                                 <%--                                    반복문을 이용해서, 출력하기--%>
                                 <c:forEach begin="${pageResponseDTO.start}"
@@ -105,9 +106,11 @@
 
 
                                 <%--    다음 버튼 부분--%>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
+                                <c:if test="${pageResponseDTO.next}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </c:if>
                             </ul>
                         </div>
 
