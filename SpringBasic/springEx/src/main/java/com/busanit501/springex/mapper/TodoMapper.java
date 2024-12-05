@@ -1,6 +1,7 @@
 package com.busanit501.springex.mapper;
 
 import com.busanit501.springex.domain.TodoVO;
+import com.busanit501.springex.dto.PageRequestDTO;
 
 import java.util.List;
 
@@ -17,6 +18,9 @@ public interface TodoMapper {
     void delete(Long tno);
 
     void update(TodoVO todoVO);
+
+    //페이징한 전체 목록
+    List<TodoVO> selectList(PageRequestDTO pageRequestDTO);
 }
 
 

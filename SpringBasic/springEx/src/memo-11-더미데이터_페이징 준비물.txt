@@ -45,6 +45,7 @@ select * from tbl_todo order by tno desc limit  20, 10;
 
 #예시) n페이지 10개 출력, nx10 - 9 ~ nx10 번까지 출력.
 # 주의사항, (n-1) 식으로 표현이 안됨.
-# Mybatis , #{page} -> getPage 게터 이용해서, 값을 설정,
+# Mybatis , #{skip} -> getSkip 게터 이용해서, 값을 설정,
+
 # select * from tbl_todo order by tno desc limit (n-1)페이지, (페이지당 출력할 갯수);
 # select * from tbl_todo order by tno desc limit (n-1), 10;
