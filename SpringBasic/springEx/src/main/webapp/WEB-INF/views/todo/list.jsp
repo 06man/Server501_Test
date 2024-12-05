@@ -92,9 +92,13 @@
                         <div class="float-end">
                             <ul class="pagination">
                                 <%--                                    이전 버튼--%>
+<%--                                페이징 이벤트 처리시, 직접 링크 부분에 추가 할수 있지만,--%>
+<%--                                    그러면, 동적으로 각 페이지 번호에 맞게 넣는 작업이 어려움, --%>
+<%--                                    data-num 변수처럼, 각각의 페이지 번호를 동적으로 표시하고, --%>
+<%--                                    자바스크립트로 진행하기--%>
                                 <c:if test="${pageResponseDTO.prev}">
                                     <li class="page-item">
-                                        <a class="page-link">Previous</a>
+                                        <a class="page-link" data-num = "${pageResponseDTO.page - 1}">Previous</a>
                                     </li>
                                 </c:if>
                                 <%--    출력할 페이지 갯수, 10개 할 예정.--%>
@@ -103,14 +107,15 @@
                                            end="${pageResponseDTO.end}" var="num">
 <%--                                    현재 페이지 번호, 표시하는 페이지 번호가 일치한다면, 액티브 속성 추가 --%>
 
-                                    <li class="page-item ${pageResponseDTO.page == num ? "active" : ""}" ><a class="page-link" href="#">${num}</a></li>
+                                    <li class="page-item ${pageResponseDTO.page == num ? "active" : ""}"
+                                        data-num = "${num}"><a class="page-link" href="#">${num}</a></li>
                                 </c:forEach>
 
 
                                 <%--    다음 버튼 부분--%>
                                 <c:if test="${pageResponseDTO.next}">
                                     <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
+                                        <a class="page-link" data-num = "${pageResponseDTO.end + 1}">Next</a>
                                     </li>
                                 </c:if>
                             </ul>
