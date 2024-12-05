@@ -75,11 +75,18 @@ public class TodoServiceTest {
     @Test
     public void testPageList() {
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
-                .page(1)
+                .page(180)
                 .size(10)
                 .build();
+        // PageResponseDTO, 안에는 , page, size, skip, start,end,
+        // prev, next,  페이징된 목록 요소들
         PageResponseDTO<TodoDTO> list = todoService.getListWithPage(pageRequestDTO);
         list.getDtoList().stream().forEach(dto -> log.info("dto : " + dto));
+        log.info("list total : " + list.getTotal());
+        log.info("list prev : " + list.isPrev());
+        log.info("list next : " + list.isNext());
+        log.info("list start : " + list.getStart());
+        log.info("list end : " + list.getEnd());
 
     }
 
