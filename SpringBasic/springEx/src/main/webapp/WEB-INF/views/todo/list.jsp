@@ -101,7 +101,9 @@
                                 <%--                                    반복문을 이용해서, 출력하기--%>
                                 <c:forEach begin="${pageResponseDTO.start}"
                                            end="${pageResponseDTO.end}" var="num">
-                                    <li class="page-item"><a class="page-link" href="#">${num}</a></li>
+<%--                                    현재 페이지 번호, 표시하는 페이지 번호가 일치한다면, 액티브 속성 추가 --%>
+
+                                    <li class="page-item" ${pageResponseDTO.page == num ? "active" : ""}><a class="page-link" href="#">${num}</a></li>
                                 </c:forEach>
 
 
