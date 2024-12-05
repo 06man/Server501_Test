@@ -100,7 +100,17 @@ public class TodoController {
 
     }
 
-    
+    //수정 로직 처리
+    @PostMapping("/update")
+    public String updateLogic(Long tno) {
+        // 수정하는 로직 필요함.
+        // 주의사항, 체크박스의 값의 문자열 on 전달 받습니다.
+
+        todoService.delete(tno);
+        return "redirect:/todo/list";
+    }
+
+
 
     // 삭제
     @PostMapping("/delete")
