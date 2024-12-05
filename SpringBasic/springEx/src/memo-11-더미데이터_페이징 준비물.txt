@@ -97,6 +97,8 @@ start = end - 9
 75/10.0 -> 7.5 => 8
 85/10.0 -> 8.5 => 9
 
+last = (int)(Math.ceil(total/size(10.0)))
+
 예시1)
       10 > 9
 end = end > last ? last : end
