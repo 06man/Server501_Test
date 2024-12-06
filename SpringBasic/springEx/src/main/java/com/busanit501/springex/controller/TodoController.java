@@ -129,6 +129,8 @@ public class TodoController {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             //redirectAttributes 이용해서, 쿼리 스트링으로 전달.
             redirectAttributes.addAttribute("tno",todoDTO.getTno());
+            redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
+            redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
             return "redirect:/todo/update";
         }
 
