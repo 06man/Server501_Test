@@ -144,7 +144,7 @@
     document.querySelector(".btn-secondary").addEventListener("click",
         function (e) {
             // 수정폼으로 가야함. 그러면, 필요한 준비물 tno 번호가 필요함
-            self.location = "/todo/list"
+            self.location = "/todo/list?${pageRequestDTO.link}"
                 , false
         })
 

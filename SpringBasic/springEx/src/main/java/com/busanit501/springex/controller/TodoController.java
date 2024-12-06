@@ -107,7 +107,7 @@ public class TodoController {
 
     // 수정 1) 폼 2) 로직 처리
     @RequestMapping("/update")
-    public void update(Long tno, Model model) {
+    public void update(Long tno,@Valid PageRequestDTO pageRequestDTO, Model model) {
         log.info("TodoController update :");
         TodoDTO todoDTO = todoService.getOne(tno);
         log.info("TodoController update 데이터 유무 확인 :" + todoDTO);
