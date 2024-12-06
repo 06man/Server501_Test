@@ -112,7 +112,7 @@ public class TodoController {
         log.info("TodoController read 데이터 유무 확인 :" + todoDTO);
         //데이터 탑재. 서버 -> 웹
         model.addAttribute("todoDTO", todoDTO);
-        return "read";
+        return "/todo/read";
 
     }
 
