@@ -137,6 +137,7 @@ public class TodoController {
         log.info("todoDTO확인 finished의 변환 여부 확인. : " + todoDTO);
 
         todoService.update(todoDTO);
+        // 쿼리 스트링으로 , 목록에 전달함.
         redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
         redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
         return "redirect:/todo/list";
@@ -146,8 +147,13 @@ public class TodoController {
 
     // 삭제
     @PostMapping("/delete")
-    public String delete(Long tno) {
+    public String delete(Long tno, PageRequestDTO pageRequestDTO,
+                         RedirectAttributes redirectAttributes
+                         ) {
         todoService.delete(tno);
+        // 쿼리 스트링으로 , 목록에 전달함.
+        redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
+        redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
         return "redirect:/todo/list";
     }
 
