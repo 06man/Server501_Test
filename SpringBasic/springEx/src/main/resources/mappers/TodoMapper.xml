@@ -41,9 +41,20 @@
 <!--     String[] types 배열로 , t(제목), w(작성자), tw(제목+작성자)-->
     <select id="selectList" resultType="com.busanit501.springex.domain.TodoVO">
         select * from tbl_todo
+        -- 1번째 과정
         <foreach collection="types" item="type">
-            #{type}
+            -- 2번째 과정,
+            <if test="type == 't'.toString()">
+                title like concat('%',#{keyword},'%')
+            </if>
+            <if test="type == 'w'.toString()">
+                writer like concat('%',#{keyword},'%')
+            </if>
+
         </foreach>
+
+        -- 첫번째 조건에서 생성된 sql
+        -- select * from tbl_todo ? ? order by tno desc limit ?, ?
 
         order by tno desc limit #{skip}, #{size}
     </select>
