@@ -81,6 +81,8 @@ public class TodoMapperTest {
                 .page(2)
                 .size(10)
                 .types(null)
+                .from(LocalDate.of(2024,12,05))
+                .to(LocalDate.of(2024,12,06))
                 .finished(true)
                 .build();
         // 검색, 필터 조건 sql 작성중
