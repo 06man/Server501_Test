@@ -87,7 +87,15 @@ public class TodoController {
     //model.addAttribute("todoDTO", todoDTO) 없이도,
     // 뷰에서 -> EL 표기법으로 바로 사용가능 ${todoDTO}
     @RequestMapping("/read")
-    public void read(Long tno, Model model) {
+    //  목록 -> 상세보기 페이지 이동시, PageRequestDTO 의 getLink 이용해서,
+    // page=7&size=10 정보를 전달 받았음.
+    // 그러면, 이 데이터 서버에서 이용할려면, 컨트롤러에서, 받는 매개변수가 필요해요.
+    // 자동으로 쿼리스트링으로 넘어온 데이터 자동으로 받기.
+    //
+    // 자동으로 받은 데이터를 다시, 자동으로 모델이 알아서, 화면에 전달함.
+    // read.jsp 화면에서, pageRequestDTO 이용가능.
+    public void read(Long tno, @Valid PageRequestDTO pageRequestDTO,
+                     Model model) {
         log.info("TodoController read :");
         TodoDTO todoDTO = todoService.getOne(tno);
         log.info("TodoController read 데이터 유무 확인 :" + todoDTO);
