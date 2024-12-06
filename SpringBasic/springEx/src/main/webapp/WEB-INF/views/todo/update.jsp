@@ -59,6 +59,10 @@
                     <div class="card-body">
                         <%--                        Todo 입력 폼 여기에 작성--%>
                         <form action="/todo/update" method="post">
+                            <%--                            수정/삭제 처리 후 페이징 정보를 전달하려면, --%>
+                            <%--                            input 히든으로 숨겨서, 페이지정보, 사이즈 정보를 전달. --%>
+                            <input type="hidden" name="page" value="${pageRequestDTO.page}">
+                            <input type="hidden" name="size" value="${pageRequestDTO.size}">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Tno</span>
                                 <input type="text" name="tno" class="form-control" readonly
