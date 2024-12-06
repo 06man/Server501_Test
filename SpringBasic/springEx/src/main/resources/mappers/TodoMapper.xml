@@ -78,6 +78,20 @@
 
 <!--    4번째 과정 2, types null 일경우, where 조건이 없는 sql 문장 확인.-->
 <!--    select * from tbl_todo order by tno desc limit ?, ?-->
+
+<!--    5번째 과정, 필터 과정. -->
+<!--    trim 이용해서, -->
+<!--    앞에 where  조건이 있다면, trim 이용해서 and 붙이고,-->
+<!--    예시-->
+<!--    elect * from tbl_todo WHERE ( title like concat('%',?,'%') -->
+<!--    OR writer like concat('%',?,'%') ) -->
+<!--    and finished = 1 order by tno desc limit ?, ?-->
+<!--    -->
+<!--    앞에 where  조건이 없다면, trim 이용해서 and 안 붙이고,-->
+<!--    select * from tbl_todo -->
+<!--    WHERE finished = 1 order by tno desc limit ?, ?-->
+
+
     <select id="selectList" resultType="com.busanit501.springex.domain.TodoVO">
         select * from tbl_todo
         <where>
