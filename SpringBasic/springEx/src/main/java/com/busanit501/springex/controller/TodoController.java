@@ -94,13 +94,25 @@ public class TodoController {
     //
     // 자동으로 받은 데이터를 다시, 자동으로 모델이 알아서, 화면에 전달함.
     // read.jsp 화면에서, pageRequestDTO 이용가능.
-    public void read(Long tno, @Valid PageRequestDTO pageRequestDTO,
+    public String read(Long tno, @Valid PageRequestDTO pageRequestDTO,
+                     BindingResult bindingResult,
+                     RedirectAttributes redirectAttributes,
                      Model model) {
         log.info("TodoController read :");
+        if (bindingResult.hasErrors()) {
+            log.info("has errors : 유효성 에러가 발생함.");
+            // 1회용으로, 웹 브라우저에서, errors , 키로 조회 가능함. -> 뷰 ${errors}
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addAttribute("tno",tno);
+            redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
+            redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
+            return "redirect:/todo/register";
+        }
         TodoDTO todoDTO = todoService.getOne(tno);
         log.info("TodoController read 데이터 유무 확인 :" + todoDTO);
         //데이터 탑재. 서버 -> 웹
         model.addAttribute("todoDTO", todoDTO);
+        return "read";
 
     }
 
