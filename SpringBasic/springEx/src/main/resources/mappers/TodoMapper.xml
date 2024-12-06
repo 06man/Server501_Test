@@ -91,9 +91,27 @@
 <!--    select * from tbl_todo -->
 <!--    WHERE finished = 1 order by tno desc limit ?, ?-->
 
+<!--    6번째 필터2, 기한 from, to 를 조건으로 할 때,-->
+<!--    select * from tbl_todo -->
+<!--    WHERE finished = 1 and dueDate between ? and ? order by tno desc limit ?, ?-->
+
+<!--    6번째 필터2, 필터 조건 1개인 경우, and 없는 부분 확인-->
+<!--    select * from tbl_todo -->
+<!--    WHERE dueDate between ? and ? order by tno desc limit ?, ?-->
 
     <select id="selectList" resultType="com.busanit501.springex.domain.TodoVO">
         select * from tbl_todo
+        <include refid="search"></include>
+        order by tno desc limit #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(tno)
+        <include refid="search"></include>
+        from tbl_todo
+    </select>
+
+    <sql id="search">
         <where>
             <if test="types != null and types.length >0">
                 <foreach collection="types" item="type"
@@ -121,15 +139,7 @@
             </if>
 
         </where>
-
-
-        order by tno desc limit #{skip}, #{size}
-    </select>
-
-    <select id="getCount" resultType="int">
-        select count(tno)
-        from tbl_todo
-    </select>
+    </sql>
 
 
 </mapper>
