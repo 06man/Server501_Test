@@ -113,6 +113,13 @@
                     finished = 1
                 </trim>
             </if>
+
+            <if test="from != null and to != null">
+                <trim prefix="and">
+                    dueDate between #{from} and #{to}
+                </trim>
+            </if>
+
         </where>
 
 
