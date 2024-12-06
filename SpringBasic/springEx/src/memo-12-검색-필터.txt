@@ -20,11 +20,8 @@ where
    or
     (writer like concat('%','이상용','%'))
     )
-and
-   finished = 1
-and
-    dueDate between '2024-5-01' and '2024-5-31'
-order by tno desc ;
+
+order by tno desc limit 10, 10 ;
 
 
 검색과 필터 구문은 완성.

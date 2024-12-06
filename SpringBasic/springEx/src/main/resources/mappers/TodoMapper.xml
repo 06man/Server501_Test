@@ -52,17 +52,32 @@
     <!--     1번째 과정-->
     <!--     첫번째 조건에서 생성된 sql-->
     <!--     select * from tbl_todo ? ? order by tno desc limit ?, ?-->
+
 <!--     2번째 과정,-->
 <!--    select * from tbl_todo ? ? -->
 <!--     title like concat('%',?,'%')-->
 <!--     writer like concat('%',?,'%')-->
 <!--     order by tno desc limit ?, ?-->
+
 <!--    3번째 과정-->
 <!--    select * from tbl_todo -->
 <!--    ( title like concat('%',?,'%') -->
 <!--    OR -->
 <!--    writer like concat('%',?,'%') ) -->
 <!--    order by tno desc limit ?, ?-->
+
+<!--    4번째 과정-->
+<!--    select * from tbl_todo-->
+<!--    WHERE-->
+<!--    (-->
+<!--    title like concat('%',?,'%')-->
+<!--    OR-->
+<!--    writer like concat('%',?,'%')-->
+<!--    )-->
+<!--    order by tno desc limit ?, ?-->
+
+<!--    4번째 과정 2, types null 일경우, where 조건이 없는 sql 문장 확인.-->
+<!--    select * from tbl_todo order by tno desc limit ?, ?-->
     <select id="selectList" resultType="com.busanit501.springex.domain.TodoVO">
         select * from tbl_todo
         <where>
