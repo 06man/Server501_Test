@@ -99,6 +99,18 @@
 <!--    select * from tbl_todo -->
 <!--    WHERE dueDate between ? and ? order by tno desc limit ?, ?-->
 
+<!--    완성된 sql, 최종 문장 구조-->
+<!--    select * from tbl_todo -->
+<!--    WHERE -->
+<!--    ( -->
+<!--    title like concat('%',?,'%') -->
+<!--    OR -->
+<!--    writer like concat('%',?,'%') -->
+<!--    ) -->
+<!--    and finished = 1 -->
+<!--    and dueDate between ? and ? -->
+<!--    order by tno desc limit ?, ?-->
+
     <select id="selectList" resultType="com.busanit501.springex.domain.TodoVO">
         select * from tbl_todo
         <include refid="search"></include>
