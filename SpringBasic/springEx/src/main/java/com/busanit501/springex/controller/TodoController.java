@@ -137,6 +137,8 @@ public class TodoController {
         log.info("todoDTO확인 finished의 변환 여부 확인. : " + todoDTO);
 
         todoService.update(todoDTO);
+        redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
+        redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
         return "redirect:/todo/list";
     }
 
