@@ -12,26 +12,7 @@
 <body>
 <div class="container-fluid">
 
-    <%--    검색 및 필터 화면 추가--%>
-    <div class="row content">
-        <div class="col">
-            <!--        카드 시작 부분-->
-            <div class="card">
-                <div class="card-header">
-                    검색 및 필터
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">검색 및 필터 </h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <!--        카드 끝 부분-->
 
-        </div>
-
-    </div>
-    <%--    검색 및 필터 화면 추가--%>
 
     <div class="row">
         <!--        <h1>Header</h1>-->
@@ -69,15 +50,46 @@
         </div>
         <!--        네비게이션바 추가 끝-->
 
+        <%--    검색 및 필터 화면 추가--%>
+        <div class="row content">
+            <div class="col">
+                <!--        카드 시작 부분-->
+                <div class="card">
+<%--                    <div class="card-header">--%>
+<%--                        검색 및 필터--%>
+<%--                    </div>--%>
+                    <div class="card-body">
+                        <h5 class="card-title">검색 및 필터 </h5>
+<%--                        검색 입력창, 검색 조건, 필터 조건                        --%>
+                        <form action="todo/list" method="get">
+                            <input type="hidden" name="size" value="${pageRequestDTO.size}">
+                            <div class="mb-3">
+                                <input type="checkbox" name="finished"> 완료여부
+                            </div>
+                            <div class="mb-3">
+                                <input type="checkbox" name="types" value="t">제목
+                                <input type="checkbox" name="types" value="w">작성자
+                                <input type="text" name="keyword" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--        카드 끝 부분-->
+
+            </div>
+
+        </div>
+        <%--    검색 및 필터 화면 추가--%>
+
         <!--        class="row content"-->
         <div class="row content">
             <!--        col-->
             <div class="col">
                 <!--        카드 시작 부분-->
                 <div class="card">
-                    <div class="card-header">
-                        Featured
-                    </div>
+<%--                    <div class="card-header">--%>
+<%--                        Featured--%>
+<%--                    </div>--%>
                     <div class="card-body">
                         <%--                        Todo List 부분 작성--%>
                         <h5 class="card-title">리스트 목록</h5>
