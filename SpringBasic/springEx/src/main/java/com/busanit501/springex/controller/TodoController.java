@@ -106,7 +106,7 @@ public class TodoController {
             redirectAttributes.addAttribute("tno",tno);
             redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
             redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
-            return "redirect:/todo/register";
+            return "redirect:/todo/read";
         }
         TodoDTO todoDTO = todoService.getOne(tno);
         log.info("TodoController read 데이터 유무 확인 :" + todoDTO);
