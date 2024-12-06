@@ -78,9 +78,10 @@ public class TodoMapperTest {
         // 페이징 준비물을 담은 PageRequestDTO 필요함,
         // 더미로 PageRequestDTO 만들고,
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
-                .page(2)
+                .page(1)
                 .size(10)
-                .types(null)
+                .keyword("수정")
+                .types(new String[]{"t","w"})
                 .from(LocalDate.of(2024,12,05))
                 .to(LocalDate.of(2024,12,06))
                 .finished(false)
@@ -98,7 +99,11 @@ public class TodoMapperTest {
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .page(1)
                 .size(10)
-                .build();
+                .keyword("수정")
+                .types(new String[]{"t","w"})
+                .from(LocalDate.of(2024,12,05))
+                .to(LocalDate.of(2024,12,06))
+                .finished(false)                .build();
         int total = todoMapper.getCount(pageRequestDTO);
         log.info("total : " + total);
     }
