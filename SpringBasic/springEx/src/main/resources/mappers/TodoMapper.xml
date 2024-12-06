@@ -119,8 +119,8 @@
 
     <select id="getCount" resultType="int">
         select count(tno)
-        <include refid="search"></include>
         from tbl_todo
+        <include refid="search"></include>
     </select>
 
     <sql id="search">
