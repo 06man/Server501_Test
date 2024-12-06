@@ -57,19 +57,28 @@
 <!--     title like concat('%',?,'%')-->
 <!--     writer like concat('%',?,'%')-->
 <!--     order by tno desc limit ?, ?-->
+<!--    3번째 과정-->
+<!--    select * from tbl_todo -->
+<!--    ( title like concat('%',?,'%') -->
+<!--    OR -->
+<!--    writer like concat('%',?,'%') ) -->
+<!--    order by tno desc limit ?, ?-->
     <select id="selectList" resultType="com.busanit501.springex.domain.TodoVO">
         select * from tbl_todo
-        <foreach collection="types" item="type"
-                 open="(" close=")" separator="OR">
+        <where>
+            <if test="types != null and types.length >0">
+                <foreach collection="types" item="type"
+                         open="(" close=")" separator="OR">
 
-            <if test="type == 't'.toString()">
-                title like concat('%',#{keyword},'%')
+                    <if test="type == 't'.toString()">
+                        title like concat('%',#{keyword},'%')
+                    </if>
+                    <if test="type == 'w'.toString()">
+                        writer like concat('%',#{keyword},'%')
+                    </if>
+                </foreach>
             </if>
-            <if test="type == 'w'.toString()">
-                writer like concat('%',#{keyword},'%')
-            </if>
-
-        </foreach>
+        </where>
 
 
         order by tno desc limit #{skip}, #{size}
