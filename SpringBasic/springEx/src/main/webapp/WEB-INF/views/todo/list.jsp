@@ -71,6 +71,10 @@
                                 <input type="checkbox" name="types" value="w">작성자
                                 <input type="text" name="keyword" class="form-control">
                             </div>
+                            <div class="input-group mb-3 dueDateDiv">
+                                <input type="date" name="from" class="form-control">
+                                <input type="date" name="to" class="form-control">
+                            </div>
                         </form>
                     </div>
                 </div>
