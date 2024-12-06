@@ -13,7 +13,6 @@
 <div class="container-fluid">
 
 
-
     <div class="row">
         <!--        <h1>Header</h1>-->
         <!--        네비게이션바 추가 시작-->
@@ -55,12 +54,12 @@
             <div class="col">
                 <!--        카드 시작 부분-->
                 <div class="card">
-<%--                    <div class="card-header">--%>
-<%--                        검색 및 필터--%>
-<%--                    </div>--%>
+                    <%--                    <div class="card-header">--%>
+                    <%--                        검색 및 필터--%>
+                    <%--                    </div>--%>
                     <div class="card-body">
                         <h5 class="card-title">검색 및 필터 </h5>
-<%--                        검색 입력창, 검색 조건, 필터 조건                        --%>
+                        <%--                        검색 입력창, 검색 조건, 필터 조건                        --%>
                         <form action="todo/list" method="get">
                             <input type="hidden" name="size" value="${pageRequestDTO.size}">
                             <div class="mb-3">
@@ -74,6 +73,12 @@
                             <div class="input-group mb-3 dueDateDiv">
                                 <input type="date" name="from" class="form-control">
                                 <input type="date" name="to" class="form-control">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="float-end">
+                                    <button class="btn btn-primary" type="submit">검색</button>
+                                    <button class="btn btn-secondary" type="reset">초기화</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -91,9 +96,9 @@
             <div class="col">
                 <!--        카드 시작 부분-->
                 <div class="card">
-<%--                    <div class="card-header">--%>
-<%--                        Featured--%>
-<%--                    </div>--%>
+                    <%--                    <div class="card-header">--%>
+                    <%--                        Featured--%>
+                    <%--                    </div>--%>
                     <div class="card-body">
                         <%--                        Todo List 부분 작성--%>
                         <h5 class="card-title">리스트 목록</h5>
