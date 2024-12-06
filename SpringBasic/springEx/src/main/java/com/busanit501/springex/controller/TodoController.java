@@ -127,7 +127,9 @@ public class TodoController {
             log.info("has errors : 유효성 에러가 발생함.");
             // 1회용으로, 웹 브라우저에서, errors , 키로 조회 가능함. -> 뷰 ${errors}
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            return "redirect:/todo/update?tno="+todoDTO.getTno()+"&"+pageRequestDTO.getLink();
+            //redirectAttributes 이용해서, 쿼리 스트링으로 전달.
+            redirectAttributes.addAttribute("tno",todoDTO.getTno());
+            return "redirect:/todo/update";
         }
 
         // 수정하는 로직 필요함.
