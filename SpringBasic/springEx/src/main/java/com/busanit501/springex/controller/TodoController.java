@@ -154,6 +154,7 @@ public class TodoController {
                               @Valid PageRequestDTO pageRequestDTO,
                               BindingResult pageBindingResult,
                               RedirectAttributes redirectAttributes) {
+        log.info("todoDTO확인 finished의 변환 여부 확인1. : " + todoDTO);
 
         // 유효성 체크 -> 유효성 검증시, 통과 안된 원인이 있다면,
         if (bindingResult.hasErrors()) {
@@ -180,7 +181,7 @@ public class TodoController {
 
         // 수정하는 로직 필요함.
         // 주의사항, 체크박스의 값의 문자열 on 전달 받습니다.
-        log.info("todoDTO확인 finished의 변환 여부 확인. : " + todoDTO);
+        log.info("todoDTO확인 finished의 변환 여부 확인2. : " + todoDTO);
         log.info("TodoController update pageRequestDTO : "+ pageRequestDTO);
 
         todoService.update(todoDTO);
