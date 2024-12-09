@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
+@Controller // 1)화면 제공 2) 데이터 제공
 @Log4j2
 public class SampleController {
 
@@ -13,6 +13,11 @@ public class SampleController {
     // 레거시에서 앞단 화면을 jsp 사용했고,
     // 부트에서 앞단 화면을 타임리프 사용. 확장자, .html 동일함.
     public void hello(Model model) {
+        // 레거시, 뷰 설정, xml 등록,
+        // WEB-INF/Views/todo prefix
+        // .jsp , suffix
+        // 기본 : templates/hello.html
+
         model.addAttribute("msg", "hello world");
     }
 }
