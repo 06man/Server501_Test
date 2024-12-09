@@ -9,6 +9,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 @Data
 @Builder
@@ -63,6 +64,17 @@ public class PageRequestDTO {
             link = builder.toString();
         }
         return link;
+    }
+
+    //검색에서, 작성자, 제목으로 체크박스 체크여부를 확인하는 기능.
+    public boolean checkType(String type) {
+        if(types==null || types.length==0){
+            return false;
+        }
+        // Arrays.stream(types) : 배열을 의미, {"t","w"}
+        // 배열중에서, 요소 하나씩 꺼내서 계속 비교해요. type과비교
+        // type ,예를 들어 t로 왔다.
+        return Arrays.stream(types).anyMatch(type::equals);
     }
 }
 
