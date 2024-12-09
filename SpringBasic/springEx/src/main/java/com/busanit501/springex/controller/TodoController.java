@@ -196,9 +196,10 @@ public class TodoController {
                          RedirectAttributes redirectAttributes
     ) {
         todoService.delete(tno);
+        log.info("TodoController delete : pageRequestDTO " + pageRequestDTO);
         // 쿼리 스트링으로 , 목록에 전달함.
-        redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
-        redirectAttributes.addAttribute("size", pageRequestDTO.getSize());
+//        redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
+//        redirectAttributes.addAttribute("size", pageRequestDTO.getSize());
         return "redirect:/todo/list?"+pageRequestDTO.getLink();
     }
 
