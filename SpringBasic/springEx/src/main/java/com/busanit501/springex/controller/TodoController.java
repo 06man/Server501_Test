@@ -199,7 +199,7 @@ public class TodoController {
         // 쿼리 스트링으로 , 목록에 전달함.
         redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
         redirectAttributes.addAttribute("size", pageRequestDTO.getSize());
-        return "redirect:/todo/list";
+        return "redirect:/todo/list?"+pageRequestDTO.getLink();
     }
 
     // 페이징,
