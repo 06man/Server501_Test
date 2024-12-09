@@ -113,6 +113,7 @@ public class TodoController {
         }
         TodoDTO todoDTO = todoService.getOne(tno);
         log.info("TodoController read 데이터 유무 확인 :" + todoDTO);
+        log.info("TodoController read 데이터 유무 확인 pageRequestDTO :" + pageRequestDTO);
         //데이터 탑재. 서버 -> 웹
         model.addAttribute("todoDTO", todoDTO);
         redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
