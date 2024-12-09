@@ -68,11 +68,11 @@
                             <div class="mb-3">
                                 <input type="checkbox" name="types" value="t" ${pageRequestDTO.checkType("t")?"checked":""}>제목
                                 <input type="checkbox" name="types" value="w" ${pageRequestDTO.checkType("w")?"checked":""}>작성자
-                                <input type="text" name="keyword" class="form-control">
+                                <input type="text" name="keyword" class="form-control" value="${pageRequestDTO.keyword}">
                             </div>
                             <div class="input-group mb-3 dueDateDiv">
-                                <input type="date" name="from" class="form-control">
-                                <input type="date" name="to" class="form-control">
+                                <input type="date" name="from" class="form-control" value="${pageRequestDTO.from}">
+                                <input type="date" name="to" class="form-control" value="${pageRequestDTO.to}">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="float-end">
