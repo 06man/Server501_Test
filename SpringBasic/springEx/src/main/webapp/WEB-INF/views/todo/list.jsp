@@ -232,7 +232,7 @@
             // 폼의 정보를 이용해서 이동.
             const formObj = document.querySelector("form")
             // 자바스크립트에서, 백틱 안에서, 문자열 구현하기가 쉽다.
-            formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'`
+            formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'>`
             formObj.submit()
 
 
