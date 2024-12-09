@@ -5,6 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Controller // 1)화면 제공 2) 데이터 제공
 @Log4j2
 public class SampleController {
@@ -20,4 +24,11 @@ public class SampleController {
 
         model.addAttribute("msg", "hello world");
     }
+
+    @GetMapping("/ex/ex1")
+    public void ex1(Model model) {
+        List<String> list = Arrays.asList("a", "b", "c");
+        model.addAttribute("list", list);
+    }
+
 }
