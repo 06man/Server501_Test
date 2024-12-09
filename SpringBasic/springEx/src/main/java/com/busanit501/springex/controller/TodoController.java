@@ -164,7 +164,7 @@ public class TodoController {
             redirectAttributes.addAttribute("tno", todoDTO.getTno());
             redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
             redirectAttributes.addAttribute("size", pageRequestDTO.getSize());
-            return "redirect:/todo/update";
+            return "redirect:/todo/update"+pageRequestDTO.getLink();
         }
 
         if (pageBindingResult.hasErrors()) {
@@ -175,7 +175,7 @@ public class TodoController {
             redirectAttributes.addAttribute("tno", todoDTO.getTno());
             redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
             redirectAttributes.addAttribute("size", pageRequestDTO.getSize());
-            return "redirect:/todo/update";
+            return "redirect:/todo/update"+pageRequestDTO.getLink();
         }
 
         // 수정하는 로직 필요함.
@@ -201,6 +201,7 @@ public class TodoController {
 //        redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
 //        redirectAttributes.addAttribute("size", pageRequestDTO.getSize());
         return "redirect:/todo/list?"+pageRequestDTO.getLink();
+//        return "redirect:/todo/list";
     }
 
     // 페이징,
