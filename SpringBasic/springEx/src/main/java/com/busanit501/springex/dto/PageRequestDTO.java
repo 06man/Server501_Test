@@ -70,7 +70,7 @@ public class PageRequestDTO {
         }
 
         //   list&page=7&size=10&finished=on
-        if (!finished) {
+        if (finished) {
             // finished ,  체크박스 이어서, 전달 받을 때 문자열 "on"
             builder.append("&finished=on");
         }
