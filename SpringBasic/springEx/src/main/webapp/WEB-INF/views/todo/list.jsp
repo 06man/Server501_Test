@@ -227,7 +227,15 @@
             const num = target.getAttribute("data-num")
 
             // 백틱, 숫자 키보드 1번 왼쪽에 보면.
-            self.location = `/todo/list?page=\${num}`
+            //  기존 페이지 이동해서,
+            // self.location = `/todo/list?page=\${num}`
+            // 폼의 정보를 이용해서 이동.
+            const formObj = document.querySelector("form")
+            // 자바스크립트에서, 백틱 안에서, 문자열 구현하기가 쉽다.
+            formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'`
+            formObj.submit()
+
+
         }, false)
 
     // 검색 초기화, 이벤트 리스너
