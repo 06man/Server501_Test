@@ -2,6 +2,7 @@ package com.busanit501.boot501;
 
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,5 +22,6 @@ public class DataSourceTests {
         @Cleanup
         Connection connection = dataSource.getConnection();
         log.info(connection);
+        Assertions.assertNotNull(connection);
     }
 }
