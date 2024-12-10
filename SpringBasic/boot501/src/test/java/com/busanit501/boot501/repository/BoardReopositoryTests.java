@@ -63,8 +63,17 @@ public class BoardReopositoryTests {
         board.changeTitleConent("변경 제목 ","변경 내용");
         // 실제 디비 테이블 반영.
         // 순서 -> 1차 영속성 컨텍스트(임시 테이블) 적용 -> 실제 테이블 반영.
+        // save -> 해당 실제 테이블 없다면, -> insert
+        // save -> 해당 실제 테이블 있다면, -> update
+
         boardRepository.save(board);
 
+    }
+
+    @Test
+    public void testDelete() {
+        Long bno = 99L;
+        boardRepository.deleteById(bno);
     }
 
 
