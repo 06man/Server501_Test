@@ -16,5 +16,17 @@
     sampleDTO
     <div th:text="${sampleDTO}">
     </div>
+
+<h1>자바스크립트 내부에서, 서버로부터 받은 데이터 이용하기</h1>
+<script th:inline="javascript">
+    const list = [[${strList}]]
+    const map = [[${map}]]
+    const sampleDTO = [[${sampleDTO}]]
+
+    console.log(list)
+    console.log(map)
+    console.log(sampleDTO)
+
+</script>
 </body>
 </html>
