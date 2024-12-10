@@ -23,6 +23,7 @@ public class SampleController {
         // 기본 : templates/hello.html
 
         model.addAttribute("msg", "hello world");
+        model.addAttribute("msg2", "어제 부터 부트 작업");
     }
 
     @GetMapping("/ex/ex1")
