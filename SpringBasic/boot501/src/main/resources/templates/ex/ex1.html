@@ -19,6 +19,18 @@
     : <h2>[[${num1 + num2}]]</h2>
 </div>
 
+  <hr/>
+<!--  <th:each="변수명 : 목록">-->
+  <h1>반복문 이용해보기. </h1>
+  <div>
+      <ul>
+          <li th:each="str : ${list}" th:text="${str}"></li>
+      </ul>
+      <ul>
+          <li th:each="str : ${list}">[[${str}]]</li>
+      </ul>
+  </div>
+
 <script>
     const list = `[[${list}]]`
     console.log(list)
