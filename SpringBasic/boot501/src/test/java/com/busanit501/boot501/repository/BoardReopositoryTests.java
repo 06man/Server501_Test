@@ -5,6 +5,11 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -87,6 +92,16 @@ public class BoardReopositoryTests {
     public void testDelete() {
         Long bno = 99L;
         boardRepository.deleteById(bno);
+    }
+
+    @Test
+    public void testPaging() {
+
+        Pageable pageable =  PageRequest.of(0, 10,
+                Sort.by("bno").descending());
+        Page<Board> result = boardRepository.findAll(pageable);
+        log.info("result.getTotalElements()10개씩 나눠진 데이터 :" +result.getTotalElements());
+        log.info("result.getTotalPages()총페이지등 :" +result.getTotalPages());
     }
 
 
