@@ -29,6 +29,17 @@
       <ul>
           <li th:each="str : ${list}">[[${str}]]</li>
       </ul>
+      <ul>
+          <th:block th:each="str : ${list}" >
+              <li> [[${str}]] </li>
+          </th:block >
+      </ul>
+
+      <ul>
+          <li th:each="str , status: ${list}" >
+              [[${status.index}]]  -- [[${status.odd}]] --[[${status.even}]]  [[${str}]]
+          </li>
+      </ul>
   </div>
 
 <script>
