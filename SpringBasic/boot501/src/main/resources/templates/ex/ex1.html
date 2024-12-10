@@ -12,9 +12,16 @@
 <!--  /* [[${list}]] */-->
   <h2>[[${list}]]</h2>
 
-<h1>변수 사용에서, 이용하기. </h1>
+<h1>변수 사용해서, 이용하기. </h1>
 <div th:with="num1 = ${10}, num2 = ${20}">
-    <h2 th:text="${num1 + num2}"></h2>
+    우리가 만든 변수 사용해보기 : <h2 th:text="${num1 + num2}"> </h2>
+    다른 방법으로 출력해보기(자바스크립 영역안에서도 이용가능)
+    : <h2>[[${num1 + num2}]]</h2>
 </div>
+
+<script>
+    const list = `[[${list}]]`
+    console.log(list)
+</script>
 </body>
 </html>
