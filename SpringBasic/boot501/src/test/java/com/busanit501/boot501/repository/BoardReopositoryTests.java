@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -28,9 +29,27 @@ public class BoardReopositoryTests {
                     .writer("샘플 작성자 : lsy "+i)
                     .build();
             // crud, insert , save-> 1차 임시 테이블 저장 -> 실제 테이블 반영
+            // save ->
+            // 예시 sql,    insert
+            //    into
+            //        board
+            //        (content, mod_date, reg_date, title, writer)
+            //    values
+            //        (?, ?, ?, ?, ?)
             Board result = boardRepository.save(board);
             log.info("추가된 bno 번호 : " + result);
         });
+    }
+
+    @Test
+    public void testSelectOne() {
+        Long bno = 99L;
+        //Optional , 있으면, 해당 인스턴스 가져오기, 없으면, null 입니다.
+        Optional<Board> result = boardRepository.findById(bno);
+        // result 있으면, Board 타입으로 받고, 없으면, 예외 발생시킴.
+        Board board= result.orElseThrow();
+        log.info("하나 조회 : " + board);
+
     }
 
 
