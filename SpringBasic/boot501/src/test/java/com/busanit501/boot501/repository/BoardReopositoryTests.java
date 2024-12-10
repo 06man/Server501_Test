@@ -103,6 +103,8 @@ public class BoardReopositoryTests {
         log.info("result.getTotalElements()전체 갯수 :" +result.getTotalElements());
         log.info("result.getTotalPages()총페이지등 :" +result.getTotalPages());
         log.info("result.getContent() 페이징된 결과물 10개 :" +result.getContent());
+        log.info("result.getNumber() 현재 페이지 번호 :" +result.getNumber());
+        log.info("result.getSize() 크기  :" +result.getSize());
     }
 
 
