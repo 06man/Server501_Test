@@ -97,7 +97,8 @@ public class BoardReopositoryTests {
     @Test
     public void testPaging() {
 
-        Pageable pageable =  PageRequest.of(0, 10,
+        // 0 -> 1페이지, 1 -> 2페이지
+        Pageable pageable =  PageRequest.of(1, 10,
                 Sort.by("bno").descending());
         Page<Board> result = boardRepository.findAll(pageable);
         log.info("result.getTotalElements()전체 갯수 :" +result.getTotalElements());
