@@ -28,7 +28,7 @@ public class BoardReopositoryTests {
         // 더미 데이터, 앞에서, 병렬 처리 기능 사용하기.
         // stream 클래스 이용하기.
         // 1 ~ 99번까지 생성해요.
-        IntStream.range(1, 100).forEach(i -> {
+        IntStream.range(1, 2).forEach(i -> {
             Board board = Board.builder()
                     .title("샘플 제목 : " + i)
                     .content("샘플 내용 : " + i)
@@ -72,7 +72,7 @@ public class BoardReopositoryTests {
 
     @Test
     public void testUpdate() {
-        Long bno = 99L;
+        Long bno = 98L;
         // 수정 할 데이터가 해당 테이블에 있는지 조회 부터 하기.
         Optional<Board> result = boardRepository.findById(bno);
         // result 있으면, Board 타입으로 받고, 없으면, 예외 발생시킴.
