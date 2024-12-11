@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.Query;
 // 간단한 crud 디비 작업은, 메서드를 이용해서 처리가 가능함.
 
 // Querydsl 이용시, 만들었던 인터페이스를 추가 구현 해야함.
-//public interface BoardRepository extends JpaRepository<Board, Long> , BoardSearch {
-public interface BoardRepository extends JpaRepository<Board, Long>  {
+public interface BoardRepository extends JpaRepository<Board, Long> , BoardSearch {
+//public interface BoardRepository extends JpaRepository<Board, Long>  {
     // 아무 메서드가 없음.
     // 하지만, 우리는 기본 탑재된 쿼리 메소드를 활용할 예정.
 
@@ -24,6 +24,9 @@ public interface BoardRepository extends JpaRepository<Board, Long>  {
     @Query("select b from Board b where b.title like concat('%',:keyword,'%')")
     Page<Board> findByKeyword(String keyword, Pageable pageable);
 
+    // Querydsl  도구 이용해서, 방법3,
+    // BoardSearch 인터페이스 구현하고, 이 인터페이스를 구현한 클래스에서 문법 사용.
+    // BoardSearchImpl 구현한 클래스의 이름. 구현체,
 
 
 

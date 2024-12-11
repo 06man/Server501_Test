@@ -32,7 +32,7 @@ public class BoardReopositoryTests {
             Board board = Board.builder()
                     .title("샘플 제목 : " + i)
                     .content("샘플 내용 : " + i)
-                    .writer("샘플 작성자 : lsy "+i)
+                    .writer("샘플 작성자 : lsy " + i)
                     .build();
             // crud, insert , save-> 1차 임시 테이블 저장 -> 실제 테이블 반영
             // save ->
@@ -53,7 +53,7 @@ public class BoardReopositoryTests {
         //Optional , 있으면, 해당 인스턴스 가져오기, 없으면, null 입니다.
         Optional<Board> result = boardRepository.findById(bno);
         // result 있으면, Board 타입으로 받고, 없으면, 예외 발생시킴.
-        Board board= result.orElseThrow();
+        Board board = result.orElseThrow();
         log.info("하나 조회 : " + board);
 
     }
@@ -77,8 +77,8 @@ public class BoardReopositoryTests {
         Optional<Board> result = boardRepository.findById(bno);
         // result 있으면, Board 타입으로 받고, 없으면, 예외 발생시킴.
         // board, 엔티티 클래스 인스턴스가, 하나의 데이터베이스의 내용임.
-        Board board= result.orElseThrow();
-        board.changeTitleConent("변경 제목 ","변경 내용");
+        Board board = result.orElseThrow();
+        board.changeTitleConent("변경 제목 ", "변경 내용");
         // 실제 디비 테이블 반영.
         // 순서 -> 1차 영속성 컨텍스트(임시 테이블) 적용 -> 실제 테이블 반영.
         // save -> 해당 실제 테이블 없다면, -> insert
@@ -98,41 +98,58 @@ public class BoardReopositoryTests {
     public void testPaging() {
 
         // 0 -> 1페이지, 1 -> 2페이지
-        Pageable pageable =  PageRequest.of(1, 10,
+        Pageable pageable = PageRequest.of(1, 10,
                 Sort.by("bno").descending());
         Page<Board> result = boardRepository.findAll(pageable);
-        log.info("result.getTotalElements()전체 갯수 :" +result.getTotalElements());
-        log.info("result.getTotalPages()총페이지등 :" +result.getTotalPages());
-        log.info("result.getContent() 페이징된 결과물 10개 :" +result.getContent());
-        log.info("result.getNumber() 현재 페이지 번호 :" +result.getNumber());
-        log.info("result.getSize() 크기  :" +result.getSize());
+        log.info("result.getTotalElements()전체 갯수 :" + result.getTotalElements());
+        log.info("result.getTotalPages()총페이지등 :" + result.getTotalPages());
+        log.info("result.getContent() 페이징된 결과물 10개 :" + result.getContent());
+        log.info("result.getNumber() 현재 페이지 번호 :" + result.getNumber());
+        log.info("result.getSize() 크기  :" + result.getSize());
     }
 
+    // 방법1 , 쿼리스트링
     @Test
     public void testQueryString() {
-        Pageable pageable =  PageRequest.of(1, 10,
+        Pageable pageable = PageRequest.of(1, 10,
                 Sort.by("bno").descending());
         Page<Board> result = boardRepository.findByTitleContainingOrderByBnoDesc(
-                "3",pageable
+                "3", pageable
         );
-        log.info("result.getTotalElements()전체 갯수 :" +result.getTotalElements());
-        log.info("result.getTotalPages()총페이지등 :" +result.getTotalPages());
-        log.info("result.getContent() 페이징된 결과물 10개 :" +result.getContent());
-        log.info("result.getNumber() 현재 페이지 번호 :" +result.getNumber());
-        log.info("result.getSize() 크기  :" +result.getSize());
+        log.info("result.getTotalElements()전체 갯수 :" + result.getTotalElements());
+        log.info("result.getTotalPages()총페이지등 :" + result.getTotalPages());
+        log.info("result.getContent() 페이징된 결과물 10개 :" + result.getContent());
+        log.info("result.getNumber() 현재 페이지 번호 :" + result.getNumber());
+        log.info("result.getSize() 크기  :" + result.getSize());
     }
 
+    // 방법2 , @Query
     @Test
     public void testQueryAnotation() {
-        Pageable pageable =  PageRequest.of(1, 10,
+        Pageable pageable = PageRequest.of(1, 10,
                 Sort.by("bno").descending());
-        Page<Board> result = boardRepository.findByKeyword("3",pageable);
+        Page<Board> result = boardRepository.findByKeyword("3", pageable);
 
-        log.info("result.getTotalElements()전체 갯수 :" +result.getTotalElements());
-        log.info("result.getTotalPages()총페이지등 :" +result.getTotalPages());
-        log.info("result.getContent() 페이징된 결과물 10개 :" +result.getContent());
-        log.info("result.getNumber() 현재 페이지 번호 :" +result.getNumber());
-        log.info("result.getSize() 크기  :" +result.getSize());
+        log.info("result.getTotalElements()전체 갯수 :" + result.getTotalElements());
+        log.info("result.getTotalPages()총페이지등 :" + result.getTotalPages());
+        log.info("result.getContent() 페이징된 결과물 10개 :" + result.getContent());
+        log.info("result.getNumber() 현재 페이지 번호 :" + result.getNumber());
+        log.info("result.getSize() 크기  :" + result.getSize());
+    }
+
+    // 방버3 Querydsl
+    // 단계적으로, sql 문장만 일단 확인중. , 아직 메서드 완성 안됨.
+    public void testQuerydsl() {
+        Pageable pageable = PageRequest.of(1, 10,
+                Sort.by("bno").descending());
+//        Page<Board> result = boardRepository.search(pageable);
+          boardRepository.search(pageable);
+
+//        log.info("result.getTotalElements()전체 갯수 :" +result.getTotalElements());
+//        log.info("result.getTotalPages()총페이지등 :" +result.getTotalPages());
+//        log.info("result.getContent() 페이징된 결과물 10개 :" +result.getContent());
+//        log.info("result.getNumber() 현재 페이지 번호 :" +result.getNumber());
+//        log.info("result.getSize() 크기  :" +result.getSize());
     }
 
 
