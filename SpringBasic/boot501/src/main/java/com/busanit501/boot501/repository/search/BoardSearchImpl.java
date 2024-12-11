@@ -20,6 +20,7 @@ implements BoardSearch {
 
     @Override
     public Page<Board> search(Pageable pageable) {
+        //예시,
         return null;
     }
 }
