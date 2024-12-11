@@ -139,6 +139,7 @@ public class BoardReopositoryTests {
 
     // 방버3 Querydsl
     // 단계적으로, sql 문장만 일단 확인중. , 아직 메서드 완성 안됨.
+    @Test
     public void testQuerydsl() {
         Pageable pageable = PageRequest.of(1, 10,
                 Sort.by("bno").descending());
