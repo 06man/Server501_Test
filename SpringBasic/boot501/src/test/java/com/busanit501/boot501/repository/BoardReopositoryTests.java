@@ -113,7 +113,7 @@ public class BoardReopositoryTests {
         Pageable pageable =  PageRequest.of(1, 10,
                 Sort.by("bno").descending());
         Page<Board> result = boardRepository.findByTitleContainingOrderByBnoDesc(
-                "샘플","3",pageable
+                "샘플",pageable
         );
         log.info("result.getTotalElements()전체 갯수 :" +result.getTotalElements());
         log.info("result.getTotalPages()총페이지등 :" +result.getTotalPages());
