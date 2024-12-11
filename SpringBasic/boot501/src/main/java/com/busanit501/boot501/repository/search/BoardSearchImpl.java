@@ -31,11 +31,15 @@ implements BoardSearch {
         // 다양한 쿼리 조건을 이용할수 있음.
         // 예, where, groupby, join , pagination
         query.where(board.title.contains("3"));
-        // =================================.,조건
+        // =================================.,조건1
+        // 페이징 조건 추가하기. qeury에 페이징 조건을 추가한 상황
+        this.getQuerydsl().applyPagination(pageable, query);
+        // =================================.,조건2
         // 해당 조건의 데이터를 가져오기,
         List<Board> list = query.fetch();
         // 해당 조건에 맞는 데이터의 갯수 조회.
         long total = query.fetchCount();
+        //
 
         return null;
     }
