@@ -106,7 +106,34 @@ QueryDSL
 -> 컴파일러의 문법 검사 기능의 도움을 받을수 있음.
 예시)
 설치 후, 간단한 메서드 작성시 보여주기.
+public Page<Board> search(Pageable pageable) {
+    // Querydsl 이용하는 기본 문법
+    QBoard board = QBoard.board;
+    // select from board 하는 것과 비슷한 기능.
+    // query -> sql 관련 문장을, 자바 문법으로 표현하고 있다.
+    JPQLQuery<Board> query = from(board);
 
+    //BooleanBuilder를 이용한 조건절 추가 해보기.
+    BooleanBuilder booleanBuilder = new BooleanBuilder();
+    booleanBuilder.or(board.title.contains("1"));
+    booleanBuilder.or(board.content.contains("1"));
+
+    // where 조건절  where title like
+//    query.where(board.title.contains("1"));
+    // BooleanBuilder를 적용하기.
+    query.where(booleanBuilder);
+    // bno > 0 보다 큰 조건 넣을 경우
+    query.where(board.bno.gt(0L));
+
+
+    // 페이징 처리 적용하기.
+    this.getQuerydsl().applyPagination(pageable, query);
+
+    // 해당 조건에 맞는 데이터 가져오기
+    List<Board> list = query.fetch();
+    // 해당 조건에 맞는 데이터 갯수
+    long count = query.fetchCount();
+    return null;
 
 Querydsl 이용해보기.
 도구를 설치.

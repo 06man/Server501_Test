@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 // 반드시 이름 작성시: 인터페이스이름 + Impl
+// QuerydslRepositorySupport 의무 상속,
+// 만든 인터페이스 구현하기.
 public class BoardSearchImpl extends QuerydslRepositorySupport
 implements BoardSearch {
 
