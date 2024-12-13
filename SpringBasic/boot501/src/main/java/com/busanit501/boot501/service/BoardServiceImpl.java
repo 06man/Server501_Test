@@ -37,4 +37,12 @@ public class BoardServiceImpl implements BoardService {
         BoardDTO dto = modelMapper.map(board, BoardDTO.class);
         return dto;
     }
+
+    @Override
+    public void update(BoardDTO boardDTO) {
+        Optional<Board> result = boardRepository.findById(boardDTO.getBno());
+        Board board = result.orElseThrow();
+        board.changeTitleConent(boardDTO.getTitle(),boardDTO.getContent());
+        boardRepository.save(board);
+    }
 }

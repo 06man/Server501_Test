@@ -35,4 +35,16 @@ public class ServiceTests {
         BoardDTO boardDTO= boardService.readOne(bno);
         log.info("testSelectOneBoard , 하나 조회 boardDTO: " + boardDTO.toString());
     }
+
+    @Test
+    public void testUpdateBoard() {
+        // 수정할 더미 데이터 필요,
+        BoardDTO boardDTO = BoardDTO.builder()
+                .bno(103L)
+                .title("수정한 오늘 점심 뭐 먹지?")
+                .content("칼국수 먹을까?")
+                .build();
+        boardService.update(boardDTO);
+
+    }
 }
