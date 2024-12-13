@@ -47,4 +47,10 @@ public class ServiceTests {
         boardService.update(boardDTO);
 
     }
+
+    @Test
+    public void testDeleteBoard() {
+        boardService.delete(103L);
+
+    }
 }
