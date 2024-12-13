@@ -19,11 +19,20 @@ public class ServiceTests {
         // 더미 데이터 필요, 임시 DTO 생성.
         BoardDTO boardDTO = BoardDTO.builder()
                 .title("오늘 점심 뭐 먹지?")
+                .content("라면 먹어야지")
                 .writer("이상용")
                 .regDate(LocalDateTime.now())
                 .build();
 
         Long bno = boardService.register(boardDTO);
         log.info("입력한 게시글 번호: " + bno.toString());
+    }
+
+    @Test
+    public void testSelectOneBoard() {
+        // 더미 데이터 필요, 임시 DTO 생성.
+        Long bno = 103L;
+        BoardDTO boardDTO= boardService.readOne(bno);
+        log.info("testSelectOneBoard , 하나 조회 boardDTO: " + boardDTO.toString());
     }
 }
