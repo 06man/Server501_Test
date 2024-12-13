@@ -1,6 +1,5 @@
 package com.busanit501.boot501.service;
 
-import com.busanit501.boot501.domain.Board;
 import com.busanit501.boot501.dto.BoardDTO;
 import com.busanit501.boot501.dto.PageRequestDTO;
 import com.busanit501.boot501.dto.PageResponseDTO;

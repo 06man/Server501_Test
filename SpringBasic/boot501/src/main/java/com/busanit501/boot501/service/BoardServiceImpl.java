@@ -13,7 +13,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -61,8 +64,20 @@ public class BoardServiceImpl implements BoardService {
         String keyword = pageRequestDTO.getKeyword();
         Pageable pageable = pageRequestDTO.getPageable("bno");
 
-        Page<Board> list = boardRepository.searchAll(types,keyword,pageable);
+        Page<Board> result = boardRepository.searchAll(types,keyword,pageable);
         // list -> PageResponseDTO 타입으로 변경 필요.
-        return null;
-    }
+
+        // result.getContent() -> 페이징된 엔티티 클래스 목록
+        List<BoardDTO> dtoList = result.getContent().stream()
+                .map(board ->modelMapper.map(board, BoardDTO.class))
+                .collect(Collectors.toList());
+
+
+        return PageResponseDTO.<BoardDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total((int) result.getTotalElements())
+                .build();
+
+    } // list
 }
