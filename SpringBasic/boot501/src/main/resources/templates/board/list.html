@@ -9,50 +9,66 @@
 
     <div class="row mt-3">
         <div class="col">
-           <div class="card">
-               <div class="card-header">
-                   Board List
-               </div>
-               <div class="card-body">
-                   <h5 class="card-title">
-                       Board List
-                   </h5>
+            <div class="card">
+                <div class="card-header">
+                    Board List
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Board List
+                    </h5>
 
-                   <table class="table">
-                       <thead>
-                       <tr>
-                           <th scope="col">Bno</th>
-                           <th scope="col">Title</th>
-                           <th scope="col">Writer</th>
-                           <th scope="col">RegDate</th>
-                       </tr>
-                       </thead>
-                       <tbody>
-                       <tr th:each="dto:${responseDTO.dtoList}">
-                           <th scope="row">
-                               [[${dto.bno}]]
-                           </th>
-                           <td>[[${dto.title}]]</td>
-                           <td>[[${dto.writer}]]</td>
-                           <td>[[${#temporals.format(dto.regDate,'yyyy-MM-dd HH:mm:ss')}]]</td>
-                       </tr>
-                       </tbody>
-                   </table>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Bno</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Writer</th>
+                            <th scope="col">RegDate</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="dto:${responseDTO.dtoList}">
+                            <th scope="row">
+                                [[${dto.bno}]]
+                            </th>
+                            <td>[[${dto.title}]]</td>
+                            <td>[[${dto.writer}]]</td>
+                            <td>[[${#temporals.format(dto.regDate,'yyyy-MM-dd HH:mm:ss')}]]</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--페이징-->
+                    <div class="float-end">
+                        <ul class="pagination flex-wrap">
+                            <li class="page-item" th:if="${responseDTO.prev}">
+                                <a class="page-link" th:data-num="${responseDTO.start - 1}">Previous</a>
+                            </li>
 
-               </div>
+                            <!--                            페이지 번호 표시, 10개 임의로 표기-->
+                            <th:block th:each="i:${#numbers.sequence(responseDTO.start,responseDTO.end)}">
 
-           </div>
+                                <li th:class="${responseDTO.page == i }?'page-item active':'page-item'">
+                                    <a class="page-link" data-num="${i}" href="#">[[${i}]]</a></li>
+                            </th:block>
+
+                            <li class="page-item" th:if="${responseDTO.next}">
+                                <a class="page-link" th:data-num="${responseDTO.end + 1}">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--페이징-->
+
+                </div>
+
+            </div>
         </div>
 
     </div>
 
 
-
-
 </div>
 <!--끝 나는 부분 layout:fragment="content"-->
-
-
 
 
 <!--자바스크립트 추가하는 영역-->
