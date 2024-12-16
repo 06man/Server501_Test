@@ -98,7 +98,7 @@ public class BoardController {
         redirectAttributes.addFlashAttribute("result", boardDTO.getBno());
         redirectAttributes.addFlashAttribute("resultType", "update");
 
-        return "redirect:/board/read?bno="+boardDTO.getBno();
+        return "redirect:/board/read?bno="+boardDTO.getBno()+"&"+pageRequestDTO.getLink();
 
     }
 }
