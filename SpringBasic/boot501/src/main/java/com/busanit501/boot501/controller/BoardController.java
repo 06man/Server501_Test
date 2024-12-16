@@ -26,4 +26,10 @@ public class BoardController {
         PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
         model.addAttribute("responseDTO", responseDTO);
     }
+
+    //등록 작업, 1) 등록화면 2) 로직처리
+    @GetMapping("/register")
+    public void register() {
+
+    }
 }
