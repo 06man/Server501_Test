@@ -79,16 +79,19 @@ public class BoardController {
     public String updatePost(@Valid BoardDTO boardDTO,
                                BindingResult bindingResult,
                                PageRequestDTO pageRequestDTO,
+                               String keyword2,String page2, String type2,
                                RedirectAttributes redirectAttributes) {
         log.info("BoardController updatePost post 로직처리: ");
         log.info("BoardController updatePost post  boardDTO : " + boardDTO);
+
+        log.info("BoardController updatePost post  pageRequestDTO : " + pageRequestDTO);
 
         // 유효성 체크 -> 유효성 검증시, 통과 안된 원인이 있다면,
         if (bindingResult.hasErrors()) {
             log.info("has errors : 유효성 에러가 발생함.");
             // 1회용으로, 웹 브라우저에서, errors , 키로 조회 가능함. -> 뷰 ${errors}
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            return "redirect:/board/update?bno="+boardDTO.getBno()+"&"+pageRequestDTO.getLink();
+            return "redirect:/board/update?bno="+boardDTO.getBno()+"&keyword="+keyword2+"&page="+page2+"&type="+type2;
         }
         //검사가 통과가 되고, 정상 입력
         boardService.update(boardDTO);
@@ -98,7 +101,7 @@ public class BoardController {
         redirectAttributes.addFlashAttribute("result", boardDTO.getBno());
         redirectAttributes.addFlashAttribute("resultType", "update");
 
-        return "redirect:/board/read?bno="+boardDTO.getBno()+"&"+pageRequestDTO.getLink();
+        return "redirect:/board/read?bno="+boardDTO.getBno()+"&keyword="+keyword2+"&page="+page2+"&type="+type2;
 
     }
 }
