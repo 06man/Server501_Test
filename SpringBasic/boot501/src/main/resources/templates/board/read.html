@@ -45,7 +45,10 @@
                                    th:value="${#temporals.format(dto.regDate,'yyyy-MM-dd HH:mm:ss')}" readonly>
                         </div>
                         <div class="mb-3" th:with="link = ${pageRequestDTO.link}">
+<!--                            수정폼 가기 방법2-->
+<!--                            <a th:href="|@{/board/update}?bno=${dto.bno}&${link}|">-->
                             <button type="button" class="btn btn-primary submitBtn">수정하기</button>
+<!--                            </a>-->
                             <a th:href="|@{/board/list}?${link}|">
                             <button type="button" class="btn btn-danger">목록가기</button>
                             </a>
@@ -69,7 +72,7 @@
    document.querySelector(".submitBtn").addEventListener("click",
        function (e){
            // 수정폼으로 가야함. 그러면, 필요한 준비물 tno 번호가 필요함
-           self.location = `/board/update?bno=${dto.bno}&${pageRequestDTO.link}`
+           self.location = "/board/update?bno="+[[${dto.bno}]]+"&"+[[${pageRequestDTO.link}]]
                ,false})
 
 </script>
