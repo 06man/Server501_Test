@@ -17,7 +17,7 @@
                     <h5 class="card-title">
                         Board Read
                     </h5>
-                    <form method="post" action="/board/update">
+<!--                    <form method="post" action="/board/update">-->
                         <div class="mb-3">
                             <label for="title" class="form-control">제목</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요"
@@ -45,13 +45,13 @@
                                    th:value="${#temporals.format(dto.regDate,'yyyy-MM-dd HH:mm:ss')}" readonly>
                         </div>
                         <div class="mb-3" th:with="link = ${pageRequestDTO.link}">
-                            <button type="submit" class="btn btn-primary submitBtn">수정하기</button>
+                            <button type="button" class="btn btn-primary submitBtn">수정하기</button>
                             <a th:href="|@{/board/list}?${link}|">
                             <button type="button" class="btn btn-danger">목록가기</button>
                             </a>
                         </div>
 
-                    </form>
+<!--                    </form>-->
                 </div>
             </div>
         </div>
@@ -65,18 +65,12 @@
 <!--자바스크립트 추가하는 영역-->
 <script layout:fragment="javascript" th:inline="javascript">
 
-    // 유효성 체크 오류 발생시, alert 경고창 알려주기.
-    // 서버에서 오류가 발생시, 전달한 키 : errors , 받아서, 처리하기.
-    const errors = [[${errors}]]
-    console.log(errors)
-
-    let errorMsg = ''
-    if(errors) {
-        for(let i = 0; i <errors.length; i++) {
-            errorMsg += `${errors[i].field}는 ${errors[i].code} \n`
-        }
-        alert(errorMsg)
-    }
+   // 수정폼으로 이동하기.
+   document.querySelector(".submitBtn").addEventListener("click",
+       function (e){
+           // 수정폼으로 가야함. 그러면, 필요한 준비물 tno 번호가 필요함
+           self.location = `/board/update?bno=${dto.bno}&${pageRequestDTO.link}`
+               ,false})
 
 </script>
 
