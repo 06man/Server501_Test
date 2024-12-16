@@ -66,7 +66,10 @@ dependencies {
     // 6
     // 서버 입장에서 입력된 데이터 유효성 검증 도구
     // https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
-    implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.2.1.Final'
+    // 레거시 버전의 유효성 도구인데, 동작 안해서, 버전 변경
+//    implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.2.1.Final'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.4.0'
+
 
 }
 
