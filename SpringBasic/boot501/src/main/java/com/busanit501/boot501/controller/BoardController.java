@@ -67,4 +67,11 @@ public class BoardController {
         BoardDTO boardDTO = boardService.readOne(bno);
         model.addAttribute("dto", boardDTO);
     }
+
+    @GetMapping("/update")
+    public void update(Long bno, PageRequestDTO pageRequestDTO,
+                     Model model) {
+        BoardDTO boardDTO = boardService.readOne(bno);
+        model.addAttribute("dto", boardDTO);
+    }
 }
