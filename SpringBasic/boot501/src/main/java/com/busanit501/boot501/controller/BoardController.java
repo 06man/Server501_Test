@@ -52,7 +52,12 @@ public class BoardController {
             return "redirect:/board/register";
         }
         //검사가 통과가 되고, 정상 입력
-        boardService.register(boardDTO);
+        Long bno = boardService.register(boardDTO);
+
+        // 글 정상 등록후, 화면에 result 값을 전달하기.
+        // 1회용 사용하기.
+        redirectAttributes.addFlashAttribute("result", bno);
+        redirectAttributes.addFlashAttribute("resultType", "register");
 
         return "redirect:/board/list";
 

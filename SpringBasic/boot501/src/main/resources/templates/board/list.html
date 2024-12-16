@@ -8,9 +8,9 @@
 <div layout:fragment="content">
 <!--    라이브 데모 모달-->
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-    </button>
+<!--    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--        Launch demo modal-->
+<!--    </button>-->
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -186,6 +186,12 @@
 
 
         }, false)
+
+    //글작성, 수정, 삭제 여부를 목록 화면에서 , 모달창에 결과 화면 출력
+    const result = [[${result}]]
+    if(result){
+        alert(result)
+    }
 
 </script>
 
