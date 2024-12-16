@@ -17,17 +17,22 @@
                     <h5 class="card-title">
                         Board update
                     </h5>
-<!--                    <form method="post" action="/board/update">-->
+                    <form id="f1" method="post" th:action="@{/board/update}">
+                        <div class="mb-3">
+                            <label for="bno" class="form-control">bno</label>
+                            <input type="text" class="form-control" id="bno" name="bno"
+                                   th:value="${dto.bno}" readonly>
+                        </div>
                         <div class="mb-3">
                             <label for="title" class="form-control">제목</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요"
-                             th:value="${dto.title}" readonly>
+                             th:value="${dto.title}">
                         </div>
                         <div class="mb-3">
                             <label for="content" class="form-control">내용</label>
                             <textarea type="text" class="form-control col-sm-5" id="content"
                                       name="content" rows="5" placeholder="내용을 입력해주세요"
-                                       readonly>[[${dto.content}]]</textarea>
+                                       >[[${dto.content}]]</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="writer" class="form-control">작성자</label>
@@ -44,14 +49,13 @@
                             <input type="text" class="form-control" id="modDate" name="modDate"
                                    th:value="${#temporals.format(dto.regDate,'yyyy-MM-dd HH:mm:ss')}" readonly>
                         </div>
-                        <div class="mb-3" th:with="link = ${pageRequestDTO.link}">
-                            <button type="button" class="btn btn-primary submitBtn">수정하기</button>
-                            <a th:href="|@{/board/list}?${link}|">
-                            <button type="button" class="btn btn-danger">목록가기</button>
-                            </a>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-primary modBtn">수정하기</button>
+                            <button type="button" class="btn btn-danger deleteBtn">삭제하기</button>
+                            <button type="button" class="btn btn-secondary listBtn">목록가기</button>
                         </div>
 
-<!--                    </form>-->
+                    </form>
                 </div>
             </div>
         </div>
