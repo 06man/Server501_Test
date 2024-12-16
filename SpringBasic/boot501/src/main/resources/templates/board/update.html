@@ -70,11 +70,7 @@
 <script layout:fragment="javascript" th:inline="javascript">
 
    // 수정폼으로 이동하기.
-   document.querySelector(".submitBtn").addEventListener("click",
-       function (e){
-           // 수정폼으로 가야함. 그러면, 필요한 준비물 tno 번호가 필요함
-           self.location = `/board/update?bno=${dto.bno}&${pageRequestDTO.link}`
-               ,false})
+
 
 </script>
 
