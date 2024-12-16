@@ -29,17 +29,18 @@
                         <div class="mb-3">
                             <label for="title" class="form-control">제목</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요"
-                             th:value="${dto.title}">
+                                   th:value="${dto.title}">
                         </div>
                         <div class="mb-3">
                             <label for="content" class="form-control">내용</label>
                             <textarea type="text" class="form-control col-sm-5" id="content"
                                       name="content" rows="5" placeholder="내용을 입력해주세요"
-                                       >[[${dto.content}]]</textarea>
+                            >[[${dto.content}]]</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="writer" class="form-control">작성자</label>
-                            <input type="text" class="form-control" id="writer" name="writer" placeholder="지금은 직접 작성자를 입력해주세요, 로그인 후 로그인 유저가 자동으로 탑재됨."
+                            <input type="text" class="form-control" id="writer" name="writer"
+                                   placeholder="지금은 직접 작성자를 입력해주세요, 로그인 후 로그인 유저가 자동으로 탑재됨."
                                    th:value="${dto.writer}" readonly>
                         </div>
                         <div class="mb-3">
@@ -52,10 +53,12 @@
                             <input type="text" class="form-control" id="modDate" name="modDate"
                                    th:value="${#temporals.format(dto.modDate,'yyyy-MM-dd HH:mm:ss')}" disabled>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3" th:with="link = ${pageRequestDTO.link}">
                             <button type="submit" class="btn btn-primary modBtn">수정하기</button>
                             <button type="button" class="btn btn-danger deleteBtn">삭제하기</button>
-                            <button type="button" class="btn btn-secondary listBtn">목록가기</button>
+                            <a th:href="|@{/board/list}?${link}|">
+                                <button type="button" class="btn btn-secondary listBtn">목록가기</button>
+                            </a>
                         </div>
 
                     </form>
@@ -78,12 +81,27 @@
     console.log(errors)
 
     let errorMsg = ''
-    if(errors) {
-        for(let i = 0; i <errors.length; i++) {
+    if (errors) {
+        for (let i = 0; i < errors.length; i++) {
             errorMsg += `${errors[i].field}는 ${errors[i].code} \n`
         }
         alert(errorMsg)
     }
+
+    //삭제시, 폼안에 있는 내용 재사용하기.
+    document.querySelector(".deleteBtn").addEventListener("click",
+        function (e) {
+            const formObj = document.querySelector("form")
+
+            e.preventDefault()
+            e.stopPropagation() // 상위 태그로 전파 방지
+
+
+            formObj.action = "/board/delete"
+            formObj.method = "post"
+
+            formObj.submit()
+        }, false)
 
 </script>
 

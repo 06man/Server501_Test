@@ -104,4 +104,14 @@ public class BoardController {
         return "redirect:/board/read?bno="+boardDTO.getBno()+"&keyword="+keyword2+"&page="+page2+"&type="+type2;
 
     }
+
+    @PostMapping("/delete")
+    public String delete(Long bno,
+                         String keyword2,String page2, String type2,
+                         RedirectAttributes redirectAttributes) {
+        boardService.delete(bno);
+        redirectAttributes.addFlashAttribute("resultType", "delete");
+        return "redirect:/board/list?"+"&keyword="+keyword2+"&page="+page2+"&type="+type2;
+    }
+
 }
