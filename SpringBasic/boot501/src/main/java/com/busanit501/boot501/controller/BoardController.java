@@ -4,12 +4,17 @@ import com.busanit501.boot501.dto.BoardDTO;
 import com.busanit501.boot501.dto.PageRequestDTO;
 import com.busanit501.boot501.dto.PageResponseDTO;
 import com.busanit501.boot501.service.BoardService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Log4j2
@@ -30,6 +35,26 @@ public class BoardController {
     //등록 작업, 1) 등록화면 2) 로직처리
     @GetMapping("/register")
     public void register() {
+
+    }
+    @PostMapping("/register")
+    public String registerPost(@Valid BoardDTO boardDTO,
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
+        log.info("BoardController register post 로직처리: ");
+        log.info("BoardController register post  boardDTO : " + boardDTO);
+
+        // 유효성 체크 -> 유효성 검증시, 통과 안된 원인이 있다면,
+        if (bindingResult.hasErrors()) {
+            log.info("has errors : 유효성 에러가 발생함.");
+            // 1회용으로, 웹 브라우저에서, errors , 키로 조회 가능함. -> 뷰 ${errors}
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/board/register";
+        }
+        //검사가 통과가 되고, 정상 입력
+        boardService.register(boardDTO);
+
+        return "redirect:/board/list";
 
     }
 }
