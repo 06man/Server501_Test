@@ -21,18 +21,18 @@
                         <div class="mb-3">
                             <label for="title" class="form-control">제목</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요"
-                             th:text="${dto.title}" readonly>
+                             th:value="${dto.title}" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="content" class="form-control">내용</label>
                             <textarea type="text" class="form-control col-sm-5" id="content"
                                       name="content" rows="5" placeholder="내용을 입력해주세요"
-                                      th:text="${dto.content}" readonly></textarea>
+                                       readonly>[[${dto.content}]]</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="writer" class="form-control">작성자</label>
                             <input type="text" class="form-control" id="writer" name="writer" placeholder="지금은 직접 작성자를 입력해주세요, 로그인 후 로그인 유저가 자동으로 탑재됨."
-                                   th:text="${dto.writer}" readonly>
+                                   th:value="${dto.writer}" readonly>
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-primary submitBtn">수정하기</button>
