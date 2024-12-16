@@ -74,4 +74,31 @@ public class BoardController {
         BoardDTO boardDTO = boardService.readOne(bno);
         model.addAttribute("dto", boardDTO);
     }
+
+    @PostMapping("/update")
+    public String updatePost(@Valid BoardDTO boardDTO,
+                               BindingResult bindingResult,
+                               PageRequestDTO pageRequestDTO,
+                               RedirectAttributes redirectAttributes) {
+        log.info("BoardController updatePost post 로직처리: ");
+        log.info("BoardController updatePost post  boardDTO : " + boardDTO);
+
+        // 유효성 체크 -> 유효성 검증시, 통과 안된 원인이 있다면,
+        if (bindingResult.hasErrors()) {
+            log.info("has errors : 유효성 에러가 발생함.");
+            // 1회용으로, 웹 브라우저에서, errors , 키로 조회 가능함. -> 뷰 ${errors}
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/board/update?bno="+boardDTO.getBno()+"&"+pageRequestDTO.getLink();
+        }
+        //검사가 통과가 되고, 정상 입력
+        boardService.update(boardDTO);
+
+        // 글 정상 등록후, 화면에 result 값을 전달하기.
+        // 1회용 사용하기.
+        redirectAttributes.addFlashAttribute("result", boardDTO.getBno());
+        redirectAttributes.addFlashAttribute("resultType", "update");
+
+        return "redirect:/board/read?bno="+boardDTO.getBno();
+
+    }
 }
