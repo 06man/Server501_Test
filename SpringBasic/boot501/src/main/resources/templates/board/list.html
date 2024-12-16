@@ -22,10 +22,18 @@
                         th:if="${resultType == 'register'}">
                         글쓰기 성공
                     </h1>
+                    <h1 class="modal-title fs-5"
+                        th:if="${resultType == 'update'}">
+                        글쓰기 수정
+                    </h1>
+                    <h1 class="modal-title fs-5"
+                        th:if="${resultType == 'delete'}">
+                        글쓰기 삭제
+                    </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    글작성 완료
+                    [[${result}]]
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
