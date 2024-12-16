@@ -22,6 +22,7 @@ public class BoardController {
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model ) {
         // 서비스 이용해서, 데이터베이스 목록 페이징 처리해서 가져오기.
+        // 앞단 화면에서, 검색어:keyword 내용, 페이징 내용(page = 1) 담아서 전달.
         PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
         model.addAttribute("responseDTO", responseDTO);
     }
