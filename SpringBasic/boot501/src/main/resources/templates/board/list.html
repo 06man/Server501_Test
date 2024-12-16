@@ -121,8 +121,7 @@
                         </tr>
                         </thead>
 <!--                        ?page=1&type=t&keyword=3-->
-                        <tbody th:with="link = ${pageRequestDTO.getLink()}">
-                        <tbody>
+                        <tbody th:with="link = ${pageRequestDTO.link}">
                         <tr th:each="dto:${responseDTO.dtoList}">
                             <th scope="row">
                                 [[${dto.bno}]]
