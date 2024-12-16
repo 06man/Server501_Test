@@ -110,6 +110,7 @@ public class BoardController {
                          String keyword2,String page2, String type2,
                          RedirectAttributes redirectAttributes) {
         boardService.delete(bno);
+        redirectAttributes.addFlashAttribute("result", bno);
         redirectAttributes.addFlashAttribute("resultType", "delete");
         return "redirect:/board/list?"+"&keyword="+keyword2+"&page="+page2+"&type="+type2;
     }
