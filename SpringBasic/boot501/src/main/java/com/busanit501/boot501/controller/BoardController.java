@@ -116,9 +116,12 @@ public class BoardController {
                          String keyword2,String page2, String type2,
                          RedirectAttributes redirectAttributes) {
         boardService.delete(bno);
+        //키워드 한글 처리.
+        String encodedKeyword = URLEncoder.encode(keyword2, StandardCharsets.UTF_8);
+
         redirectAttributes.addFlashAttribute("result", bno);
         redirectAttributes.addFlashAttribute("resultType", "delete");
-        return "redirect:/board/list?"+"&keyword="+keyword2+"&page="+page2+"&type="+type2;
+        return "redirect:/board/list?"+"&keyword="+encodedKeyword+"&page="+page2+"&type="+type2;
     }
 
 }
