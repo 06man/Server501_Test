@@ -12,12 +12,16 @@ Controller 표현.
 
 화면이 존재,
 기존에 API 명세서
-예) /board/list
-예) /board/register
-예) /board/read
-예) /board/udpate
-예) /board/delete
+예) /board/list, get
+예) /board/register, get,post
+예) /board/read, get
+예) /board/udpate, get, post -> put
+예) /board/delete, post -> delete
 
+초반에, 주로 사용했던,
+get, post 2가지 형식을
+연장해서
+get, post, put, delete, patch
 
 화면이 없네...!!!
 변경 API 명세서
