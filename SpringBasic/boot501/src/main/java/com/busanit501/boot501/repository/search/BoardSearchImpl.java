@@ -127,6 +127,31 @@ public class BoardSearchImpl extends QuerydslRepositorySupport
         query.leftJoin(reply).on(reply.board.bno.eq(board.bno));
         // groupby 설정,
         query.groupBy(board);
+
+        // 위에서 사용한 검색 조건 , 재사용하기
+        if (types != null && types.length > 0 && keyword != null) {
+            // 여러 조건을 하나의 객체에 담기.
+            BooleanBuilder booleanBuilder = new BooleanBuilder();
+            for (String type : types) {
+                switch (type) {
+                    case "t":
+                        booleanBuilder.or(board.title.contains(keyword));
+                        break;
+                    case "c":
+                        booleanBuilder.or(board.content.contains(keyword));
+                        break;
+                    case "w":
+                        booleanBuilder.or(board.writer.contains(keyword));
+                        break;
+                } // switch
+            }// end for
+            // where 조건을 적용해보기.
+            query.where(booleanBuilder);
+        } //end if
+        // bno >0
+        query.where(board.bno.gt(0L));
+        // 위에서 사용한 검색 조건 , 재사용하기
+
         // 모델 맵핑 작업, DTO <-> 엔티티 클래스간에 형변환을 해야함.
         JPQLQuery<BoardListReplyCountDTO> dtoQuery =
                 query.select(Projections.bean(BoardListReplyCountDTO.class,
@@ -136,7 +161,22 @@ public class BoardSearchImpl extends QuerydslRepositorySupport
                         board.writer,
                         board.regDate,
                         reply.count().as("replyCount")));
+        
+        // 페이징 조건, 재사용, dto<-> 엔티티 형변환 할 때 사용했던 쿼리로 변
+        // query -> dtoQuery
+        this.getQuerydsl().applyPagination(pageable, dtoQuery);
 
-        return null;
+        // =============================================
+        // 위의 조건으로,검색 조건 1) 페이징된 결과물 2) 페이징된 전체 갯수
+        // 해당 조건의 데이터를 가져오기,
+        List<BoardListReplyCountDTO> list = dtoQuery.fetch();
+        // 해당 조건에 맞는 데이터의 갯수 조회.
+        long total = dtoQuery.fetchCount();
+
+        // 마지막, Page 타입으로 전달 해주기.
+        Page<BoardListReplyCountDTO> result = new PageImpl<BoardListReplyCountDTO>(list, pageable, total);
+
+        return result;
+        // 페이징 조건, 재사용
     }
 }
