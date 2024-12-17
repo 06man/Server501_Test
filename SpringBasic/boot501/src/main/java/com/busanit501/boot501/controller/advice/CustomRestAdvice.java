@@ -17,7 +17,7 @@ import java.util.Map;
 public class CustomRestAdvice {
     @ExceptionHandler(BindException.class)// 예외 처리할 종류를 알려주기
     @ResponseStatus(HttpStatus.EXPECTATION_FAILED) // 응답코드, 예외 실패라서 안됐습니다. 메세지 코드 전달.
-    public ResponseEntity<Map<String,String>> hadleException(BindException e){
+    public ResponseEntity<Map<String,String>> handleException(BindException e){
 
         log.error("CustomRestAdvice hadle exception ", e);
         log.error(e);
@@ -30,6 +30,6 @@ public class CustomRestAdvice {
                         errorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
                     });
         }
-return ResponseEntity.badRequest().body(errorMap);
+        return ResponseEntity.badRequest().body(errorMap);
     }
 }
