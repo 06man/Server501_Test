@@ -2,6 +2,8 @@ package com.busanit501.boot501.repository.search;
 
 import com.busanit501.boot501.domain.Board;
 import com.busanit501.boot501.domain.QBoard;
+import com.busanit501.boot501.domain.QReply;
+import com.busanit501.boot501.dto.BoardListReplyCountDTO;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
@@ -107,5 +109,20 @@ public class BoardSearchImpl extends QuerydslRepositorySupport
         Page<Board> result = new PageImpl<Board>(list, pageable, total);
 
         return result;
+    }
+
+    @Override
+    // 게시글 테이블과, 댓글 테이블 2개를 조인 ,
+    public Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types, String keyword, Pageable pageable) {
+        QBoard board = QBoard.board;
+        QReply reply = QReply.reply;
+        JPQLQuery<Board> query = from(board);// select * from board
+        // 조인 설정 , 게시글에서 댓글에 포함된 게시글 번호와 , 게시글 번호 일치
+        query.leftJoin(reply).on(reply.board.bno.eq(board.bno));
+        // groupby 설정,
+        query.groupBy(board);
+        // 모델 맵핑 작업, DTO <-> 엔티티 클래스간에 형변환을 해야함.
+
+        return null;
     }
 }
