@@ -5,6 +5,7 @@ import com.busanit501.boot501.domain.QBoard;
 import com.busanit501.boot501.domain.QReply;
 import com.busanit501.boot501.dto.BoardListReplyCountDTO;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -112,7 +113,12 @@ public class BoardSearchImpl extends QuerydslRepositorySupport
     }
 
     @Override
-    // 게시글 테이블과, 댓글 테이블 2개를 조인 ,
+    // 데이터베이스 형식으로, 단방향으로 참조 중.
+    // 댓글 -> 게시글 방향으로 조회 중.
+    // 즉, 반대 방향으로 조회를 못함.
+    // 게시글 테이블과, 댓글 테이블 2개를 조인
+    // 내부 조인(널 표기 안했음.),
+    // 외부 조인,(널 표기 같이 해야함.) ,
     public Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types, String keyword, Pageable pageable) {
         QBoard board = QBoard.board;
         QReply reply = QReply.reply;
@@ -122,6 +128,14 @@ public class BoardSearchImpl extends QuerydslRepositorySupport
         // groupby 설정,
         query.groupBy(board);
         // 모델 맵핑 작업, DTO <-> 엔티티 클래스간에 형변환을 해야함.
+        JPQLQuery<BoardListReplyCountDTO> dtoQuery =
+                query.select(Projections.bean(BoardListReplyCountDTO.class,
+                        board.bno,
+                        board.title,
+                        board.content,
+                        board.writer,
+                        board.regDate,
+                        reply.count().as("replyCount")));
 
         return null;
     }
