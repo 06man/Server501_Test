@@ -17,7 +17,11 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "board")// db에 접근시, 2번접근 안함.
+@ToString// db에 접근시, 2번접근 안함.
+// 단위 테스트 기본 설정상, 하나의 테이블에 한번 접근함.
+//(exclude = "board") , 사용 안하고,
+// 다른 테이블도 같이 조회를 해야한다면, @Transaction 설정
+// 단위테스트 메서드에 추가하기.
 public class Reply extends BaseEntity {
 
     @Id
