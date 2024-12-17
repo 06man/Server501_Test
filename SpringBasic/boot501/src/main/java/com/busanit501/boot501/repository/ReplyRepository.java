@@ -1,7 +1,6 @@
 package com.busanit501.boot501.repository;
 
 import com.busanit501.boot501.domain.Reply;
-import com.busanit501.boot501.dto.BoardListReplyCountDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,5 +11,5 @@ public interface ReplyRepository extends JpaRepository<Reply, Integer> {
 
     // 검색 기능 추가해보기.
     @Query("select r from Reply r where r.board.bno = :bno")
-    Page<BoardListReplyCountDTO> listOfBoard(Long bno, Pageable pageable);
+    Page<Reply> listOfBoard(Long bno, Pageable pageable);
 }

@@ -17,6 +17,8 @@ import org.springframework.data.domain.Sort;
 public class ReplyRepositoryTests {
     @Autowired
     private ReplyRepository replyRepository;
+    @Autowired
+    private BoardRepository boardRepository;
 
     @Test
     public void testInsert() {
@@ -58,10 +60,10 @@ public class ReplyRepositoryTests {
 
         // 전달할 준비물
         // 1) 검색어, 2) 검색 유형
-        String keyword = "샘플";
+        String keyword = "오늘";
         String[] types = {"t","w","c"};
 
-        Page<BoardListReplyCountDTO> result = replyRepository.listOfBoard(121L,pageable);
+        Page<BoardListReplyCountDTO> result = boardRepository.searchWithReplyCount(types,keyword,pageable);
 
         log.info("result.getTotalElements()전체 갯수 :" +result.getTotalElements());
         log.info("result.getTotalPages()총페이지등 :" +result.getTotalPages());
