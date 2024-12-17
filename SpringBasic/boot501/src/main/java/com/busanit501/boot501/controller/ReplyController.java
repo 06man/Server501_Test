@@ -36,7 +36,7 @@ public class ReplyController {
     //Map<String,Long> 으로전달 -> jackson 직렬화 -> 문자열로 변환,
     // json 문자열 형식으로 변환.
 
-    // @RequestBodyd, JSON 의 문자열로 전달을 받아요.
+    // @RequestBody, JSON 의 문자열로 전달을 받아요.
     // 원래의 일반 클래스로 역직렬화,
     // Jackson 컨버터 도구가, 알아서, 역직렬화 해줌.
     public ResponseEntity<Map<String,Long>> register(
