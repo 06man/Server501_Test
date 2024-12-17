@@ -55,7 +55,7 @@ public class ReplyRepositoryTests {
 // 게시글 표시에 댓글 갯수 추가해서 조회하기.
     @Test
     public void testSelectWithReplyCount() {
-        Pageable pageable = PageRequest.of(1, 10,
+        Pageable pageable = PageRequest.of(0, 10,
                 Sort.by("bno").descending());
 
         // 전달할 준비물
