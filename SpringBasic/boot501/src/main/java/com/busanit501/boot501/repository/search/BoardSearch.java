@@ -15,7 +15,7 @@ public interface BoardSearch {
     // Page -> 1) 페이징된 결과물 10개 2) 전체 갯수 3) 현제 페이지, 등. 정보 조회 가능.
     Page<Board> searchAll(String[] types, String keyword, Pageable pageable);
 
-    // 댓글 갯수를 포함한 목록, 작업 1
+    // 댓글 갯수를 포함한 목록,
     Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types, String keyword, Pageable pageable);
 
 }
