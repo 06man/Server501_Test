@@ -6,6 +6,10 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 @SpringBootTest
 @Log4j2
@@ -28,6 +32,21 @@ public class ReplyRepositoryTests {
                 .build();
 
         replyRepository.save(reply);
+    }
+
+    @Test
+    public void testSelect() {
+        Long bno = 121L;
+        // 페이징 조건, 준비물 준비
+        Pageable pageable = PageRequest.of(0,10, Sort.by("rno").descending());
+
+        //
+        Page<Reply> result = replyRepository.listOfBoard(bno, pageable);
+        // result 안에, 페이징 조건의 준비물이 다 있음.
+        // 1) 전체 갯수, 2) 페이지 3) 페이지당 크기 4) 페이징 처리된 목록 요소
+        result.getContent().forEach(reply -> {
+            log.info(reply);
+        });
     }
 }
 
