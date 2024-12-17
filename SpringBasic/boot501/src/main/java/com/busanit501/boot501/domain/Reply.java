@@ -4,6 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+// 복합키 인덱스, 순서 중요함,
+// 순서, 댓글 번호로 1차 기준 정렬, 게시글 번호 2차 기준 정렬,
+// 검색시, 전체 검색을 안하고, 색인 검색(index scan)
+// 검색시, 성능 향상을 위해서함,
+// 주의사항, 너무 복잡한 복합키 설정이나, 또는 많은 복합키를 사용하게 되면,
+// 디비 자체에서 부하가 걸려서 효율적이지 못함, 가급적 너무 많은 복합키 사용은 주의.
+@Table(name = "Reply", indexes = {
+        @Index(name = "idx_reply_board_bno", columnList = "board_bno")
+})
 @Getter
 @Builder
 @AllArgsConstructor
