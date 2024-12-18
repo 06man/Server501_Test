@@ -21,9 +21,10 @@
 // 점원 3명,
 //
 
-async function get(bno) {
+async function getList(bno) {
     const result = await axios.get(`/replies/list/${bno}`)
-    console.log(result)
+    // console.log(result)
+    return result.data
 }
 
 

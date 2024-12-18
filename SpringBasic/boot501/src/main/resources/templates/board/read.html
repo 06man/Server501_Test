@@ -106,7 +106,26 @@
    // 비동기 함수, 테스트 작업.
    const bno = [[${dto.bno}]]
 
-   get(bno)
+   // 함수 정의,
+   // 주의사항, reply.js , 통신 이용해서, 데이터를 전달하는 업무, 백
+   // read.html,  받아온 데이터를 업데이트를 하는 역할. 화면 그려주는 역할. 프론트  react.jsx
+
+   function  printReplies(page,size,goLast) {
+       // 비동기 함수를 호출하게 되면, 호출된 데이터의 성공 여부에 따라서,
+       // 성공시, then  절 받아서 처리,
+       // 실패시, catch 절 받아서 처리.
+       getList({bno,page,size,goLast})
+           .then(
+               data => console.log(data)
+           )
+           .catch(e => {
+                   console.error(e)
+               }
+           )
+   }
+
+
+
 
 </script>
 
