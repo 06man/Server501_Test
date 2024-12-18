@@ -15,7 +15,6 @@ public class ReplyServiceTests {
     private ReplyService replyService;
 
     @Test
-//    @Transactional
     public void testRegisterReply() {
         // 더미 데이터 필요, 임시 DTO 생성.
         ReplyDTO replyDTO = ReplyDTO.builder()
@@ -29,5 +28,12 @@ public class ReplyServiceTests {
         log.info("replyDTO , register 함수 호출 하기전 : "+replyDTO);
         Long bno = replyService.register(replyDTO);
         log.info("입력한 댓글 번호: " + bno.toString());
+    }
+
+    @Test
+    public void testReadReply() {
+
+        ReplyDTO replyDTO = replyService.readOne(9L);
+        log.info("조회한 댓글 내용: " + replyDTO);
     }
 }

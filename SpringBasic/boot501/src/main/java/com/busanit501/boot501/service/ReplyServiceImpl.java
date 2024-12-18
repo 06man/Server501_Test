@@ -36,4 +36,22 @@ public class ReplyServiceImpl implements ReplyService {
         Long rno = replyRepository.save(reply).getRno();
         return rno;
     }
+
+    @Override
+    public ReplyDTO readOne(Long rno) {
+        Optional<Reply> result = replyRepository.findById(rno);
+        Reply reply = result.orElseThrow();
+        ReplyDTO replyDTO = modelMapper.map(reply, ReplyDTO.class);
+        return replyDTO;
+    }
+
+    @Override
+    public void update(ReplyDTO replyDTO) {
+
+    }
+
+    @Override
+    public void delete(Long rno) {
+
+    }
 }

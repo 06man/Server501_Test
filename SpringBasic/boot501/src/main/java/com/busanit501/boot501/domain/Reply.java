@@ -42,4 +42,9 @@ public class Reply extends BaseEntity {
         this.board = board;
     }
 
+    // 수정 시, 내용만 변경하기위해서 사용함, 불변성을 유지하기위한 조취
+    public void changeReplyText(String replyText) {
+        this.replyText = replyText;
+    }
+
 }
