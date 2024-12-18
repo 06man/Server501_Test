@@ -21,6 +21,13 @@
 // 점원 3명,
 //
 
+//연습용
+async function get(bno) {
+    const result = await axios.get(`/replies/list/${bno}`)
+    console.log(result)
+}
+
+// 댓글 전체 목록
 async function getList({bno,page,size,goLast}) {
     const result = await axios.get(`/replies/list/${bno}`,
         {params: {page,size}})
