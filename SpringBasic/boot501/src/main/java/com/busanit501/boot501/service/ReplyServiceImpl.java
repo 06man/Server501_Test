@@ -73,7 +73,11 @@ public class ReplyServiceImpl implements ReplyService {
         Page<Reply> result = replyRepository.listOfBoard(bno, pageable);
 
        List<ReplyDTO>  dtoList = result.getContent().stream()
-                .map(reply -> modelMapper.map(reply, ReplyDTO.class))
+                .map(reply -> {
+                   ReplyDTO replyDTO = modelMapper.map(reply, ReplyDTO.class);
+                   replyDTO.setRno(reply.getRno());
+                   return replyDTO;
+                })
                .collect(Collectors.toList());
 
        PageResponseDTO<ReplyDTO> pageResponseDTO = PageResponseDTO.<ReplyDTO>withAll()
