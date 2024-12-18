@@ -62,11 +62,12 @@ public class ReplyController {
     //댓글 목록 조회,
     // localhost:8080/replies/list/122
     @Tag(name = "댓글 목록 조회",description = "댓글 목록 조회 RESTful get방식")
-    @GetMapping("/list /{bno}")
-    public PageResponseDTO<ReplyDTO> getList(
-            @PathVariable("bno") Long bno, PageRequestDTO pageRequestDTO    )
+    @GetMapping(value ="/list/{bno}")
+    public PageResponseDTO<ReplyDTO> getList(@PathVariable("bno") Long bno, PageRequestDTO pageRequestDTO)
     {
-        return null;
+        log.info(" ReplyController getList: bno={}", bno);
+        PageResponseDTO<ReplyDTO> responseDTO = replyService.listWithReply(bno, pageRequestDTO);
+        return responseDTO;
     }
 
 }
