@@ -125,6 +125,12 @@ public class BoardSearchImpl extends QuerydslRepositorySupport
         JPQLQuery<Board> query = from(board);// select * from board
         // 조인 설정 , 게시글에서 댓글에 포함된 게시글 번호와 , 게시글 번호 일치
         query.leftJoin(reply).on(reply.board.bno.eq(board.bno));
+        // bno  title  content writer , rno  bno  replyText replyer
+        // 121   test   test    lsy      1    121    댓글    댓글작성자
+        // 121   test   test    lsy      2    121    댓글2    댓글작성자2
+
+        // 120   test3   test3    lsy3   3    120    댓글33    댓글작성자33
+        // 120   test3   test3    lsy3   4    120    댓글44    댓글작성자44
         // groupby 설정,
         query.groupBy(board);
 
@@ -153,6 +159,13 @@ public class BoardSearchImpl extends QuerydslRepositorySupport
         // 위에서 사용한 검색 조건 , 재사용하기
 
         // 모델 맵핑 작업, DTO <-> 엔티티 클래스간에 형변환을 해야함.
+        // 기존에는 서비스 계층에서,  dto-entity 변환,
+
+
+        // query -> 조인이 된 상태이고, 그룹별로 분할 된상태.
+        // Querydsl 에서, 데이터 조회 후, 바로 형변환을 자동으로 지원.
+        // Projections.bean 기능을 이용하면,
+        // modelMapper.map(boardDTO, Board.class)
         JPQLQuery<BoardListReplyCountDTO> dtoQuery =
                 query.select(Projections.bean(BoardListReplyCountDTO.class,
                         board.bno,
@@ -164,6 +177,12 @@ public class BoardSearchImpl extends QuerydslRepositorySupport
         
         // 페이징 조건, 재사용, dto<-> 엔티티 형변환 할 때 사용했던 쿼리로 변
         // query -> dtoQuery
+        // dtoQuery
+        // bno  title  content writer , replyCount
+        // 121   test   test    lsy       2
+        // 120   test3  test3   lsy3      2
+
+        // 위에 게시글에 , 댓글 갯수를 포함한 결과에 페이징 처리를 적용하는 코드
         this.getQuerydsl().applyPagination(pageable, dtoQuery);
 
         // =============================================
