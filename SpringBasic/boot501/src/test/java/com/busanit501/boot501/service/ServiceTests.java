@@ -1,6 +1,7 @@
 package com.busanit501.boot501.service;
 
 import com.busanit501.boot501.dto.BoardDTO;
+import com.busanit501.boot501.dto.BoardListReplyCountDTO;
 import com.busanit501.boot501.dto.PageRequestDTO;
 import com.busanit501.boot501.dto.PageResponseDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -68,6 +69,22 @@ public class ServiceTests {
                         .build();
 
         PageResponseDTO<BoardDTO> list = boardService.list(pageRequestDTO);
+        log.info("list: " + list.toString());
+    }
+
+    @Test
+    public void testSelectAllBoardWithReplyCount() {
+        // 검색할 더미 데이터
+        // 준비물 1) PageRequestDTO, 키워드, 페이지, 사이즈 정보가 다 있음.
+        PageRequestDTO pageRequestDTO =
+                PageRequestDTO.builder()
+                        .page(1)
+                        .type("tcw")
+                        .keyword("샘플")
+                        .size(10)
+                        .build();
+
+        PageResponseDTO<BoardListReplyCountDTO> list = boardService.listWithReplyCount(pageRequestDTO);
         log.info("list: " + list.toString());
     }
 }
