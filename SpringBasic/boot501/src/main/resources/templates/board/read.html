@@ -103,6 +103,11 @@
            self.location = "/board/update?bno="+[[${dto.bno}]]+"&"+[[${pageRequestDTO.link}]]
                ,false})
 
+   // 비동기 함수, 테스트 작업.
+   const bno = [[${dto.bno}]]
+
+   get(bno)
+
 </script>
 
 </body>
