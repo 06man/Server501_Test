@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -73,6 +74,7 @@ public class ServiceTests {
     }
 
     @Test
+    @Transactional
     public void testSelectAllBoardWithReplyCount() {
         // 검색할 더미 데이터
         // 준비물 1) PageRequestDTO, 키워드, 페이지, 사이즈 정보가 다 있음.
