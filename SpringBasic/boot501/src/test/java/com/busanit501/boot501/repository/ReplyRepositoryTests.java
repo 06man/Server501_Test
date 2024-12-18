@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Log4j2
@@ -75,11 +76,12 @@ public class ReplyRepositoryTests {
     }
 
     @Test
+    @Transactional
     public void testSelectWithReply() {
         Pageable pageable = PageRequest.of(0, 10,
-                Sort.by("bno").descending());
+                Sort.by("rno").descending());
 
-        Page<Reply> result = replyRepository.listOfBoard(122L,pageable);
+        Page<Reply> result = replyRepository.listOfBoard(121L,pageable);
         log.info("result.getTotalElements()전체 갯수 :" +result.getTotalElements());
         log.info("result.getTotalPages()총페이지등 :" +result.getTotalPages());
         log.info("result.getContent() 페이징된 결과물 10개 :" +result.getContent());
