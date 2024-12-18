@@ -39,9 +39,13 @@ public class ReplyServiceTests {
     @Test
     public void testUpdateReply() {
         // 더미 데이터 필요, 임시 DTO 생성.
+        // 수정할 댓글 번호가 없어요. 더미로 추가함.
+        // 각자 디비에 따라서 조금씩 달라요.
+        //
         ReplyDTO replyDTO = ReplyDTO.builder()
                 .replyText("수정 테스트 내용 변경만 확인해주세요.")
                 .replyer("이상용")
+                .rno(9L)
                 .bno(122L)
                 .regDate(LocalDateTime.now())
                 .build();
