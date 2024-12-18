@@ -5,7 +5,6 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +15,7 @@ public class ReplyServiceTests {
     private ReplyService replyService;
 
     @Test
-    @Transactional
+//    @Transactional
     public void testRegisterReply() {
         // 더미 데이터 필요, 임시 DTO 생성.
         ReplyDTO replyDTO = ReplyDTO.builder()
