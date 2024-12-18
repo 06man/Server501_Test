@@ -55,6 +55,6 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public void delete(Long rno) {
-
+        replyRepository.deleteById(rno);
     }
 }

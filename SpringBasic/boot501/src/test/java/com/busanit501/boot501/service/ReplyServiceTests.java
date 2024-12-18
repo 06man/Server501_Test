@@ -55,4 +55,9 @@ public class ReplyServiceTests {
         replyService.update(replyDTO);
 
     }
+
+    @Test
+    public void testDeleteReply() {
+        replyService.delete(9L);
+    }
 }
