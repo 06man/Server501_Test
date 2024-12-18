@@ -47,7 +47,10 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public void update(ReplyDTO replyDTO) {
-
+        Optional<Reply> result = replyRepository.findById(replyDTO.getRno());
+        Reply reply = result.orElseThrow();
+        reply.changeReplyText(replyDTO.getReplyText());
+        replyRepository.save(reply);
     }
 
     @Override
