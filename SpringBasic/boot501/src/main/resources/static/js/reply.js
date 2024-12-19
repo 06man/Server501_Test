@@ -80,6 +80,12 @@ async function updateReply(replyObj){
     return response.data
 }
 
+// 댓글 삭제, 댓글 번호만 필요함 rno
+async function deleteReply(rno){
+    const response = await axios.delete(`/replies/${rno}`)
+    return response.data
+}
+
 
 
 

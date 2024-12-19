@@ -87,7 +87,7 @@
     </div>
 
     <!--    댓글 등록 모달창1-->
-    <div class="modal fade registerModal"  tabindex="-1"
+    <div class="modal fade registerModal" tabindex="-1"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -96,7 +96,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-<!--                    댓글 등록 입력폼 추가하기-->
+                    <!--                    댓글 등록 입력폼 추가하기-->
                     <div class="input-group mb-3">
                         <span class="input-group-text">내용</span>
                         <input type="text" class="form-control replyText">
@@ -116,7 +116,7 @@
     <!--    댓글 등록 모달창1-->
 
     <!--    댓글 수정 모달창2-->
-    <div class="modal fade updateModal"  tabindex="-1"
+    <div class="modal fade updateModal" tabindex="-1"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -299,38 +299,37 @@
 
     // addReplyBtn 요소 클릭시, 모달창 띄우기
     document.querySelector(".addReplyBtn").addEventListener("click",
-    function (e){
-        registerModal.show()
-    })
-//취소 할 경우, hide
+        function (e) {
+            registerModal.show()
+        })
+    //취소 할 경우, hide
     registerCloseBtn.addEventListener("click",
-        function (e){
+        function (e) {
             registerModal.hide()
         })
 
     //댓글 등록 , 로직 처리, 이벤트 추가.
-    registerBtn.addEventListener("click",function (e)
-    {
+    registerBtn.addEventListener("click", function (e) {
         // 댓글의 내용과, 작성자를 가져와서, 객체에 담기.
         const replyObj = {
-            bno:bno,
-            replyText:replyText.value,
-            replyer:replyer.value
+            bno: bno,
+            replyText: replyText.value,
+            replyer: replyer.value
         }
         addReply(replyObj).then(
             result => {
-                alert("댓글 작성 번호: "+result.rno)
+                alert("댓글 작성 번호: " + result.rno)
                 registerModal.hide()
                 replyText.value = ''
                 replyer.value = ''
                 // 댓글 작성후, 마지막 댓글 페이지 이동
-                printReplies(1,10,true)
+                printReplies(1, 10, true)
             }
         )
-            .catch(e =>{
+            .catch(e => {
                 alert("예외가 발생함")
             })
-    },false)
+    }, false)
 
 
     // 댓글 수정 모달창 띄우기, 이벤트 처리, 댓글 내용을 클릭시 띄우기.
@@ -344,7 +343,7 @@
     const deleteBtn = document.querySelector(".deleteBtn")
 
     // 이벤트 처리, 댓글 클릭시, 수정 모달창 띄우기.
-    replyList.addEventListener("click",function (e){
+    replyList.addEventListener("click", function (e) {
         e.preventDefault()
         e.stopPropagation()
 
@@ -360,11 +359,11 @@
         console.log("클릭시 rno  가져오기 확인 : " + rno)
 
         // rno 가 없다면, 이벤트 처리 안합니다.
-        if(!rno){
+        if (!rno) {
             return;
         }
         // rno 있으니, 추가 작업 계속함.
-        getReply(rno).then(reply =>{
+        getReply(rno).then(reply => {
             console.log("하나 조회 : replyDTO : " + reply)
             // 모달 창 화면에 , 조회한 댓글 내용과, 작성자 표기 , 주입.
             replyHeader.innerHTML = reply.rno
@@ -372,15 +371,15 @@
             updateReplyer.value = reply.replyer
             updateModal.show()
         })
-            .catch(e =>alert("댓글 추가 예외 발생함"))
-    },false)
+            .catch(e => alert("댓글 추가 예외 발생함"))
+    }, false)
 
     //댓글 수정, 로직 처리,
-    updateBtn.addEventListener("click",function (e){
+    updateBtn.addEventListener("click", function (e) {
         //변경된 댓글 내용과, 작성자를 가져오기,
         const replyObj = {
-            bno:bno,
-            rno:replyHeader.innerHTML,
+            bno: bno,
+            rno: replyHeader.innerHTML,
             replyText: updateReplyText.value,
             replyer: updateReplyer.value
         }
@@ -389,14 +388,32 @@
         // 비동기 통신 이용해서, 성공시, 실패시 나눠서 작업.
         updateReply(replyObj).then(result => {
             alert(result.rno + "번 댓글 수정 완료 ")
-            updateReplyText.value =''
+            updateReplyText.value = ''
             updateModal.hide()
-            printReplies(page,size)
+            printReplies(page, size)
         })
             .catch(e => {
                 alert("댓글 수정 실패")
             })
-    },false)
+    }, false)
+
+    // 삭제 로직 처리 추가.
+    deleteBtn.addEventListener("click", function (e) {
+
+        const rno = replyHeader.innerHTML
+        console.log("replyHeader.innerHTML : " + replyHeader.innerHTML)
+        console.log("rno 확인 : " + rno)
+
+        // 비동기 통신 이용해서, 성공시, 실패시 나눠서 작업.
+        deleteReply(rno).then(result => {
+            alert(result.rno + "번 댓글 삭제 완료 ")
+            updateModal.hide()
+            printReplies(page, size, true)
+        })
+            .catch(e => {
+                alert("댓글 삭제 실패")
+            })
+    }, false)
 
 </script>
 
