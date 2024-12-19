@@ -28,7 +28,7 @@ public class BoardReopositoryTests {
         // 더미 데이터, 앞에서, 병렬 처리 기능 사용하기.
         // stream 클래스 이용하기.
         // 1 ~ 99번까지 생성해요.
-        IntStream.range(1, 2).forEach(i -> {
+        IntStream.range(1,101 ).forEach(i -> {
             Board board = Board.builder()
                     .title("샘플 제목 : " + i)
                     .content("샘플 내용 : " + i)

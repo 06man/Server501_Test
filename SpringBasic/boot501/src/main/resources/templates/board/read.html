@@ -121,13 +121,14 @@
        // 성공시, then  절 받아서 처리,
        // 실패시, catch 절 받아서 처리.
        // 순서4, 서버로 부터 넘어온 데이터를, 댓글 목록 출력하는 함수에 전달하는 역할
-       getList({bno,page,size,goLast})
-           .then(
+       getList({bno,page,size,goLast}) // 비동기로 함수를 사용함.
+           .then( // 성공하면 동작할 영역
                // 연습용 콘솔 출력,
                // data => console.log(data)
+               // 성공하면, data , 매개변수에, 서버로 부터 받은 데이터 할당됨
                data => printList(data.dtoList) // 댓글 목록 출력하기.
            )
-           .catch(e => {
+           .catch(e => { // 실패하면 동작할 영역
                    console.error(e)
                }
            )
@@ -166,7 +167,34 @@
 
    // 페이징 목록 처리,
    // 순서7, 댓글의 페이징 번호를 출력하는 기능
+   //  페이징 준비물이, data 객체 안에 다 들어가 있다.
+   // page, size, next, prev, total, start, end 다 있음.
+    function printPages(data){
+       let pageStr = ''
+        // 이전페이지 여부
+        if(data.prev){
+            pageStr += `<li class="page-item"><a class="page-link"
+            data-page="${data.start-1}">이전</a></li>
+             `
+        }
+        // 페이지 번호를 출력, 보통 10개씩 출력중.
+        for(let i = data.start; i<=data.end; i++) {
+            pageStr += `
+            <li class="${data.page == i}?'page-item active':'page-item'">
+                                    <a class="page-link"
+                                       data-page="${i}">[[${i}]]</a>
+                                </li>
+            `
+        }
 
+        // 다음 페이지 여부
+        if(data.next){
+            pageStr += `<li class="page-item"><a class="page-link"
+            data-page="${data.end+1}">다음</a></li>
+             `
+        }
+        replyPaging.innerHTML = pageStr
+    }
 
 
 
