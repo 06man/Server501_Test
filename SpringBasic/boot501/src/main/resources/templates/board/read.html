@@ -333,6 +333,48 @@
     },false)
 
 
+    // 댓글 수정 모달창 띄우기, 이벤트 처리, 댓글 내용을 클릭시 띄우기.
+    const updateModal = new bootstrap.Modal(document.querySelector(".updateModal"))
+    // 나머지 , 화면 요소를 미리 , 재사용하기 위해서, 변수에 할당 해놓기.
+    const updateBtn = document.querySelector(".updateBtn")
+    const replyHeader = document.querySelector(".replyHeader")
+    const updateCloseBtn = document.querySelector(".updateCloseBtn")
+    const updateReplyText = document.querySelector(".updateReplyText")
+    const updateReplyer = document.querySelector(".updateReplyer")
+    const deleteBtn = document.querySelector(".deleteBtn")
+
+    // 이벤트 처리, 댓글 클릭시, 수정 모달창 띄우기.
+    replyList.addEventListener("click",function (e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        const target = e.target
+
+        // span 태그가 아니면, 이벤트 처리를 안합니다.
+        if (!target || target.tagName != 'SPAN') {
+            return
+        }
+
+        // span 태그이고, 작업 계속 진행함.
+        const rno = target.getAttribute("data-rno")
+
+        // rno 가 없다면, 이벤트 처리 안합니다.
+        if(!rno){
+            return;
+        }
+        // rno 있으니, 추가 작업 계속함.
+        getReply(rno).then(reply =>{
+            console.log("하나 조회 : replyDTO : " + reply)
+            // 모달 창 화면에 , 조회한 댓글 내용과, 작성자 표기 , 주입.
+            replyHeader.innerHTML = reply.rno
+            updateReplyText.innerHTML = reply.replyText
+            updateReplyer.innerHTML = reply.replyer
+            updateModal.show()
+        })
+            .catch(e =>alert("예외 발생함"))
+    })
+
+
 </script>
 
 </body>
