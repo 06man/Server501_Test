@@ -68,6 +68,12 @@ async function addReply(replyObj){
     return response.data
 }
 
+//댓글 조회 , rno : 댓글 번호
+async function getReply(rno){
+    const response = await axios.get(`/replies/{rno}`)
+    return response.data
+}
+
 
 
 

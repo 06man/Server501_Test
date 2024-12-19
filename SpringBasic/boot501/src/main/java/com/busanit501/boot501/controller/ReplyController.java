@@ -70,6 +70,17 @@ public class ReplyController {
         return responseDTO;
     }
 
+    // 댓글 하나 조회, 상세보기
+    // localhost:8080/replies/{rno:댓글번호}
+    @Tag(name = "댓글 하나 조회",description = "댓글 하나 조회 RESTful get방식")
+    @GetMapping(value ="/{rno}")
+    public PageResponseDTO<ReplyDTO> getRead(@PathVariable("rno") Long rno, PageRequestDTO pageRequestDTO)
+    {
+        log.info(" ReplyController getRead: rno={}", rno);
+//        PageResponseDTO<ReplyDTO> responseDTO = replyService.listWithReply(bno, pageRequestDTO);
+        return null;
+    }
+
 }
 
 
