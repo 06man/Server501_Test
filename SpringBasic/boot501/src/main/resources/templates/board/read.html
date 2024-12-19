@@ -86,6 +86,40 @@
         </div>
     </div>
 
+    <!--    댓글 등록 모달창1-->
+    <div class="modal fade registerModal"  tabindex="-1"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">댓글 등록</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<!--                    댓글 등록 입력폼 추가하기-->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">내용</span>
+                        <input type="text" class="form-control replyText">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">작성자</span>
+                        <input type="text" class="form-control replyer">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary registerCloseBtn" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary registerBtn">댓글 등록</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    댓글 등록 모달창1-->
+
+    <!--    댓글 수정 모달창2-->
+
+    <!--    댓글 수정 모달창2-->
+
+
     <!--axios 도구 , 비동기 식으로 처리하는 문법을 마치 동기화된 코드 처럼 이용 가능 문법,-->
     <!--async , await 키워드를 이용해서, 비동기 처리를 조금 더 쉽게 동기화 코드처럼 이용가능-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -217,18 +251,16 @@
         const target = e.target
 
         // a 태그가 아니면, 이벤트 처리를 안합니다.
-        if(!target || target.tagName != 'A' ){
+        if (!target || target.tagName != 'A') {
             return
         }
 
         // a 태그이고, 작업 계속 진행함.
         const pageNum = target.getAttribute("data-page")
         page = pageNum
-        printReplies(page,size)
+        printReplies(page, size)
 
-    },false)
-
-
+    }, false)
 
 
 </script>

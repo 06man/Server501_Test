@@ -63,6 +63,7 @@ async function getList({bno,page,size,goLast}) {
 
 //댓글 등록
 async function addReply(replyObj){
+    // 등록 후, response = {"rno": 102}
     const response = await axios.post(`/replies/`, replyObj)
     return response.data
 }
