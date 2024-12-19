@@ -203,6 +203,33 @@
         replyPaging.innerHTML = pageStr
     }
 
+    // 페이징 번호 이벤트 핸들러 추가.
+    // 1) data-page=1 , 번호를 활용하기.
+    // 페이징 번호 화면 구성 <ul> : 고정 -> <li> : 동적 변경
+    // ul 태그 기준으로해서, 하위에 자식 태그에 접근하자.
+    let page = 1
+    let size = 10
+
+    replyPaging.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const target = e.target
+
+        // a 태그가 아니면, 이벤트 처리를 안합니다.
+        if(!target || target.tagName != 'A' ){
+            return
+        }
+
+        // a 태그이고, 작업 계속 진행함.
+        const pageNum = target.getAttribute("data-page")
+        page = pageNum
+        printReplies(page,size)
+
+    },false)
+
+
+
 
 </script>
 
