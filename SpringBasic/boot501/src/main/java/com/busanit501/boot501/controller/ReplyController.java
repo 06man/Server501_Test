@@ -81,6 +81,24 @@ public class ReplyController {
         return replyDTO;
     }
 
+    // 댓글 수정, 로직처리
+    // localhost:8080/replies/{rno:댓글번호}
+    @Tag(name = "댓글 수정 로직처리",description = "댓글 수정 로직처리 RESTful get방식")
+    @PutMapping(value ="/{rno}")
+    public Map<String,Long> updateReply(
+    @Valid @RequestBody ReplyDTO replyDTO,
+    BindingResult bindingResult,
+    @PathVariable("rno") Long rno) throws BindException {
+        if (bindingResult.hasErrors()) {
+            throw new BindException(bindingResult);
+        }
+
+        log.info(" ReplyController updateReply: rno={}", rno);
+        replyService.update(replyDTO);
+        Map<String,Long> map = Map.of("rno",rno);
+        return map;
+    }
+
 }
 
 
