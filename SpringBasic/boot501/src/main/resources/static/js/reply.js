@@ -37,10 +37,27 @@ async function get(bno) {
 
 // 댓글 전체 목록
 // 순서1, 서버로부터 , 댓글 목록 데이터 받아오기
+// async function getList({bno,page,size,goLast}) {
+//     const result = await axios.get(`/replies/list/${bno}`,
+//         {params: {page,size}})
+//     // console.log(result)
+//     return result.data
+// }
+
+// 마지막 댓글 위치로 이동하기.
 async function getList({bno,page,size,goLast}) {
     const result = await axios.get(`/replies/list/${bno}`,
         {params: {page,size}})
     // console.log(result)
+    if(goLast){
+        const total = result.data.total
+        // 마지막 댓글 페이지 여부 ,
+        // 만약, 전쳇 갯수 101개.
+        // 101/10 = 10.1, 올림 : 11, 마지막 페이지 의미.
+        // 75/10 = 7.5 올림 : 8  마지막 페이지 의미.
+        const lastPage = parseInt(Math.ceil(total/size))
+        return getList({bno:bno,page:lastPage, size:size})
+    }
     return result.data
 }
 
