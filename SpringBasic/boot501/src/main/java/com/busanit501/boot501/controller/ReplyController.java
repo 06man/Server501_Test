@@ -99,6 +99,17 @@ public class ReplyController {
         return map;
     }
 
+    // 댓글 삭제, 로직처리
+    // localhost:8080/replies/{rno:댓글번호}
+    @Tag(name = "댓글 삭제 로직처리",description = "댓글 삭제 로직처리 RESTful get방식")
+    @DeleteMapping(value ="/{rno}")
+    public Map<String,Long> deleteReply(
+            @PathVariable("rno") Long rno) throws BindException {
+        replyService.delete(rno);
+        Map<String,Long> map = Map.of("rno",rno);
+        return map;
+    }
+
 }
 
 
