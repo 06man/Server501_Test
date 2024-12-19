@@ -22,6 +22,14 @@
 //
 
 //연습용
+// axios 도구 역할, 비동기 통신으로 문법 작성시,
+// 콜백 함수 안에 또 콜백 함수를 작성해서, 콜백 지옥, 표현.
+//  ex( function doA(  doB(
+//   또다른 함수들을 호출하는 형식으로,
+//   ),
+// 문법 작성시는, 동기적 함수 표현식으로 사용하되, 실제 동작은 비동기적으로 합니다.
+// 결론, 비동기 통신을 이용하되, 문법 작성은 마치 동기적으로 동작하는 것처럼 작성,
+
 async function get(bno) {
     const result = await axios.get(`/replies/list/${bno}`)
     console.log(result)
