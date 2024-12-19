@@ -74,6 +74,11 @@ async function getReply(rno){
     return response.data
 }
 
+// 댓글 수정, 수정할 댓글 내용 :  replyObj 이용하기.
+async function updateReply(replyObj){
+    const response = await axios.put(`/replies/${replyObj.rno}`,replyObj)
+    return response.data
+}
 
 
 
