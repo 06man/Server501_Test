@@ -104,6 +104,7 @@
                ,false})
 
    // 비동기 함수, 테스트 작업.
+   // 순서2, 현재 게시글의  bno 번호를 알아야 함
    const bno = [[${dto.bno}]]
    // 함수 실행 해보기.
    //
@@ -114,10 +115,12 @@
    // 주의사항, reply.js , 통신 이용해서, 데이터를 전달하는 업무, 백
    // read.html,  받아온 데이터를 업데이트를 하는 역할. 화면 그려주는 역할. 프론트  react.jsx
 
+   // 순서3, 화면에 출력하는 역할,
    function  printReplies(page,size,goLast) {
        // 비동기 함수를 호출하게 되면, 호출된 데이터의 성공 여부에 따라서,
        // 성공시, then  절 받아서 처리,
        // 실패시, catch 절 받아서 처리.
+       // 순서4, 서버로 부터 넘어온 데이터를, 댓글 목록 출력하는 함수에 전달하는 역할
        getList({bno,page,size,goLast})
            .then(
                // 연습용 콘솔 출력,
@@ -136,9 +139,11 @@
 
 
    // 비동기 함수 이용해서, 댓글 목록 출력 작업해보기.
+   // 순서5, 화면에 출력할 태그의 요소를 선택
    const replyList = document.querySelector('.replyList')
    const replyPaging = document.querySelector('.replyPaging')
 
+   // 순서6, 댓글을 출력하는 기능
    // 함수 작성, dtoList: 서버로 부터 받아온 댓글의 목록(페이징 처리가 된 목록)
    function printList(dtoList) {
        // innerHTML, 동적 태그를 생성해서 추가할 예정.
@@ -160,6 +165,7 @@
    }
 
    // 페이징 목록 처리,
+   // 순서7, 댓글의 페이징 번호를 출력하는 기능
 
 
 

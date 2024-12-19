@@ -36,6 +36,7 @@ async function get(bno) {
 }
 
 // 댓글 전체 목록
+// 순서1, 서버로부터 , 댓글 목록 데이터 받아오기
 async function getList({bno,page,size,goLast}) {
     const result = await axios.get(`/replies/list/${bno}`,
         {params: {page,size}})
