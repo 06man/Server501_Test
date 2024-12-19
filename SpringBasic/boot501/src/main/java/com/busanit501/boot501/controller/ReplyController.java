@@ -92,7 +92,7 @@ public class ReplyController {
         if (bindingResult.hasErrors()) {
             throw new BindException(bindingResult);
         }
-
+        log.info(" ReplyController updateReply: replyDTO={}", replyDTO);
         log.info(" ReplyController updateReply: rno={}", rno);
         replyService.update(replyDTO);
         Map<String,Long> map = Map.of("rno",rno);

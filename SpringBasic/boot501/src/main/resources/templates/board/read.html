@@ -384,6 +384,7 @@
             replyText: updateReplyText.value,
             replyer: updateReplyer.value
         }
+        console.log("replyHeader.innerHTML : " + replyHeader.innerHTML)
 
         // 비동기 통신 이용해서, 성공시, 실패시 나눠서 작업.
         updateReply(replyObj).then(result => {
