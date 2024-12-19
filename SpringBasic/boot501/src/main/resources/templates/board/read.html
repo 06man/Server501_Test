@@ -116,7 +116,33 @@
     <!--    댓글 등록 모달창1-->
 
     <!--    댓글 수정 모달창2-->
-
+    <div class="modal fade updateModal"  tabindex="-1"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title replyHeader"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--                    댓글 등록 입력폼 추가하기-->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">내용</span>
+                        <input type="text" class="form-control updateReplyText">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">작성자</span>
+                        <input type="text" class="form-control updateReplyer">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary updateCloseBtn" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary updateBtn">댓글 수정</button>
+                    <button type="button" class="btn btn-danger deleteBtn">댓글 삭제</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--    댓글 수정 모달창2-->
 
 
