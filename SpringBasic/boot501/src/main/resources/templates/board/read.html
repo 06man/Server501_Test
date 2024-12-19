@@ -375,6 +375,27 @@
             .catch(e =>alert("댓글 추가 예외 발생함"))
     },false)
 
+    //댓글 수정, 로직 처리,
+    updateBtn.addEventListener("click",function (e){
+        //변경된 댓글 내용과, 작성자를 가져오기,
+        const replyObj = {
+            bno:bno,
+            rno:replyHeader.innerHTML,
+            replyText: updateReplyText.value,
+            replyer: updateReplyer.value
+        }
+
+        // 비동기 통신 이용해서, 성공시, 실패시 나눠서 작업.
+        updateReply(replyObj).then(result => {
+            alert(result.rno + "번 댓글 수정 완료 ")
+            updateReplyText.value =''
+            updateModal.hide()
+            printReplies(page,size)
+        })
+            .catch(e => {
+                alert("댓글 수정 실패")
+            })
+    },false)
 
 </script>
 
