@@ -263,6 +263,26 @@
     }, false)
 
 
+    // 댓글 등록 버튼 이벤트 처리 작업, 모달 창 show/hide
+    const registerModal = new bootstrap.Modal(document.querySelector(".registerModal"))
+    // 나머지 , 화면 요소를 미리 , 재사용하기 위해서, 변수에 할당 해놓기.
+    const registerBtn = document.querySelector(".registerBtn")
+    const registerCloseBtn = document.querySelector(".registerCloseBtn")
+    const replyText = document.querySelector(".replyText")
+    const replyer = document.querySelector(".replyer")
+
+    // addReplyBtn 요소 클릭시, 모달창 띄우기
+    document.querySelector("addReplyBtn").addEventListener("click",
+    function (e){
+        registerModal.show()
+    })
+//취소 할 경우, hide
+    registerCloseBtn.addEventListener("click",
+        function (e){
+            registerModal.hide()
+        })
+
+
 </script>
 
 </body>
