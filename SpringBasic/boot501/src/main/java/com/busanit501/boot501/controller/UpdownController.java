@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -109,7 +110,7 @@ public class UpdownController {
 
     @Tag(name = "파일 조회 get",
             description = "멀티파트 타입 형식 이용해서, get 형식으로 이미지 읽기")
-    @PostMapping(value = "/view/{fileName}")
+    @GetMapping(value = "/view/{fileName}")
     // Resource : 실제 이미지 자원을 말함.
     public ResponseEntity<Resource> viewFileGet(@PathVariable String fileName) {
 
