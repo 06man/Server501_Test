@@ -145,7 +145,15 @@ public class UpdownController {
     // Resource : 실제 이미지 자원을 말함.
     public ResponseEntity<Resource> fileDownload(@PathVariable String filename) {
         try {
+            // 업로드한 폴더를 가리킴.
+            //c:\\upload\\springTest\\UUID임시생성문자열_파일명
+            // normalize() : 해당 경로에 불필요한 요소를 제거하는 목적.
+            // 불필요한 요소에보면, 상대경로, 예) ../../ -> 절대 경로 나타 내자.
             Path filePath = Paths.get(uploadPath).resolve(filename).normalize();
+            log.info("UpdownController filePath : "+filePath);
+
+            // URL 경로로 표시하는 방법.
+            log.info("UpdownController filePath.toUri() : "+filePath.toUri());
             Resource resource = new UrlResource(filePath.toUri());
 
             if (!resource.exists()) {
@@ -153,6 +161,9 @@ public class UpdownController {
             }
 
             return ResponseEntity.ok()
+                    // 파일 다운로도시,
+                    // 헤더 키 : Content-Disposition
+                    // 값 :attachment; filename="파일명"
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                     .body(resource);
         } catch (Exception ex) {
