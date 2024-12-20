@@ -35,10 +35,13 @@ public class UpdownController {
             uploadFileDTO.getFiles().forEach(multipartFile -> {
                 log.info("UpdownController multipartFile.getOriginalFilename() 실제 파일 이름 확인 : "+multipartFile.getOriginalFilename());
                 String originName = multipartFile.getOriginalFilename();
+
                 String uuid = UUID.randomUUID().toString();
+                log.info("UpdownController uuid 랜덤 생성 문자열 확인: "+uuid);
+
                 // savePath -> c:\\upload\\springTest\\UUID임시생성문자열_파일명
                 Path savePath = Paths.get(uploadPath,uuid+"_"+originName);
-                log.info("UpdownController uuid 랜덤 생성 문자열 확인: "+uuid);
+
 
                 //화면 -> 서버, 이미지 파일을 받았고,
                 // 받은 이미지 파일명 중복 안되게 설정,
