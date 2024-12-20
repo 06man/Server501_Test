@@ -138,5 +138,37 @@ public class UpdownController {
 
     }
 
+    @Tag(name = "파일 다운로드 get",
+            description = "멀티파트 타입 형식 이용해서, get 형식으로 이미지 다운로드")
+    @GetMapping(value = "/download/{fileName}")
+    // Resource : 실제 이미지 자원을 말함.
+    public ResponseEntity<Resource> fileDownload(@PathVariable String fileName) {
+
+        // Resource : 패키지, 스프링 시스템 꺼 사용하기.
+        // c:\\upload\\springTest\\UUID임시생성문자열_파일명
+        Resource resource = new FileSystemResource(uploadPath+File.separator+fileName);
+
+        String resourceName = resource.getFilename();
+        log.info("UpdownController resourceName : "+resourceName);
+
+        //http 헤더 작업,
+        // http 통신 전달 할 때, 전달하는 데이터의 종류를 알려줘야 함. Content-Type , 키,
+        // 이미지입니다. -> MIME , type image/*, image/jpg, image/png, image/jpeg
+        //푸시
+        HttpHeaders headers = new HttpHeaders();
+        try{// Files.probeContentType : 해당 파일명의 확장자를 확인해서, 타입을 지정하기.
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
+
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        // http -> 비유, 편지 봉투(헤더), 편지 내용(바디)
+        return  ResponseEntity.ok().header(String.valueOf(headers))
+                .body(resource);
+
+
+    }
+
 
 }
