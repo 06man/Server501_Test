@@ -3,10 +3,13 @@ package com.busanit501.boot501.controller;
 import com.busanit501.boot501.dto.upload.UploadFileDTO;
 import com.busanit501.boot501.dto.upload.UploadResultDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -97,6 +100,15 @@ public class UpdownController {
             // 추가 6, 리스트 반환
             return list;
         } // end if
+
+        return null;
+    }// upload
+
+    @Tag(name = "파일 조회 get",
+            description = "멀티파트 타입 형식 이용해서, get 형식으로 이미지 읽기")
+    @PostMapping(value = "/view/{fileName}")
+    // Resource : 실제 이미지 자원을 말함.
+    public ResponseEntity<Resource> viewFileGet(@PathVariable String fileName) {
 
         return null;
     }
