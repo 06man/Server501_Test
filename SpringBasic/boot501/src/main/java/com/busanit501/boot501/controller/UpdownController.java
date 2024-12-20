@@ -16,6 +16,13 @@ public class UpdownController {
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String upload(UploadFileDTO uploadFileDTO) {
         log.info("UpdownController uploadFileDTO 내용 확인: "+uploadFileDTO);
+
+        if(uploadFileDTO.getFiles() != null && uploadFileDTO.getFiles().size() > 0){
+            uploadFileDTO.getFiles().forEach(multipartFile -> {
+                log.info("UpdownController multipartFile.getOriginalFilename() 실제 파일 이름 확인 : "+multipartFile.getOriginalFilename());
+            });
+        }
+
         return null;
     }
 
