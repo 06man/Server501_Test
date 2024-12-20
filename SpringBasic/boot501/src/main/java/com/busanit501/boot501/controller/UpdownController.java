@@ -13,10 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -169,6 +167,15 @@ public class UpdownController {
         } catch (Exception ex) {
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @Tag(name = "파일 삭제 delete",
+            description = "멀티파트 타입 형식 이용해서, delete 형식으로 이미지 삭제")
+    @DeleteMapping(value = "/delete/{filename}")
+    // Resource : 실제 이미지 자원을 말함.
+    public Map<String,Boolean> fileDelete(@PathVariable String filename) {
+
+        return null;
     }
 
 
