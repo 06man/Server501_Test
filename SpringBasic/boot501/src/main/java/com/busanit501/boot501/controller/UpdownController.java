@@ -40,6 +40,7 @@ public class UpdownController {
         if(uploadFileDTO.getFiles() != null && uploadFileDTO.getFiles().size() > 0){
 
             // 서버로부터 전달 받은 이미지 파일 임시 목록 저장소
+            // 추가1
             final List<UploadResultDTO> list = new ArrayList<>();
 
             uploadFileDTO.getFiles().forEach(multipartFile -> {
@@ -52,6 +53,7 @@ public class UpdownController {
                 // savePath -> c:\\upload\\springTest\\UUID임시생성문자열_파일명
                 Path savePath = Paths.get(uploadPath,uuid+"_"+originName);
 
+                // 추가2. 이미지 여부
                 boolean image = false;
 
 
@@ -70,6 +72,7 @@ public class UpdownController {
                     // 작은 이미지라는 표시, 이름 앞에 s_ 이런식으로 이름을 변경.
                     if(Files.probeContentType(savePath).startsWith("image")){
 
+                        // 추가 4, 이미지 상태 업데이트
                         image = true;
 
                         // 새로운 파일을 생성. 기존 원본 이미지 -> 작은 이미지
@@ -82,6 +85,7 @@ public class UpdownController {
                 {
                     e.printStackTrace();
                 }
+                // 추가 5, 이미지 임시 저장소 목록 추가 작업.
                 list.add(UploadResultDTO.builder()
                                 .uuid(uuid)
                                 .fileName(originName)
@@ -89,6 +93,8 @@ public class UpdownController {
                         .build());
 
             });// end forEach
+
+            // 추가 6, 리스트 반환
             return list;
         } // end if
 
