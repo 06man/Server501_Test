@@ -123,6 +123,7 @@ public class UpdownController {
         //http 헤더 작업,
         // http 통신 전달 할 때, 전달하는 데이터의 종류를 알려줘야 함. Content-Type , 키,
         // 이미지입니다. -> MIME , type image/*, image/jpg, image/png, image/jpeg
+        //푸시
         HttpHeaders headers = new HttpHeaders();
         try{// Files.probeContentType : 해당 파일명의 확장자를 확인해서, 타입을 지정하기.
             headers.add("Content-Type",
