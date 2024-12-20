@@ -3,12 +3,15 @@ package com.busanit501.boot501.controller;
 import com.busanit501.boot501.dto.upload.UploadFileDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
+import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -50,7 +53,19 @@ public class UpdownController {
                 // 파일 업로드 이동시, 반드시, 예외처리.
                 try {
                     // 실제 파일 -> 해당 경로 -> 물리 파일 복사하는 일.
+                    // 원본으로 저장,
                     multipartFile.transferTo(savePath);
+
+                    // 컨텐츠 타입을 확인해서, 이미지라면, 썸네일 도구 이용해서,
+                    // 작은 이미지로 변환 해서, 저장,
+                    // 작은 이미지라는 표시, 이름 앞에 s_ 이런식으로 이름을 변경.
+                    if(Files.probeContentType(savePath).startsWith("image")){
+                        // 새로운 파일을 생성. 기존 원본 이미지 -> 작은 이미지
+                        File thumbFile = new File(uploadPath,"s_"+ uuid+"_"+originName);
+                        // 작은 이미지 변환 도구 이용해서, 축소 작업.
+                        Thumbnailator.createThumbnail(savePath.toFile(),thumbFile, 200,200);
+                    }
+
                 } catch (IOException e)
                 {
                     e.printStackTrace();
