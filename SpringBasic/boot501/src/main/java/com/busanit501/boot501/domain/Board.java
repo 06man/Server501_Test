@@ -36,7 +36,8 @@ public class Board extends BaseEntity { // 전역으로 만든, 베이스 엔티
     // 연관관계 설정,
     @OneToMany(mappedBy = "board",
             cascade = CascadeType.ALL // 부모 테이블의 변경을 , 자식 테이블에서도 같이 적용됨.
-            ,fetch = FetchType.LAZY
+            ,fetch = FetchType.LAZY,
+            orphanRemoval = true // 고아 객체 자동 삭제 설정
     )// 필요한 시점에 조회를 함.
     // 자식테이블 : BoardImage의 board
     // 중간 테이블을 생성하지 않고, 데이터베이스 관점 처럼, 자식 테이블 입장에서 작업이 가능함.

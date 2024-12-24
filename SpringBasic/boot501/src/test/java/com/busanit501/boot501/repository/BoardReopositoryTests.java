@@ -236,7 +236,7 @@ public class BoardReopositoryTests {
     @Commit
     @Test
     public void testUpdateImages() {
-        Optional<Board> result = boardRepository.findByIdWithImages(1L);
+        Optional<Board> result = boardRepository.findByIdWithImages(3L);
         Board board = result.orElseThrow();
 
         // 이미지 수정시, 기존 이미지를 전부 다 삭제 후 새로 추가하기.
