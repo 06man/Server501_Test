@@ -28,7 +28,33 @@ cascade 설정, 고아 객체 처리, N+1, 최적화등.
 이미지들 입장 : @ManyToOne
 게시글 1: 이미지들 N
 
-JPA, 중간 테이블을 만들어줌.
+JPA, 중간 테이블을 만들어줌. : board_image_set
+예시
+Hibernate:
+    create table board (
+        bno bigint not null auto_increment,
+        mod_date datetime(6),
+        reg_date datetime(6),
+        writer varchar(50) not null,
+        title varchar(500) not null,
+        content varchar(2000) not null,
+        primary key (bno)
+    ) engine=InnoDB
+Hibernate:
+    create table board_image_set (
+        board_bno bigint not null,
+        image_set_uuid varchar(255) not null,
+        primary key (board_bno, image_set_uuid)
+    ) engine=InnoDB
+Hibernate:
+    create table board_image (
+        ord integer not null,
+        board_bno bigint,
+        file_name varchar(255),
+        uuid varchar(255) not null,
+        primary key (uuid)
+    ) engine=InnoDB
+=========================
 
 
 연관관계 주인 설정.
