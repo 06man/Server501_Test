@@ -1,6 +1,7 @@
 package com.busanit501.boot501.repository;
 
 import com.busanit501.boot501.domain.Board;
+import com.busanit501.boot501.domain.BoardImage;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -183,6 +184,7 @@ public class BoardReopositoryTests {
     // 부모 게시글 삭제시, 자식 테이블 첨부 이미지 삭제되는 부분 확인.
     // 고아 객체 제거 옵션을 설정 안하고, 테스트 -> 오류가남.
     // 설정 후, 삭제 되는 부분 확인.
+    // 순서1
     @Test
     public void testInsertWithImages() {
         // 더미 데이터 만들기.
@@ -202,13 +204,42 @@ public class BoardReopositoryTests {
         boardRepository.save(board);
 
     }
-    // 부모 게시글 삭제시, 자식 첨부 이미지 삭제 확인.
+
+    // 순서2, 조회, -> 지연 로딩, 한번에 다 같이 조인해서 조회하기.
+    @Test
+    @Transactional
+    public void testReadWithImages() {
+        //더미 데이터 2개, 게시글 1, 2번
+    Optional<Board> result = boardRepository.findById(1L);
+//        Optional<Board> result = boardRepository.findByIdWithImages(1L);
+        Board board = result.orElseThrow();
+
+        // 보드 출력해보기. 1차 캐시 테이블에서, 더티 체킹, select
+        // 단위 테스트 할 때, board 조회 할 때 세션이 하나 필요하고
+        // 단위 테스트 할 때, boardImage 이미지 조회 할 때 세션이 하나 더 필요하고
+        // 단위 테스트 이용시에는 디비 접근 세션을 하나만 이용해서, 오류가 발생함.
+
+        log.info("BoardRepositoryTests board 확인  : " + board);
+        log.info("========================================== ");
+        log.info("BoardRepositoryTests board.getImageSet() 확인2  : " + board.getImageSet());
+        // 1차 오류 발생함.
+        for (BoardImage boardImage : board.getImageSet()) {
+            log.info("BoardRepositoryTests board.getImageSet() 확인32  : " + boardImage);
+        }
+
+    }
+
+
+    // 순서3, 수정, -> 고아객체 만들기.
+
+
+    // 순서4 부모 게시글 삭제시, 자식 첨부 이미지 삭제 확인.
     @Test
     @Transactional
     @Commit // DML 적용되기 위한 설정.
     public void removeAll() {
 
-        Long bno = 1L;
+        Long bno = 2L;
 
         // 댓글 삭제 후,
 //        replyRepository.deleteByBoard_Bno(bno);
