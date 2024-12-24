@@ -210,7 +210,7 @@ public class BoardReopositoryTests {
     @Transactional
     public void testReadWithImages() {
         //더미 데이터 2개, 게시글 1, 2번
-    Optional<Board> result = boardRepository.findById(1L);
+    Optional<Board> result = boardRepository.findById(3L);
 //        Optional<Board> result = boardRepository.findByIdWithImages(1L);
         Board board = result.orElseThrow();
 
