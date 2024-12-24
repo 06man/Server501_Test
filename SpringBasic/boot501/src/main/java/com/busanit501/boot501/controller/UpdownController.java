@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -155,11 +157,15 @@ public class UpdownController {
                 return ResponseEntity.notFound().build();
             }
 
+            // 파일 이름을 UTF-8로 URLEncoding
+            String encodedFilename = URLEncoder.encode(resource.getFilename(), StandardCharsets.UTF_8.toString())
+                    .replaceAll("\\+", "%20"); // 공백 처리
+
             return ResponseEntity.ok()
                     // 파일 다운로도시,
                     // 헤더 키 : Content-Disposition
                     // 값 :attachment; filename="파일명"
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFilename + "\"")
                     .body(resource);
         } catch (Exception ex) {
             return ResponseEntity.internalServerError().build();
