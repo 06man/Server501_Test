@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +24,9 @@ public class BoardReopositoryTests {
     @Autowired
     // 아무 메소드가 없지만, 기본 탑재된 쿼리 메소드 이용해서, crud  해보기.
     private BoardRepository boardRepository;
+
+    @Autowired
+    private ReplyRepository replyRepository;
 
     @Test
     public void testInsert() {
@@ -195,6 +200,20 @@ public class BoardReopositoryTests {
             board.addImage(uuid, fileName + i + ".png");
         }
         boardRepository.save(board);
+
+    }
+    // 부모 게시글 삭제시, 자식 첨부 이미지 삭제 확인.
+    @Test
+    @Transactional
+    @Commit // DML 적용되기 위한 설정.
+    public void removeAll() {
+
+        Long bno = 1L;
+
+        // 댓글 삭제 후,
+//        replyRepository.deleteByBoard_Bno(bno);
+        // 게시글 삭제,
+        boardRepository.deleteById(bno);
 
     }
 
