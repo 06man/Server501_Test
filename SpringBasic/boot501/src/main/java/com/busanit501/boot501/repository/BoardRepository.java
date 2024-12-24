@@ -37,7 +37,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> , BoardSearc
     @Query(value = "select now()" , nativeQuery = true)
     String now();
 
-    // 조회시, 특정의 속성을 같이 조회를 함.
+    // 조회시, 특정의 속성을 같이 조회를 함. -> 조인,
     @EntityGraph(attributePaths = {"imageSet"})
     @Query("select b from Board b where b.bno=:bno")
     Optional<Board> findByIdWithImages(Long bno);

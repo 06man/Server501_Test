@@ -211,7 +211,7 @@ public class BoardReopositoryTests {
     public void testReadWithImages() {
         //더미 데이터 2개, 게시글 1, 2번
 //    Optional<Board> result = boardRepository.findById(3L);
-        Optional<Board> result = boardRepository.findByIdWithImages(1L);
+        Optional<Board> result = boardRepository.findByIdWithImages(3L);
         Board board = result.orElseThrow();
 
         // 보드 출력해보기. 1차 캐시 테이블에서, 더티 체킹, select
@@ -231,7 +231,25 @@ public class BoardReopositoryTests {
 
 
     // 순서3, 수정, -> 고아객체 만들기.
+    @Transactional
+    //단위 테스트에서, 수정을 반영하기.
+    @Commit
+    @Test
+    public void testUpdateImages() {
+        Optional<Board> result = boardRepository.findByIdWithImages(1L);
+        Board board = result.orElseThrow();
 
+        // 이미지 수정시, 기존 이미지를 전부 다 삭제 후 새로 추가하기.
+        board.clearImages();
+
+        // 새 첨부 이미지 추가하기.
+        for (int i = 0; i < 2; i++) {
+            String uuid = UUID.randomUUID().toString();
+            String fileName = "SampleImageFileName_수정2";
+            board.addImage(uuid, fileName + i + ".png");
+        }
+        boardRepository.save(board);
+    }
 
     // 순서4 부모 게시글 삭제시, 자식 첨부 이미지 삭제 확인.
     @Test
