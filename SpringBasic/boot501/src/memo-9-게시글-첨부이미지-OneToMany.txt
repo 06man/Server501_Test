@@ -144,3 +144,46 @@ Hibernate:
         board_image is1_0
     where
         is1_0.board_bno in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+
+
+DTO <-> Entity 형변환 단계 ,
+2단계 , 3단계 비교,
+
+2단계,
+JPQLQuery<BoardListReplyCountDTO> dtoQuery =
+                query.select(Projections.bean(BoardListReplyCountDTO.class,
+                        board.bno,
+                        board.title,
+                        board.content,
+                        board.writer,
+                        board.regDate,
+                        reply.count().as("replyCount")));
+
+3단계
+ // 3단계, 튜플 이용해서, 데이터 형변환.
+        JPQLQuery<Tuple> tupleJPQLQuery = boardJPQLQuery.select(
+                // 게시글, 댓글의 갯수를 조회한 결과,
+                board,reply.countDistinct()
+        );
+        // 튜플에서, 각 데이터를 꺼내서, 형변환 작업,
+        // 꺼내는 형식이 조금 다름. 맵과 비슷
+
+        // tupleList, 튜플의 타입으로 조인된 테이블의 내용이 담겨 있음.
+        List<Tuple> tupleList = tupleJPQLQuery.fetch();
+
+        // 형변환 작업, 디비에서 조회 후 바로, DTO로 변환 작업,
+        List<BoardListAllDTO> dtoList =
+                tupleList.stream().map(tuple -> {
+                    // 디비에서 조회된 내용임.
+                    Board board1 = (Board)tuple.get(board);
+                    long replyCount = tuple.get(1, Long.class);
+                    // DTO로 형변환 하는 코드,
+                    BoardListAllDTO dto = BoardListAllDTO.builder()
+                            .bno(board1.getBno())
+                            .title(board1.getTitle())
+                            .writer(board1.getWriter())
+                            .regDate(board1.getRegDate())
+                            .replyCount(replyCount)
+                            .build();
+                    return dto;
+                }).collect(Collectors.toList());
