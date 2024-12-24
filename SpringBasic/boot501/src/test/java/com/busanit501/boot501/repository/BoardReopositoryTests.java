@@ -245,7 +245,7 @@ public class BoardReopositoryTests {
         // 새 첨부 이미지 추가하기.
         for (int i = 0; i < 2; i++) {
             String uuid = UUID.randomUUID().toString();
-            String fileName = "SampleImageFileName_수정2";
+            String fileName = "SampleImageFileName_수정7777777777";
             board.addImage(uuid, fileName + i + ".png");
         }
         boardRepository.save(board);
