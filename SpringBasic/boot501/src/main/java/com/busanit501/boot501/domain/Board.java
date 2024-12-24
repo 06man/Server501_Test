@@ -33,7 +33,9 @@ public class Board extends BaseEntity { // 전역으로 만든, 베이스 엔티
     private String writer;
 
     // 연관관계 설정,
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board",
+            cascade = CascadeType.ALL // 부모 테이블의 변경을 , 자식 테이블에서도 같이 적용됨.
+            ,fetch = FetchType.LAZY)// 필요한 시점에 조회를 함.
     // 자식테이블 : BoardImage의 board
     // 중간 테이블을 생성하지 않고, 데이터베이스 관점 처럼, 자식 테이블 입장에서 작업이 가능함.
     @Builder.Default
@@ -49,5 +51,30 @@ public class Board extends BaseEntity { // 전역으로 만든, 베이스 엔티
     public void changeTitleConent(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    // 불변성 유지 위해서,
+    // imageSet 관련해서, 추가및 삭제
+    public void addImage(String uuid, String fileName) {
+        BoardImage boardImage = BoardImage.builder()
+                .uuid(uuid)
+                .fileName(fileName)
+                .board(this)
+                .ord(imageSet.size())
+                .build();
+        // imageSet, 추가하기.
+        imageSet.add(boardImage);
+    }
+
+    public void clearImages() {
+        // imageSet = {boardImage1,boardImage2,...}
+        // boardImage1 : 첨부이미지는 게시글 1번의 첨부이미지,
+        // boardImage1.board.getBno =>1
+        // 삭제 한다는 건, 부모게시글을 참조를 안한다는 소리,
+        // boardImage1.board.getBno => null
+        // boardImage1 갑자기 부모가 없어져요, 즉, 고아
+        // 자바 특성, 가비지 컬렉션이 알아서, 메모리 수거함.
+        imageSet.forEach(boardImage -> boardImage.chageBoard(null));
+        this.imageSet.clear();
     }
 }
