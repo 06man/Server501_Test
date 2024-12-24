@@ -207,11 +207,11 @@ public class BoardReopositoryTests {
 
     // 순서2, 조회, -> 지연 로딩, 한번에 다 같이 조인해서 조회하기.
     @Test
-    @Transactional
+    @Transactional // 단위 테스트에서, 2개의 테이블에 같이 접근시 이용하는 간단 해결책.
     public void testReadWithImages() {
         //더미 데이터 2개, 게시글 1, 2번
-    Optional<Board> result = boardRepository.findById(3L);
-//        Optional<Board> result = boardRepository.findByIdWithImages(1L);
+//    Optional<Board> result = boardRepository.findById(3L);
+        Optional<Board> result = boardRepository.findByIdWithImages(1L);
         Board board = result.orElseThrow();
 
         // 보드 출력해보기. 1차 캐시 테이블에서, 더티 체킹, select

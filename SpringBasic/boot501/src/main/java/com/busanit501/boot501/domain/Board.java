@@ -11,8 +11,8 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//@ToString(exclude ="imageSet")//로그를 해당 인스턴스 찍을 때, 해당 멤버를 쉽게 확인 가능.
-@ToString
+@ToString(exclude ="imageSet")//로그를 해당 인스턴스 찍을 때, 해당 멤버를 쉽게 확인 가능.
+//@ToString
 public class Board extends BaseEntity { // 전역으로 만든, 베이스 엔티티 클래스  적용.
 
     //2 번째 작업, 제약조건 넣기, 각 멤버는 각 디비의 컬럼과 동일함,
