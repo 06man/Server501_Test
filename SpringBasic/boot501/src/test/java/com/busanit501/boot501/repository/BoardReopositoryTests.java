@@ -3,6 +3,7 @@ package com.busanit501.boot501.repository;
 import com.busanit501.boot501.domain.Board;
 import com.busanit501.boot501.domain.BoardImage;
 import com.busanit501.boot501.domain.Reply;
+import com.busanit501.boot501.dto.BoardListAllDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -313,6 +314,16 @@ public void testSearchWithAll() {
             Sort.by("bno").descending());
     boardRepository.searchWithAll(null,null,pageable);
 }
+
+    @Transactional
+    @Test
+    public void testSearchWithAll2() {
+        Pageable pageable = PageRequest.of(0,10,
+                Sort.by("bno").descending());
+       Page< BoardListAllDTO> result =  boardRepository.searchWithAll(null,null,pageable);
+       log.info("result.getTotalElements"+result.getTotalElements());
+        result.getContent().forEach(dto -> log.info("dto :  " + dto));
+    }
 
 //    @Transactional
 //    @Test
