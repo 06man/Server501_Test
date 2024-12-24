@@ -33,7 +33,9 @@ public class Board extends BaseEntity { // 전역으로 만든, 베이스 엔티
     private String writer;
 
     // 연관관계 설정,
-    @OneToMany
+    @OneToMany(mappedBy = "board")
+    // 자식테이블 : BoardImage의 board
+    // 중간 테이블을 생성하지 않고, 데이터베이스 관점 처럼, 자식 테이블 입장에서 작업이 가능함.
     @Builder.Default
     private Set<BoardImage> imageSet = new HashSet<>();
 
