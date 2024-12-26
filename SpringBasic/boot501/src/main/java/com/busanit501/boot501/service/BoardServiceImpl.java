@@ -1,6 +1,7 @@
 package com.busanit501.boot501.service;
 
 import com.busanit501.boot501.domain.Board;
+import com.busanit501.boot501.domain.Reply;
 import com.busanit501.boot501.dto.*;
 import com.busanit501.boot501.repository.BoardRepository;
 import com.busanit501.boot501.repository.ReplyRepository;
@@ -91,7 +92,11 @@ public class BoardServiceImpl implements BoardService {
         // 댓글 존재 여부 확인 후, 있다면, 삭제하고,
         // 없다면, 기존 게시글만 삭제하면, 자동으로 첨부이미지 삭제.
         // ReplyRepository의 지원을 받아야함.
-//        = replyRepository.findByBoardBno(bno);
+       List<Reply> result = replyRepository.findByBoardBno(bno);
+       boolean checkReply = result.isEmpty() ? false : true;
+       if(checkReply) {
+           replyRepository.deleteByBoard_Bno(bno);
+       }
 
         // 게시글만 삭제,
         boardRepository.deleteById(bno);
