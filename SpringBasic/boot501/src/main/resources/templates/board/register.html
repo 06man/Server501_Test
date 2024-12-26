@@ -118,6 +118,17 @@
         uploadModal.show();
     },false)
 
+    // 첨부 파일 모달창에서, 파일 추가시 로직.
+    document.querySelector(".uploadBtn").addEventListener("click",
+    function (e){
+        const formObj = new FormData();
+        // input 태그에서 이름 files의 요소를 선택.
+        const fileInput = document.querySelector("input[name='files']")
+
+        console.log(fileInput.files)
+
+    })
+
 </script>
 
 </body>
