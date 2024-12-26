@@ -125,6 +125,7 @@ public class ReplyRepositoryTests {
 
     // 게시글에 삭제시, 게시글에 대한 댓글의 존재 여부 확인중.
     @Test
+    @Transactional
     public void testSelectReplyWithBoardBno() {
         Long bno = 2L;
         List<Reply> replyList = replyRepository.findByBoardBno(bno);
