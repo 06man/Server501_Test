@@ -42,8 +42,8 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Long register(BoardDTO boardDTO) {
         // 교체 작업
-        Board board = modelMapper.map(boardDTO, Board.class);
-//        Board board = dtoToEntity(boardDTO);
+//        Board board = modelMapper.map(boardDTO, Board.class);
+        Board board = dtoToEntity(boardDTO);
         Long bno = boardRepository.save(board).getBno();
         return bno;
     }
