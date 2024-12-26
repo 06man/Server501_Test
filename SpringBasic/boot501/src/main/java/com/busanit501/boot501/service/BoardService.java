@@ -3,6 +3,9 @@ package com.busanit501.boot501.service;
 import com.busanit501.boot501.domain.Board;
 import com.busanit501.boot501.dto.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public interface BoardService {
     Long register(BoardDTO boardDTO);
     BoardDTO readOne(Long bno);
@@ -34,6 +37,29 @@ public interface BoardService {
 
         }
         return board;
+    }
+
+    // 디비 -> 화면 , Entity -> dto 변환하기.
+    default BoardDTO entityToDto(Board board) {
+        BoardDTO boardDTO = BoardDTO.builder()
+                .bno(board.getBno())
+                .title(board.getTitle())
+                .content(board.getTitle())
+                .writer(board.getWriter())
+                .regDate(board.getRegDate())
+                .modDate(board.getModDate())
+                .build();
+
+        // 첨부 이미지들 처리.
+        List<String> fileNames =
+                board.getImageSet().stream().sorted()
+                        .map(boardImage ->
+                                boardImage.getUuid()+"_"
+                        +boardImage.getFileName())
+                        .collect(Collectors.toList());
+        // 첨부 이미지들 추가하기.
+        boardDTO.setFileNames(fileNames);
+        return boardDTO;
     }
 
 }
