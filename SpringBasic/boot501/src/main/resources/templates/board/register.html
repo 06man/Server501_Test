@@ -144,6 +144,10 @@
                 // uuid_파일명 형식의 리스트
                 // uploadResult , 하나의 이미지 파일명을 의미.
                 for (const uploadResult of result) {
+                    console.log("uploadResult : "+ uploadResult)
+                    console.log("uploadResult.uuid : "+ uploadResult.uuid)
+                    console.log("uploadResult.fileName : "+ uploadResult.fileName)
+                    console.log("uploadResult.link : "+ uploadResult.link)
                     // showUploadFile , 임의의 함수
                     showUploadFile(uploadResult)
                 }
