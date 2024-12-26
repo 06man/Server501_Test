@@ -159,5 +159,12 @@ public class ServiceTests {
         boardService.update(boardDTO);
     }
 
+    // 삭제 테스트 1) 댓글이 있는 경우, 2) 댓글 없는 경우
+    @Test
+    public void testDeleteBoardReplyWithImage() {
+        Long bno = 1L;
+        boardService.delete(bno);
+    }
+
 
 }
