@@ -127,7 +127,7 @@
 
         console.log(fileInput.files)
 
-        // 선택된 파일들에서, 파일명만 뽑아서 전달해주기.
+        // 선택된 파일들에서, 파일 객체 뽑아서 전달해주기.
         for( let i = 0; i < fileInput.files.length; i++) {
             formObj.append("files", fileInput.files[i])
         }
