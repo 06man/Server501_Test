@@ -317,6 +317,7 @@ public void testSearchWithAll() {
 
     @Transactional
     @Test
+    // 1)댓글 갯수 와 2)첨부 이미지 목록 존재 여부
     public void testSearchWithAll2() {
         Pageable pageable = PageRequest.of(0,10,
                 Sort.by("bno").descending());
@@ -324,6 +325,26 @@ public void testSearchWithAll() {
        log.info("result.getTotalElements"+result.getTotalElements());
         result.getContent().forEach(dto -> log.info("dto :  " + dto));
     }
+
+    @Transactional
+    @Test
+    // 1)댓글 갯수 와 2)첨부 이미지 목록 존재 여부
+    // 3)검색 조건 추가해서, 테스트
+    public void testSearchWithAll3() {
+        Pageable pageable = PageRequest.of(0,10,
+                Sort.by("bno").descending());
+
+        // 전달할 준비물
+        // 1) 검색어, 2) 검색 유형
+        String keyword = "샘플";
+        String[] types = {"t","w","c"};
+        
+        Page< BoardListAllDTO> result =  boardRepository.searchWithAll(types,keyword,pageable);
+        log.info("result.getTotalElements"+result.getTotalElements());
+        result.getContent().forEach(dto -> log.info("dto :  " + dto));
+    }
+
+
 
 //    @Transactional
 //    @Test
