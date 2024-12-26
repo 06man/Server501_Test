@@ -113,8 +113,8 @@
     )
     document.querySelector(".uploadFileBtn").addEventListener("click",
     function (e) {
-        e.defaultPrevented();
         e.stopPropagation();
+        e.preventDefault();
         uploadModal.show();
     },false)
 
