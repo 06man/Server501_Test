@@ -128,9 +128,11 @@
         console.log(fileInput.files)
 
         // 선택된 파일들에서, 파일명만 뽑아서 전달해주기.
-        for( let i = 0; i < files.length; i++) {
+        for( let i = 0; i < fileInput.files.length; i++) {
             formObj.append("files", files[i])
         }
+
+        console.log("formObj " + formObj)
 
         // axios 이용해서, 비동기 통신 하기.
         uploadToServer(formObj).then(
