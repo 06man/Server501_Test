@@ -26,10 +26,22 @@ public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
     // DTO <-> Entity class
     private final ModelMapper modelMapper;
+    private final BoardService boardService;
 
+    // 게시글만 첨부된 내용.
+//    @Override
+//    public Long register(BoardDTO boardDTO) {
+//        Board board = modelMapper.map(boardDTO, Board.class);
+//        Long bno = boardRepository.save(board).getBno();
+//        return bno;
+//    }
+
+// 게시글 + 첨부이미지 추가된 내용.
     @Override
     public Long register(BoardDTO boardDTO) {
-        Board board = modelMapper.map(boardDTO, Board.class);
+        // 교체 작업
+//        Board board = modelMapper.map(boardDTO, Board.class);
+        Board board = dtoToEntity(boardDTO);
         Long bno = boardRepository.save(board).getBno();
         return bno;
     }
