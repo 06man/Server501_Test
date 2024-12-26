@@ -217,6 +217,30 @@ public class BoardSearchImpl extends QuerydslRepositorySupport
         JPQLQuery<Board> boardJPQLQuery = from(board);// select * from board
         // 조인 설정 , 게시글에서 댓글에 포함된 게시글 번호와 , 게시글 번호 일치
         boardJPQLQuery.leftJoin(reply).on(reply.board.bno.eq(board.bno));
+
+        //기존 , 검색 조건 추가. 위의 내용 재사용.
+        if (types != null && types.length > 0 && keyword != null) {
+            // 여러 조건을 하나의 객체에 담기.
+            BooleanBuilder booleanBuilder = new BooleanBuilder();
+            for (String type : types) {
+                switch (type) {
+                    case "t":
+                        booleanBuilder.or(board.title.contains(keyword));
+                        break;
+                    case "c":
+                        booleanBuilder.or(board.content.contains(keyword));
+                        break;
+                    case "w":
+                        booleanBuilder.or(board.writer.contains(keyword));
+                        break;
+                } // switch
+            }// end for
+            // where 조건을 적용해보기.
+            boardJPQLQuery.where(booleanBuilder);
+        } //end if
+        // bno >0
+        boardJPQLQuery.where(board.bno.gt(0L));
+
         boardJPQLQuery.groupBy(board); // 그룹 묶기
         this.getQuerydsl().applyPagination(pageable, boardJPQLQuery); //페이징
         // 기본 세팅.
@@ -267,13 +291,9 @@ public class BoardSearchImpl extends QuerydslRepositorySupport
                     return dto; // 댓글의 갯수 , 첨부 이미지 목록들.
                 }).collect(Collectors.toList());
 
+        // 위에 첨부
         // 페이징 된 데이터 가져오기.
-
-
-
-
         // 앞에서 사용했던, 검색 조건
-
 
         long totalCount = boardJPQLQuery.fetchCount();
         Page<BoardListAllDTO> page
