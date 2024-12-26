@@ -140,6 +140,14 @@ public class ServiceTests {
                 .build();
 
         // 더미 데이터에 첨부 이미지 파일 추가.
+        // 경우의수,
+        // 기존의 첨부 이미지들을 모두 지우고, 새로운 첨부 이미지를 추가.
+        // 1) 기존 첨부이미지 3장, 모두 교체할 경우.
+        // 예시)1.jpg,2.jpg,3.jpg -> 4.jpg, 5.jpg
+
+        // 2) 기존 첨부이미지 3장, 2장 삭제, 1장 교체할 경우.
+        // 예시)1.jpg(유지),2.jpg(삭제),3.jpg(삭제)
+        //  4.jpg(추가), 5.jpg(추가) -> 1.jpg(유지), 4.jpg(추가), 5.jpg(추가)
         boardDTO.setFileNames(
                 Arrays.asList(
                         UUID.randomUUID()+"_sampleImage.png",

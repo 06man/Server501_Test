@@ -3,6 +3,7 @@ package com.busanit501.boot501.service;
 import com.busanit501.boot501.domain.Board;
 import com.busanit501.boot501.dto.*;
 import com.busanit501.boot501.repository.BoardRepository;
+import com.busanit501.boot501.repository.ReplyRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -24,6 +25,10 @@ public class BoardServiceImpl implements BoardService {
     //맵퍼에게 의존 해야함.
     // 디비 작업 도구,
     private final BoardRepository boardRepository;
+
+    // 지원 받기, 댓글의 디비 작업이 가능한,
+    private final ReplyRepository replyRepository;
+
     // DTO <-> Entity class
     private final ModelMapper modelMapper;
     //dtoToEntity 메서드 이용할려고, 잠시, 한번 사용하려다가.
@@ -83,6 +88,12 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void delete(Long bno) {
+        // 댓글 존재 여부 확인 후, 있다면, 삭제하고,
+        // 없다면, 기존 게시글만 삭제하면, 자동으로 첨부이미지 삭제.
+        // ReplyRepository의 지원을 받아야함.
+//        = replyRepository.findByBoardBno(bno);
+
+        // 게시글만 삭제,
         boardRepository.deleteById(bno);
     }
 
