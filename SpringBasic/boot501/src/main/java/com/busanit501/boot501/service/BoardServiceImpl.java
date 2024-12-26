@@ -59,10 +59,25 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    // 첨부 이미지 추가 버전으로 수정하기.
     public void update(BoardDTO boardDTO) {
+
         Optional<Board> result = boardRepository.findById(boardDTO.getBno());
         Board board = result.orElseThrow();
         board.changeTitleConent(boardDTO.getTitle(),boardDTO.getContent());
+
+        // 첨부 이미지들을 처리하는 로직.
+        // 기존 내용 다 삭제 후, 첨부된 내용을 새로 업데이트를 하는 방식으로
+        board.clearImages();
+
+        // 게시글 수정시, 만약, 첨부된 이미지가 있다면, 교체 작업,
+        if(boardDTO.getFileNames() != null) {
+            for (String fileName : boardDTO.getFileNames()) {
+                 String [] arr = fileName.split("_");
+                 board.addImage(arr[0], arr[1]);
+            }
+        }
+
         boardRepository.save(board);
     }
 
