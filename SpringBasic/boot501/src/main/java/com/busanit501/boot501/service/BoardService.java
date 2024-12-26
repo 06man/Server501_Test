@@ -18,6 +18,7 @@ public interface BoardService {
     PageResponseDTO<BoardListAllDTO> listWithAll(PageRequestDTO pageRequestDTO);
 
     // 화면 (DTO)-> 디비(엔티티),
+    // 기능: 게시글 작성,
     default Board dtoToEntity(BoardDTO dto) {
         // 박스에서 꺼내서, 디비 타입(Entity) 변경.
         Board board = Board.builder()
@@ -40,6 +41,7 @@ public interface BoardService {
     }
 
     // 디비 -> 화면 , Entity -> dto 변환하기.
+    // 기능: 조회, 상세보기,
     default BoardDTO entityToDto(Board board) {
         BoardDTO boardDTO = BoardDTO.builder()
                 .bno(board.getBno())

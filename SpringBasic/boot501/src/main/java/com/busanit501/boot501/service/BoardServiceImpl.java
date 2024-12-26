@@ -52,7 +52,9 @@ public class BoardServiceImpl implements BoardService {
     public BoardDTO readOne(Long bno) {
         Optional<Board> result = boardRepository.findById(bno);
         Board board= result.orElseThrow();
-        BoardDTO dto = modelMapper.map(board, BoardDTO.class);
+        // 첨부 이미지를 추가한 버전으로 변경
+//        BoardDTO dto = modelMapper.map(board, BoardDTO.class);
+        BoardDTO dto = entityToDto(board);
         return dto;
     }
 
