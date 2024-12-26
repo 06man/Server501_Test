@@ -101,7 +101,7 @@ public class ServiceTests {
                 .writer("이상용첨부이미지작업중")
                 .build();
 
-        // 더미 파일 이름들
+//         더미 파일 이름들
         boardDTO.setFileNames(
                 Arrays.asList(
                         UUID.randomUUID()+"_aa.png",
@@ -110,7 +110,7 @@ public class ServiceTests {
                 )
         );
         Long bno = boardService.register(boardDTO);
-        log.info("bno: " + bno.toString());
+        log.info("bno: " + bno);
 
 
     }

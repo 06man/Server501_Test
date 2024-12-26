@@ -26,7 +26,9 @@ public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
     // DTO <-> Entity class
     private final ModelMapper modelMapper;
-    private final BoardService boardService;
+    //dtoToEntity 메서드 이용할려고, 잠시, 한번 사용하려다가.
+    // 자동으로 주입되어서, 루핑 돌고 있음. 그래서, 제거
+//    private final BoardService boardService;
 
     // 게시글만 첨부된 내용.
 //    @Override
@@ -40,8 +42,8 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Long register(BoardDTO boardDTO) {
         // 교체 작업
-//        Board board = modelMapper.map(boardDTO, Board.class);
-        Board board = dtoToEntity(boardDTO);
+        Board board = modelMapper.map(boardDTO, Board.class);
+//        Board board = dtoToEntity(boardDTO);
         Long bno = boardRepository.save(board).getBno();
         return bno;
     }
