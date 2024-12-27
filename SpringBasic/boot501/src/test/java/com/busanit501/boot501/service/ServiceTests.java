@@ -173,7 +173,7 @@ public class ServiceTests {
                 PageRequestDTO.builder()
                         .page(1)
                         .type("tcw")
-                        .keyword("샘플")
+                        .keyword("ㅇㅇ")
                         .size(10)
                         .build();
 

@@ -145,6 +145,16 @@
     </div>
     <!--    댓글 수정 모달창2-->
 
+<!--    첨부된 이미지들 출력해보기. 원본으로 출력하기-->
+    <div class="col">
+        <div class="card" th:if="${dto.fileName != null && dto.fileName.size()>0}">
+            <img class="card-img-top"
+                 th:each="fileName: ${dto.fileNames}"
+                 th:src="|/view/${fileName}|"
+            >
+        </div>
+    </div>
+
 
     <!--axios 도구 , 비동기 식으로 처리하는 문법을 마치 동기화된 코드 처럼 이용 가능 문법,-->
     <!--async , await 키워드를 이용해서, 비동기 처리를 조금 더 쉽게 동기화 코드처럼 이용가능-->
