@@ -86,7 +86,7 @@
 <!--                추가 작업, 이제는 게시글에 BoardDTO , 게시글, 댓글 갯수, 첨부 이미지들 다있음.-->
 <!--                꺼내서, 보여주기. -->
                 <th:block th:each="fileName : ${dto.fileNames}">
-                    <div class="card col-4" th:with = "arr = ${fileName.split('_')}">
+                    <div class="card col-4" th:with="arr = ${fileName.split('_')}">
                         <div class="card-header d-flex justify-content-center">
                             [[${arr[1]}]]
                             <button class="btn-sm btn-danger"
@@ -243,24 +243,7 @@
 `
         uploadResult.innerHTML += str
     }
-    // 순서4,
-    // 첨부된 이미지가 미리보기 화면에서, x 클릭식, 삭제되는 이벤트 처리 .
-    // function removeFile(uuid, fileName, obj) {
-    //     console.log("uuid : " + uuid)
-    //     console.log("fileName : " + fileName)
-    //     console.log("obj : " + obj)
-    //
-    //     // x , 삭제를 요청한 요소에서, 가장 가까운 카드 요소를 선택.
-    //     // 버튼으로 부터 가장 가까운 카드 요소
-    //     const targetDiv = obj.closest(".card")
-    //
-    //     // 미디어 서버에서, 이미지가 삭제가 된다면,
-    //     removeFileToServer(uuid,fileName).then(
-    //         // 섬네일 미리보기 화면도(카드) 같이 제거.
-    //         data => {targetDiv.remove()}
-    //     )
-    //
-    // }
+
 
     // 수정시, 주의,
     // 섬네일 이미지를 삭제시, 실제로 삭제 하는게 아니라,
@@ -274,7 +257,7 @@
 
     //최종으로 삭제할 첨부 파일 목록
     const removeFileList = []
-    console("removeFileList : "+removeFileList)
+
 
     function removeFile(uuid,fileName,obj){
         // yes -> 계속 삭제 진행,
@@ -282,15 +265,16 @@
         if(!confirm("파일을 삭제하시겠습니까?")){
             return
         }
-        console("uuid : "+uuid)
-        console("fileName : "+fileName)
-        console("obj : "+obj)
+        console.log("uuid : "+uuid)
+        console.log("fileName : "+fileName)
+        console.log("obj : "+obj)
+        console.log("removeFileList : "+removeFileList)
 
 
         // 삭제할 명단에 추가하기
         removeFileList.push({uuid,fileName})
         // 화면 상에서 카드 요소를 제거하기.
-        const targetDiv = obj.closet(".card")
+        const targetDiv = obj.closest(".card")
         targetDiv.remove()
 
     }
