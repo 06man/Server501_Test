@@ -42,6 +42,9 @@ public class BoardController {
 
     }
     @PostMapping("/register")
+    // 일반글로 만 받을 때, DTO 클래스로 받고 있는데,
+    // 화면에서, -> 파일 이미지들을 문자열 형태로 , 각각 따로 보내고 있음.
+    // 받을 때 타입을 변경.
     public String registerPost(@Valid BoardDTO boardDTO,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
