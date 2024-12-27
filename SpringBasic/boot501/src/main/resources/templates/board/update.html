@@ -164,6 +164,47 @@
             uploadModal.show();
         },false)
 
+    // 순서2,  첨부 파일 모달창에서, 파일 추가시 로직.
+    document.querySelector(".uploadBtn").addEventListener("click",
+        function (e){
+            const formObj = new FormData();
+            // input 태그에서 이름 files의 요소를 선택.
+            const fileInput = document.querySelector("input[name='files']")
+
+            console.log(fileInput.files)
+
+            // 선택된 파일들에서, 파일 객체 뽑아서 전달해주기.
+            for( let i = 0; i < fileInput.files.length; i++) {
+                formObj.append("files", fileInput.files[i])
+            }
+
+            console.log("formObj " + formObj)
+
+            // axios 이용해서, 비동기 통신 하기.
+            uploadToServer(formObj).then(
+                result => {
+                    // console.log(result)
+                    // 섬네일 이미지를 표시하는 부분에 추가.
+                    // 함수를 만들어서, 출력하는 기능 추가.
+                    //, result : 서버에 이미지 파일을 업로드 후,
+                    // uuid_파일명 형식의 리스트
+                    // uploadResult , 하나의 이미지 파일명을 의미.
+                    for (const uploadResult of result) {
+                        console.log("uploadResult : "+ uploadResult)
+                        console.log("uploadResult.uuid : "+ uploadResult.uuid)
+                        console.log("uploadResult.fileName : "+ uploadResult.fileName)
+                        console.log("uploadResult.link : "+ uploadResult.link)
+                        // showUploadFile , 임의의 함수
+                        showUploadFile(uploadResult)
+                    }
+                    uploadModal.hide()
+                }
+            )
+                .catch(e => {
+                    uploadModal.hide()
+                })
+        },false)
+
 </script>
 
 </body>
