@@ -262,6 +262,37 @@
 
     }
 
+    // 수정시, 주의,
+    // 섬네일 이미지를 삭제시, 실제로 삭제 하는게 아니라,
+    // 삭제할 리스트에 추가하기.
+    // 실제로, 글 수정할 때, 첨부 이미지만 생각해보기.
+    // 기존 이미지 (1.jpg,2.jpg,3.jpg)3장,
+    // 수정시, 기존 이미지 (3.jpg)1장 제거, 2장 추가. (4.jpg)(5.jpg)
+    // 새로 업로드 해야할 첨부 이미지 목록 , (1.jpg)(2.jpg)(4.jpg)(5.jpg)
+    // 새로 업로드 시, 기존 이미지를 다 지우고, 새로 업로드 하니까.
+    // 제거 해야할 첨부 이미지 : (3.jpg) -> 1) 물리 저장소 제거,
+
+    //최종으로 삭제할 첨부 파일 목록
+    const removeFileList = []
+
+    function remoiveFile(uuid,fileName,obj){
+        // yes -> 계속 삭제 진행,
+        // no -> 함수 나가기.
+        if(!confirm("파일을 삭제하시겠습니까?")){
+            return
+        }
+        console("uuid : "+uuid)
+        console("fileName : "+fileName)
+        console("obj : "+obj)
+
+        // 삭제할 명단에 추가하기
+        removeFileList.push({uuid,fileName})
+        // 화면 상에서 카드 요소를 제거하기.
+        const targetDiv = obj.closet(".card")
+        targetDiv.remove()
+
+    }
+
 </script>
 
 </body>
