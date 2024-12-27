@@ -43,6 +43,16 @@
                                    placeholder="지금은 직접 작성자를 입력해주세요, 로그인 후 로그인 유저가 자동으로 탑재됨."
                                    th:value="${dto.writer}" readonly>
                         </div>
+
+                        <div class="mb-3 input-group">
+                            <span class="input-group-text">첨부파일  </span>
+                            <div class="uploadHidden">
+                                <!--                                첨부한 이미지의 요소를 첨부할 예정. 서버 전달용이라서, -->
+                                <!--                                숨겨 두기.-->
+                                <button type="button" class="btn btn-primary uploadFileBtn">파일추가</button>
+                            </div>
+                        </div>
+
                         <div class="mb-3">
                             <label for="regDate" class="form-control">등록시간</label>
                             <input type="text" class="form-control" id="regDate" name="regDate"
