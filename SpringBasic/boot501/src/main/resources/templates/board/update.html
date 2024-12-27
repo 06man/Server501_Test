@@ -274,8 +274,9 @@
 
     //최종으로 삭제할 첨부 파일 목록
     const removeFileList = []
+    console("removeFileList : "+removeFileList)
 
-    function remoiveFile(uuid,fileName,obj){
+    function removeFile(uuid,fileName,obj){
         // yes -> 계속 삭제 진행,
         // no -> 함수 나가기.
         if(!confirm("파일을 삭제하시겠습니까?")){
@@ -284,6 +285,7 @@
         console("uuid : "+uuid)
         console("fileName : "+fileName)
         console("obj : "+obj)
+
 
         // 삭제할 명단에 추가하기
         removeFileList.push({uuid,fileName})
