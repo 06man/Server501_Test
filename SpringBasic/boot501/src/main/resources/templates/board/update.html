@@ -279,6 +279,23 @@
 
     }
 
+    //수정 하기 버튼 클릭시, 이벤트 작업.
+    document.querySelector(".modBtn").addEventListener("click",function (e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.action = `/board/update?${link}`
+
+        // 첨부파일을 히든으로 추가., 정의해야 함.
+        appendFileData()
+
+        // 삭제 대상 파일 삭제하는 함수 정의,
+        callRemoveFiles()
+
+        formObj.method = 'post'
+        formObj.submit()
+    })
+
 </script>
 
 </body>
