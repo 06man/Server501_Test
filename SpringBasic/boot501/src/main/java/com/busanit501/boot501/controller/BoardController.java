@@ -32,6 +32,7 @@ public class BoardController {
         // 교체 작업, 수정2, 게시글 + 댓글 갯수 + 첨부된 이미지들
         PageResponseDTO<BoardListAllDTO> responseDTO = boardService.listWithAll(pageRequestDTO);
         log.info("pageRequestDTO 의 getLink 조사 : " + pageRequestDTO.getLink());
+        log.info("PageResponseDTO 의 responseDTO 조사 : " + responseDTO);
         model.addAttribute("responseDTO", responseDTO);
     }
 
