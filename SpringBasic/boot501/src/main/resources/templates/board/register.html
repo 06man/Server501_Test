@@ -107,7 +107,8 @@
         alert(errorMsg)
     }
 
-    // 첨부 파일 업로드 모달창 띄우기.
+    // 파일 업로드 작업
+    // 순서1, 첨부 파일 업로드 모달창 띄우기.
     const uploadModal = new bootstrap.Modal(
         document.querySelector(".uploadModal")
     )
@@ -118,7 +119,7 @@
         uploadModal.show();
     },false)
 
-    // 첨부 파일 모달창에서, 파일 추가시 로직.
+    // 순서2,  첨부 파일 모달창에서, 파일 추가시 로직.
     document.querySelector(".uploadBtn").addEventListener("click",
     function (e){
         const formObj = new FormData();
@@ -159,6 +160,7 @@
             })
     },false)
 
+    // 순서3
 // 섬네일 이미지를 출력하는 기능.showUploadFile
 // 결과 화면을 출력할 요소를 지정.
     const  uploadResult = document.querySelector(".uploadResult")
@@ -175,6 +177,24 @@ function showUploadFile({uuid, fileName, link}) {
 `
     uploadResult.innerHTML += str
 }
+    // 순서4,
+    // 첨부된 이미지가 미리보기 화면에서, x 클릭식, 삭제되는 이벤트 처리 .
+    function removeFile(uuid, fileName, obj) {
+        console.log("uuid : " + uuid)
+        console.log("fileName : " + fileName)
+        console.log("obj : " + obj)
+
+        // x , 삭제를 요청한 요소에서, 가장 가까운 카드 요소를 선택.
+        const targetDiv = obj.closest(".card")
+
+        // 미디어 서버에서, 이미지가 삭제가 된다면,
+        removeFileToServer(uuid,fileName).then(
+            // 섬네일 미리보기 화면도(카드) 같이 제거.
+            data => {targetDiv.remove()}
+        )
+            .catch()
+
+    }
 
 
 </script>
