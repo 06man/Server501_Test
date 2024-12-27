@@ -151,6 +151,19 @@
             formObj.submit()
         }, false)
 
+    // 글작성에서 사용했던 이벤트 리스너를 재사용.
+    // 파일 업로드 작업
+    // 순서1, 첨부 파일 업로드 모달창 띄우기.
+    const uploadModal = new bootstrap.Modal(
+        document.querySelector(".uploadModal")
+    )
+    document.querySelector(".uploadFileBtn").addEventListener("click",
+        function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            uploadModal.show();
+        },false)
+
 </script>
 
 </body>
