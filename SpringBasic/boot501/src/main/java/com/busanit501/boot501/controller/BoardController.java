@@ -1,9 +1,6 @@
 package com.busanit501.boot501.controller;
 
-import com.busanit501.boot501.dto.BoardDTO;
-import com.busanit501.boot501.dto.BoardListReplyCountDTO;
-import com.busanit501.boot501.dto.PageRequestDTO;
-import com.busanit501.boot501.dto.PageResponseDTO;
+import com.busanit501.boot501.dto.*;
 import com.busanit501.boot501.service.BoardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +28,9 @@ public class BoardController {
         // 앞단 화면에서, 검색어:keyword 내용, 페이징 내용(page = 1) 담아서 전달.
 //        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
         // 교체 작업, 수정1
-        PageResponseDTO<BoardListReplyCountDTO> responseDTO = boardService.listWithReplyCount(pageRequestDTO);
+//        PageResponseDTO<BoardListReplyCountDTO> responseDTO = boardService.listWithReplyCount(pageRequestDTO);
+        // 교체 작업, 수정2, 게시글 + 댓글 갯수 + 첨부된 이미지들
+        PageResponseDTO<BoardListAllDTO> responseDTO = boardService.listWithAll(pageRequestDTO);
         log.info("pageRequestDTO 의 getLink 조사 : " + pageRequestDTO.getLink());
         model.addAttribute("responseDTO", responseDTO);
     }
