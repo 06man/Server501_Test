@@ -34,6 +34,8 @@
                         <div class="mb-3 input-group">
                             <span class="input-group-text">첨부파일  </span>
                             <div class="uploadHidden">
+<!--                                첨부한 이미지의 요소를 첨부할 예정. 서버 전달용이라서, -->
+<!--                                숨겨 두기.-->
                                 <button type="button" class="btn btn-primary uploadFileBtn">파일추가</button>
                             </div>
                         </div>
@@ -188,6 +190,7 @@ function showUploadFile({uuid, fileName, link}) {
         console.log("obj : " + obj)
 
         // x , 삭제를 요청한 요소에서, 가장 가까운 카드 요소를 선택.
+        // 버튼으로 부터 가장 가까운 카드 요소
         const targetDiv = obj.closest(".card")
 
         // 미디어 서버에서, 이미지가 삭제가 된다면,
@@ -195,18 +198,38 @@ function showUploadFile({uuid, fileName, link}) {
             // 섬네일 미리보기 화면도(카드) 같이 제거.
             data => {targetDiv.remove()}
         )
-            .catch()
 
     }
 
-    //순서4-2, 글작성시, 폼 내부에서, 기본 전송 버튼 이용해서, 문제가 발생해서, 분리.
+    //순서4-2, 글작성시, 폼 내부에서,
+    // 기본 전송 버튼 이용해서, 문제가 발생해서, 분리. -> div 태그 안닫아서 문제였고 수정했음.
+    // 첨부된 이미지를 , 서버에 전달하기.
+    // 첨부된 이미지를 , 특정 요소에 숨겨서 , 글과 이미지를 같이 전달하기.
     document.querySelector(".submitBtn").addEventListener("click",
     function (e) {
         e.preventDefault()
         e.stopPropagation()
 
         // 기본 글작성 내용이랑, + 첨부된 이미지들도 다 같이 전송할 예정.
-        document.querySelector("form").submit();
+        // 첨부된 이미지는 innerHTML 이용해서, 레스트로 첨부를 할 예정.
+
+        // 첨부 이미지의 파일들을 붙여 둘 공간
+        const target = document.querySelector(".uploadHidden")
+        // 모든 섬네일 이미지를 가리킴.
+       const uploadFiles = uploadResult.querySelectorAll("img")
+
+        // 첨부할 문자열, 태그를 저장할 변수 선언.
+        let str = ''
+
+        for(let i = 0; i < uploadFiles.length; i++) {
+            const uploadFile = uploadFiles[i]
+            const imgLink = uploadFile.getAttribute("src")
+
+            str += `<input type='hidden' name='fileName' value="${imgLink}"/>`
+        }
+        target.innerHTML = str;
+
+        // document.querySelector("form").submit();
 
     })
 
