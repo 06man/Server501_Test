@@ -223,7 +223,7 @@ function showUploadFile({uuid, fileName, link}) {
 
         for(let i = 0; i < uploadFiles.length; i++) {
             const uploadFile = uploadFiles[i]
-            const imgLink = uploadFile.getAttribute("src")
+            const imgLink = uploadFile.getAttribute("data-src")
 // 서버에서, BoardDTO에서, 받는 매개변수 , private List<String> fileNames;
             str += `<input type='hidden' name='fileNames' value="${imgLink}"/>`
         }
