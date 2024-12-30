@@ -6,12 +6,15 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Log4j2
 @Configuration
 @RequiredArgsConstructor
+// 시큐리티 설정 on 추가
+@EnableWebSecurity
 public class CustomSecurityConfig {
 
     //순서1,
@@ -26,6 +29,24 @@ public class CustomSecurityConfig {
         http.formLogin(
                 formLogin ->
                         formLogin.loginPage("/member/login")
+        );
+
+        //로그인 후, 성공시 리다이렉트 될 페이지 지정, 간단한 버전.
+        http.formLogin(formLogin ->
+                formLogin.defaultSuccessUrl("/board/list",true)
+        );
+
+        // 기본은 csrf 설정이 on, 작업시에는 끄고 작업하기.
+        http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
+
+        http.authorizeHttpRequests(
+                authorizeRequests -> {
+                    authorizeRequests.requestMatchers("/css/**", "/js/**", "/images/**", "/images2/**","/member/login").permitAll();
+                    authorizeRequests.requestMatchers("/board/list","/board/register").authenticated();
+                    authorizeRequests.requestMatchers("/admin/**").hasRole("ADMIN");
+                    authorizeRequests.anyRequest().authenticated();
+                }
+
         );
 
 
