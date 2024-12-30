@@ -56,6 +56,7 @@ public class BoardController {
     }
 
     //등록 작업, 1) 등록화면 2) 로직처리
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/register")
     public void register() {
 
@@ -90,7 +91,8 @@ public class BoardController {
     }
 
     //권한별로 접근 지정. 관리자만 접근 가능.
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/read")
     public void read(Long bno, PageRequestDTO pageRequestDTO,
                      Model model) {

@@ -45,6 +45,9 @@ public class CustomSecurityConfig {
 
         // 순서5
         // 기본은 csrf 설정이 on, 작업시에는 끄고 작업하기.
+        // 만약, 사용한다면,
+        // 웹 화면에서 -> 서버로,  csrf 토큰 생성해서 전송.
+        // 레스트로 작업시에도 , csrf 토큰 생성해서 전송.
         http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
 
 
@@ -64,6 +67,14 @@ public class CustomSecurityConfig {
                     //위의 3가지 조건을 제외한 나머지 모든 접근은 인증이 되어야 접근이 가능함.
                     authorizeRequests.anyRequest().authenticated();
                 }
+
+        );
+
+        // 순서 8, 로그아웃 설정.
+        // 로그 아웃 설정.
+        http.logout(
+                logout -> logout.logoutUrl("/member/logout")
+                        .logoutSuccessUrl("/member/login?logout")
 
         );
 
