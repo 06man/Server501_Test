@@ -34,9 +34,14 @@ public class CustomUserDetailsService implements UserDetailsService {
         // 테스트, 더미 데이터 작업,
         // 반환 타입 : UserDetails
         // User : 스프링 시큐리티에서 제공하는 클래스, 주의하기, 이름. 고정.
+
+        log.info("passwordEncoder.encode(\"123456\") : " +passwordEncoder.encode("123456"));
         UserDetails userDetails = User.builder()
                 .username("lsy")
-                .password("1234")
+                // 서버에서는 평문으로 패스워드 넘어오면,
+                // 기본 다 거부함. 기본 해쉬한 값으로 와야함.
+//                .password("1234")
+                .password(passwordEncoder.encode("123456"))
                 .authorities("ROLE_USER")
                 .build();
 
