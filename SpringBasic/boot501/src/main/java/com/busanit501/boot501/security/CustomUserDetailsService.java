@@ -1,6 +1,7 @@
 package com.busanit501.boot501.security;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,6 +31,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("로그인한 유저 확인 : "+ username);
         // 데이터베이스에 저장된 유저와 비교 작업 후, 처리 예정.
-        return null;
+        // 테스트, 더미 데이터 작업,
+        // 반환 타입 : UserDetails
+        // User : 스프링 시큐리티에서 제공하는 클래스, 주의하기, 이름. 고정.
+        UserDetails userDetails = User.builder()
+                .username("lsy")
+                .password("1234")
+                .authorities("ROLE_USER")
+                .build();
+
+        return userDetails;
     }
 }
