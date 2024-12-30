@@ -41,7 +41,9 @@ public class CustomUserDetailsService implements UserDetailsService {
                 // 서버에서는 평문으로 패스워드 넘어오면,
                 // 기본 다 거부함. 기본 해쉬한 값으로 와야함.
 //                .password("1234")
-                .password(passwordEncoder.encode("123456"))
+                .password(passwordEncoder.encode("1234"))
+                // 인증된 유저,
+                // 관리자, ROLE_ADMIN
                 .authorities("ROLE_USER")
                 .build();
 
