@@ -25,7 +25,7 @@ public class CustomSecurityConfig {
         // http.formLogin();
         http.formLogin(
                 formLogin ->
-                        formLogin.loginPage("/login")
+                        formLogin.loginPage("/member/login")
         );
 
 
