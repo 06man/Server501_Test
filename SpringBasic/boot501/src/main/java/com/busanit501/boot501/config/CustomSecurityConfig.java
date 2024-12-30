@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Log4j2
@@ -31,19 +33,28 @@ public class CustomSecurityConfig {
                         formLogin.loginPage("/member/login")
         );
 
+        // 순서4
         //로그인 후, 성공시 리다이렉트 될 페이지 지정, 간단한 버전.
         http.formLogin(formLogin ->
                 formLogin.defaultSuccessUrl("/board/list",true)
         );
 
+        // 순서5
         // 기본은 csrf 설정이 on, 작업시에는 끄고 작업하기.
         http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
 
+
+        // 순서 6, 가장 중요함.
+        // 시큐리티의 전체 허용 여부 관련 목록
+        // 주의사항, 위에서 부터 차례대로 설정 적용이 됨.
+        // 첫번째 줄에 너무 큰 범위로 막는 설정을 하고, 다음 줄에서 허용을해도
+        // 허용이 안됩니다.
         http.authorizeHttpRequests(
                 authorizeRequests -> {
-                    authorizeRequests.requestMatchers("/css/**", "/js/**", "/images/**", "/images2/**","/member/login").permitAll();
+                    authorizeRequests.requestMatchers("/css/**", "/js/**","/member/login").permitAll();
                     authorizeRequests.requestMatchers("/board/list","/board/register").authenticated();
                     authorizeRequests.requestMatchers("/admin/**").hasRole("ADMIN");
+                    //위의 3가지 조건을 제외한 나머지 모든 접근은 인증이 되어야 접근이 가능함.
                     authorizeRequests.anyRequest().authenticated();
                 }
 
@@ -53,6 +64,7 @@ public class CustomSecurityConfig {
         return http.build();
     }
 
+
     // 순서2,
     // css, js, 등 정적 자원은 시큐리티 필터에서 제외하기
     @Bean
@@ -61,6 +73,12 @@ public class CustomSecurityConfig {
         return (web) ->
                 web.ignoring()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
+
+    //순서7, 패스워드 암호화를 해주는 도구, 스프링 설정.
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 

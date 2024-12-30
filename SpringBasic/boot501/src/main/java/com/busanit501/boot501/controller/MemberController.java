@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Log4j2
 @RequiredArgsConstructor
 public class MemberController {
+    // 시큐리티 설정에서 설정한 로그인 페이지로 이동함.
     @GetMapping("/login")
     public void loginGet(String error, String logout,
                          RedirectAttributes redirectAttributes) {
