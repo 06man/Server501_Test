@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -88,6 +89,8 @@ public class BoardController {
 
     }
 
+    //권한별로 접근 지정. 관리자만 접근 가능.
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/read")
     public void read(Long bno, PageRequestDTO pageRequestDTO,
                      Model model) {
