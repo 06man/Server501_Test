@@ -105,7 +105,8 @@ public class BoardController {
 
     //권한별로 접근 지정. 관리자만 접근 가능.
 //    @PreAuthorize("hasRole('ADMIN')")
-    @PreAuthorize("hasRole('USER')")
+//    @PreAuthorize("hasRole('USER')") // 로그인시 기본 권한. ROLE_USER
+    @PreAuthorize("isAuthenticated()") // 로그인 처리가 되었을 경우
     @GetMapping("/read")
     public void read(Long bno, PageRequestDTO pageRequestDTO,
                      Model model) {
