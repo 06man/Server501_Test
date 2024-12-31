@@ -68,7 +68,7 @@ public class BoardController {
     }
 
     //등록 작업, 1) 등록화면 2) 로직처리
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/register")
     public void register(@AuthenticationPrincipal UserDetails user, Model model) {
         model.addAttribute("user", user);
