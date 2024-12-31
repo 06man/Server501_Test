@@ -57,6 +57,9 @@ public class BoardController {
         PageResponseDTO<BoardListAllDTO> responseDTO = boardService.listWithAll(pageRequestDTO);
         log.info("pageRequestDTO 의 getLink 조사 : " + pageRequestDTO.getLink());
         log.info("PageResponseDTO 의 responseDTO 조사 : " + responseDTO);
+
+        // user 객체의 내용 확인해보기.
+        log.info("@AuthenticationPrincipal UserDetails user 조사 : " + user);
         model.addAttribute("responseDTO", responseDTO);
     }
 
