@@ -48,7 +48,8 @@
                     <div class="mb-3" th:with="link = ${pageRequestDTO.link}">
                         <!--                            수정폼 가기 방법2-->
                         <!--                            <a th:href="|@{/board/update}?bno=${dto.bno}&${link}|">-->
-                        <button type="button" class="btn btn-primary submitBtn">수정하기</button>
+                        <!--                    게시글 작성자와 로그인한 유저가 같은 경우에만, 수정하기 버튼 활성화하기.-->
+                        <button type="button" th:if="${user != null user.Username == dto.writer}" class="btn btn-primary submitBtn">수정하기</button>
                         <!--                            </a>-->
                         <a th:href="|@{/board/list}?${link}|">
                             <button type="button" class="btn btn-danger">목록가기</button>
@@ -137,6 +138,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary updateCloseBtn" data-bs-dismiss="modal">취소</button>
+
                     <button type="button" class="btn btn-primary updateBtn">댓글 수정</button>
                     <button type="button" class="btn btn-danger deleteBtn">댓글 삭제</button>
                 </div>

@@ -108,10 +108,11 @@ public class BoardController {
 //    @PreAuthorize("hasRole('USER')") // 로그인시 기본 권한. ROLE_USER
     @PreAuthorize("isAuthenticated()") // 로그인 처리가 되었을 경우
     @GetMapping("/read")
-    public void read(Long bno, PageRequestDTO pageRequestDTO,
+    public void read(@AuthenticationPrincipal UserDetails user, Long bno, PageRequestDTO pageRequestDTO,
                      Model model) {
         BoardDTO boardDTO = boardService.readOne(bno);
         model.addAttribute("dto", boardDTO);
+        model.addAttribute("user", user);
     }
 
     @GetMapping("/update")
