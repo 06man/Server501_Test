@@ -38,6 +38,10 @@
                                         <a class="nav-link" aria-current="page" href="/board/register">글작성</a>
                                     </li>
 
+                                    <li class="nav-item" th:if="${user} != null">
+                                        <a class="nav-link" href="#">[[${user.Username}]]님환영합니다.</a>
+                                    </li>
+
                                     <li class="nav-item ">
                                         <a class="nav-link" href="#"></a>
                                     </li>
