@@ -60,7 +60,10 @@ public class BoardController {
 
         // user 객체의 내용 확인해보기.
         log.info("@AuthenticationPrincipal UserDetails user 조사 : " + user);
+        // user 정보를 화면에 전달하기.
+        model.addAttribute("user", user);
         model.addAttribute("responseDTO", responseDTO);
+
     }
 
     //등록 작업, 1) 등록화면 2) 로직처리
