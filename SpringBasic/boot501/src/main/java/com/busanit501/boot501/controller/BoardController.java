@@ -113,6 +113,8 @@ public class BoardController {
         BoardDTO boardDTO = boardService.readOne(bno);
         model.addAttribute("dto", boardDTO);
         model.addAttribute("user", user);
+        log.info("user: 정보조회" + user);
+        log.info("boardDTO: 정보조회" + boardDTO);
     }
 
     @GetMapping("/update")
