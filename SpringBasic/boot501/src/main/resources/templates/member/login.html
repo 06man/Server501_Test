@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="www.thymeleaf.org"
+      layout:decorate="~{layout/base.html}">
 
 <head>
     <meta charset="utf-8"/>
@@ -8,9 +11,9 @@
     <meta name="author" content=""/>
     <title>Simple Sidebar - Login</title>
     <!-- Favicon-->
-<!--    <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}"/>-->
+    <!--    <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}"/>-->
     <!-- Core theme CSS (includes Bootstrap)-->
-<!--    <link th:href="@{/css/styles.css}" rel="stylesheet"/>-->
+    <!--    <link th:href="@{/css/styles.css}" rel="stylesheet"/>-->
 </head>
 <body class="align-middle">
 <div>
@@ -20,14 +23,14 @@
             LOGIN Page
         </div>
         <div class="card-body">
-<!--            로그아웃 여부 확인하는 코드-->
-<!--            파라미터로 logout 있다면, 로그인 입력폼 안보이게 하기-->
+            <!--            로그아웃 여부 확인하는 코드-->
+            <!--            파라미터로 logout 있다면, 로그인 입력폼 안보이게 하기-->
             <th:block th:if="${param.logout != null}">
                 <h1>Logout........</h1>
             </th:block>
-<!--            로그아웃 파라미터 추가 설정-->
+            <!--            로그아웃 파라미터 추가 설정-->
             <form id="registerForm" action="/member/login" method="post"
-            th:if="${param.logout == null}">
+                  th:if="${param.logout == null}">
                 <div class="input-group mb-3">
                     <span class="input-group-text">아이디</span>
                     <input type="text" name="username" class="form-control" placeholder="USER ID">
@@ -36,12 +39,12 @@
                     <span class="input-group-text">패스워드</span>
                     <input type="password" name="password" class="form-control" placeholder="PASSWORD">
                 </div>
-<!--                <div class="input-group mb-3 ">-->
-<!--                    <input class="form-check-input" type="checkbox" name="remember-me">-->
-<!--                    <label class="form-check-label">-->
-<!--                        자동 로그인-->
-<!--                    </label>-->
-<!--                </div>-->
+                <!--                <div class="input-group mb-3 ">-->
+                <!--                    <input class="form-check-input" type="checkbox" name="remember-me">-->
+                <!--                    <label class="form-check-label">-->
+                <!--                        자동 로그인-->
+                <!--                    </label>-->
+                <!--                </div>-->
                 <div class="my-4">
                     <button type="button" class="btn btn-primary w-100 joinBtn">Join</button>
                 </div>
