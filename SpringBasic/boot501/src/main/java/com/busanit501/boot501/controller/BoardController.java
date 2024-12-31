@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,7 +44,10 @@ public class BoardController {
     private final BoardService boardService;
     // http://localhost:8080/board/list
     @GetMapping("/list")
-    public void list(PageRequestDTO pageRequestDTO, Model model ) {
+    // 로그인한 유저의 정보를, 서버 -> 화면에 제공하는 방법,
+    // 메서드 안에 파라미터에 , @AuthenticationPrincipal UserDetails user
+    // user 객체 안에 로그이한 유저 정보가 있음.
+    public void list(@AuthenticationPrincipal UserDetails user, PageRequestDTO pageRequestDTO, Model model ) {
         // 서비스 이용해서, 데이터베이스 목록 페이징 처리해서 가져오기.
         // 앞단 화면에서, 검색어:keyword 내용, 페이징 내용(page = 1) 담아서 전달.
 //        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
