@@ -1,5 +1,6 @@
 package com.busanit501.boot501.security.handler;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,12 +29,12 @@ public class Custom403Handler implements AccessDeniedHandler {
                     } else {
                         // 403 상태 코드 설정
                         // 방법1, 특정 페이지로 이동
-//                        log.info("Custom403Handler 403 에러 확인 " +jsonRequest);
-//                        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-//                        RequestDispatcher dispatcher = request.getRequestDispatcher("/error/403");
-//                        dispatcher.forward(request, response);
+                        log.info("Custom403Handler 403 에러 확인 " +jsonRequest);
+                        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("/error/403");
+                        dispatcher.forward(request, response);
                         //방법2, 로그인 페이지로 이동시키기
-                        response.sendRedirect("/member/login?error=ACCESS_DENIED");
+//                        response.sendRedirect("/member/login?error=ACCESS_DENIED");
         }
     }
 }
