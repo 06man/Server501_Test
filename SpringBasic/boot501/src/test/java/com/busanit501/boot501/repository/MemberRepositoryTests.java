@@ -1,0 +1,41 @@
+package com.busanit501.boot501.repository;
+
+import com.busanit501.boot501.domain.Member;
+import com.busanit501.boot501.domain.MemberRole;
+import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.stream.IntStream;
+
+@SpringBootTest
+@Log4j2
+public class MemberRepositoryTests {
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    //회원 가입 테스트
+    @Test
+    public void testInsertMember() {
+        IntStream.rangeClosed(1, 100).forEach(i -> {
+            Member member = Member.builder()
+                    .mid("member" + i)
+                    .mpw(passwordEncoder.encode("1111"))
+                    .email("email"+i+"@test.com")
+                    .build();
+            // 각 유저별로 권한 추가
+
+            member.addRole(MemberRole.USER);
+
+            if (i>=90) {
+                member.addRole(MemberRole.ADMIN);
+            }
+            memberRepository.save(member);
+        });
+    }
+}
