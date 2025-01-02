@@ -111,6 +111,10 @@ public class CustomSecurityConfig {
 
         // 자동 로그인 순서2,
 
+        // 403 에러 페이지 연결 하기.
+        http.exceptionHandling(exception -> {
+            exception.accessDeniedPage("/error/403");
+        });
 
         return http.build();
     }
@@ -144,6 +148,7 @@ public class CustomSecurityConfig {
 
     // 403 핸들러 추가.
     // 설정 클래스에 추가하기.
+    // 레스트용, Content-Type, application/json 형태 일 때만 동작을하고,
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
         return new Custom403Handler();
