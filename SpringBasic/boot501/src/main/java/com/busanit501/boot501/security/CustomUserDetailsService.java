@@ -48,6 +48,11 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .authorities("ROLE_USER", "ROLE_ADMIN")
                 .build();
 
+        // 더미 데이터에 이어서, 우리가 만든 Member 엔티티 이용하고,
+        //  로그인 처리시에 사용하는 DTO 이용함
+        // 주의사항, 반드시 시큐리티에서 제공하는  User 클래스 상속 받은 클래스 이용해야함.
+
+
         return userDetails;
     }
 }
