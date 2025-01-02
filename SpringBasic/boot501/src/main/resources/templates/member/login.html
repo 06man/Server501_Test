@@ -62,6 +62,15 @@
             </div>
         </div>
     </div>
+<!--    끝나는 부분 fragment-->
+    <script layout:fragment="javascript" th:inline="javascript">
+        document.querySelector(".joinBtn").addEventListener("click", function (e){
+            e.preventDefault()
+            e.stopPropagation()
+            self.location = "/member/join"
+        })
+    </script>
+
 </div>
 
 </body>
