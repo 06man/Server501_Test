@@ -10,7 +10,7 @@ import java.util.Optional;
 //Member -> @Id -> String mid -> <Member, String>
 public interface MemberRepository extends JpaRepository<Member, String> {
     // 회원 조회, 추가로 MemberRole 테이블을 조인해서 , 소셜 로그인이 아닌 상태
-    @EntityGraph(attributePaths = "roleset")
+    @EntityGraph(attributePaths = "roleSet")
     @Query("select m from Member m where m.mid = :mid and m.social = false")
     Optional<Member> getWithRoles(String mid);
 }
