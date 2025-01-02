@@ -1,6 +1,7 @@
 package com.busanit501.boot501.controller;
 
 import com.busanit501.boot501.dto.MemberJoinDTO;
+import com.busanit501.boot501.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Log4j2
 @RequiredArgsConstructor
 public class MemberController {
+    private final MemberService memberService;
+
     // 시큐리티 설정에서 설정한 로그인 페이지로 이동함.
     @GetMapping("/login")
     public void loginGet(String error, String logout,
@@ -43,9 +46,16 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String joinPost(MemberJoinDTO memberJoinDTO) {
+    public String joinPost(MemberJoinDTO memberJoinDTO,
+                           RedirectAttributes redirectAttributes) {
         // 서비스 만들어서, 연결 해주기.
-
-        return "redirect:/board/list";
+        try{
+            memberService.join(memberJoinDTO);
+        } catch (MemberService.MidExistException e) {
+            redirectAttributes.addFlashAttribute("error", "mid");
+            return "redirect:/member/join";
+        }
+        redirectAttributes.addFlashAttribute("result", "success");
+        return "redirect:/member/login";
     }
 }
