@@ -112,9 +112,12 @@ public class CustomSecurityConfig {
         // 자동 로그인 순서2,
 
         // 403 에러 페이지 연결 하기.
-        http.exceptionHandling(exception -> {
-            exception.accessDeniedPage("/error/403");
+        http.exceptionHandling(
+                exception -> {
+            exception.accessDeniedHandler(accessDeniedHandler());
         });
+
+
 
         return http.build();
     }
