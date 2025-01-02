@@ -117,6 +117,10 @@ public class BoardController {
         log.info("boardDTO: 정보조회" + boardDTO);
     }
 
+    // 수정폼에도 접근시, 게시글 작성자와 로그인 유저가 일치한다면 허용함.
+    // get 방식에서, boardDTO 를 추가를 해야함.
+    // 그러면, 수정폼은 접근을해, 하지만, 로직 처리는 안해줄거야.
+
     @GetMapping("/update")
     public void update(Long bno, PageRequestDTO pageRequestDTO,
                      Model model) {
@@ -124,6 +128,9 @@ public class BoardController {
         model.addAttribute("dto", boardDTO);
     }
 
+    // principal.username : 로그인한 유저
+    // #boardDTO.writer : 게시글의 작성자
+    @PreAuthorize("principal.username == #boardDTO.writer")
     @PostMapping("/update")
     public String updatePost(@Valid BoardDTO boardDTO,
                                BindingResult bindingResult,
