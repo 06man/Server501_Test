@@ -54,14 +54,12 @@
     <script layout:fragment="javascript" th:inline="javascript">
       // 중복 아이디 처리 경고창 추가하기
       const error = [[${error}]]
-      const result = [[${result}]]
+
 
       if(error && error === "mid") {
           alert("중복된 아이디입니다.")
       }
-      if(result && result === "success") {
-          alert("회원가입 축하합니다.")
-      }
+
     </script>
 </div>
 
