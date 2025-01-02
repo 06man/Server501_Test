@@ -164,6 +164,8 @@ public class BoardController {
 
     }
 
+    // 게시글 작성자와 로그인 유저 동일 할 때, 삭제 로직처리 해줄게.
+    @PreAuthorize("principal.username == #boardDTO.writer")
     @PostMapping("/delete")
     // 삭제시,
     // 주의사항,
