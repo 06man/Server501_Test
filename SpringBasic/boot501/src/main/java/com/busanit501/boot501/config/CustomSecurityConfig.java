@@ -71,7 +71,7 @@ public class CustomSecurityConfig {
         http.authorizeHttpRequests(
                 authorizeRequests -> {
                     authorizeRequests.requestMatchers
-                            ("/css/**", "/js/**","/member/login","/member/join", "/board/list").permitAll();
+                            ("/css/**", "/js/**","/images/**","/member/login","/member/join", "/board/list").permitAll();
                     authorizeRequests.requestMatchers
                             ("/board/register").authenticated();
                     authorizeRequests.requestMatchers
@@ -117,7 +117,10 @@ public class CustomSecurityConfig {
             exception.accessDeniedHandler(accessDeniedHandler());
         });
 
-
+        //카카오 로그인 API 설정
+        http.oauth2Login(
+                oauthLogin -> oauthLogin.loginPage("/member/login")
+        );
 
         return http.build();
     }
