@@ -104,3 +104,9 @@ https://developers.kakao.com/tool/resource/login
 시큐리티 원하는 UserDetails 타입으로 반환 해주기 원해요.
 그래서, 그 틀 맞춰서 추가 설정.
 
+카카오 로그인 구현 과정.
+공식 문서,
+https://developers.kakao.com/docs/latest/ko/kakaologin/common
+
+
+
