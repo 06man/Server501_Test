@@ -17,6 +17,9 @@ import java.util.Map;
 @Getter
 @Setter
 @ToString
+// MemberSecurityDTO , 클래스는
+// 다형성으로, 반환 타입, UserDetails ,되고,
+// 반환 타입 , OAuth2User 됨.
 public class MemberSecurityDTO extends User implements OAuth2User {
 
     private String mid;
