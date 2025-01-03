@@ -5,8 +5,10 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
+import java.util.Map;
 
 // 여기 DTO, 리턴 타입을 UserDetails 반환 해야함.
 // Security, 로그인 처리 후, 반환 타입을 약속함.
@@ -15,13 +17,16 @@ import java.util.Collection;
 @Getter
 @Setter
 @ToString
-public class MemberSecurityDTO extends User {
+public class MemberSecurityDTO extends User implements OAuth2User {
 
     private String mid;
     private String mpw;
     private String email;
     private boolean del;
     private boolean social;
+
+    // 소셜 로그인 정보를 담을 요소
+    private Map<String, Object> props;
 
     public MemberSecurityDTO(String username, String password, String email,
                              boolean del, boolean social,
@@ -33,6 +38,16 @@ public class MemberSecurityDTO extends User {
         this.del = del;
         this.social = social;
 
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return this.getProps();
+    }
+
+    @Override
+    public String getName() {
+        return this.mid;
     }
 }
 
