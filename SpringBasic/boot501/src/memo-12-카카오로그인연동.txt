@@ -70,7 +70,8 @@ spring.security.oauth2.client.registration.kakao.client-id=
 
 # secret 값 복붙
 spring.security.oauth2.client.registration.kakao.client-secret=
-spring.security.oauth2.client.registration.kakao.client-authentication-method=POST
+# post -> client_secret_post : 변경하기
+spring.security.oauth2.client.registration.kakao.client-authentication-method=client_secret_post
 spring.security.oauth2.client.registration.kakao.scope=profile_nickname,account_email, profile_image
 
 
