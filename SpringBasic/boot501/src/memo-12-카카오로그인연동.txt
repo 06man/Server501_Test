@@ -110,4 +110,18 @@ https://developers.kakao.com/tool/resource/login
 https://developers.kakao.com/docs/latest/ko/kakaologin/common
 
 
+4. 시큐리티 허용 주소 추가
+  "http://localhost:8080/login/oauth2/code/kakao",
+                                    "https://kauth.kakao.com",
+                                    "https://kapi.kakao.com"
+예시
+  http.authorizeHttpRequests(
+                authorizeRequests -> {
+                    authorizeRequests.requestMatchers
+                            ("/css/**", "/js/**","/images/**",
+                                    "/member/login","/member/join", "/board/list",
+                                    "http://localhost:8080/login/oauth2/code/kakao",
+                                    "https://kauth.kakao.com",
+                                    "https://kapi.kakao.com").permitAll();
+
 

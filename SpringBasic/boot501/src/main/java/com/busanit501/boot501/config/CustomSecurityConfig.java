@@ -71,15 +71,19 @@ public class CustomSecurityConfig {
         http.authorizeHttpRequests(
                 authorizeRequests -> {
                     authorizeRequests.requestMatchers
-                            ("/css/**", "/js/**","/images/**","/member/login","/member/join", "/board/list").permitAll();
+                            ("/css/**", "/js/**","/images/**",
+                                    "/member/login","/member/join", "/board/list",
+                                    "http://localhost:8080/login/oauth2/code/kakao",
+                                    "https://kauth.kakao.com",
+                                    "https://kapi.kakao.com").permitAll();
                     authorizeRequests.requestMatchers
                             ("/board/register").authenticated();
                     authorizeRequests.requestMatchers
                             ("/admin/**","/board/update").hasRole("ADMIN");
                     //위의 3가지 조건을 제외한 나머지 모든 접근은 인증이 되어야 접근이 가능함.
                     authorizeRequests
-//                            .anyRequest().authenticated();
-                            .anyRequest().permitAll();
+                            .anyRequest().authenticated();
+//                            .anyRequest().permitAll();
                 }
 
         );
