@@ -111,9 +111,9 @@ https://developers.kakao.com/docs/latest/ko/kakaologin/common
 
 
 4. 시큐리티 허용 주소 추가
-  "http://localhost:8080/login/oauth2/code/kakao",
-                                    "https://kauth.kakao.com",
-                                    "https://kapi.kakao.com"
+"http://localhost:8080/login/oauth2/code/kakao",
+"https://kauth.kakao.com",
+"https://kapi.kakao.com"
 예시
   http.authorizeHttpRequests(
                 authorizeRequests -> {
