@@ -219,3 +219,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
     <a th:if="${user != null && user.username==boardDTO.writer}" th:href="|@{/board/update(bno =${boardDTO.bno})}&${link}|">
         <button type="button" class="btn btn-primary">수정하기</button>
     </a>
+
+4. 권한별 , 화면에서 접근 제어하는 예시.
+  <!--    로그인시 권한별로 어드민 페이지 표시 해보기-->
+<!-- 타임리프의 기능 중에 sec 접두어, 기능 따로 도구를 설치-->
+<li class="nav-item"  sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+    <a class="nav-link" href="#" >관리자페이지</a>
+</li>
