@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.coyote.Request;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -53,7 +52,7 @@ public class PageRequestDTO {
             builder.append("&size=" + this.size);
 
             if (type != null && type.length() > 0) {
-                    builder.append("&type="+ type);
+                builder.append("&type="+ type);
             }
 
             if(keyword != null) {
