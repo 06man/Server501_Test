@@ -44,6 +44,13 @@
     </div>
 <!--    라이브 데모 모달-->
 
+<!--    로그인한 유저를 표시 해보기-->
+    <div class="row mt-3">
+        <div class="col">
+            <h1 th:if="${user} != null">[[${user.Username}]]님환영합니다.</h1>
+        </div>
+    </div>
+
     <!--    검색화면 추가-->
 
     <div class="row mt-3">
@@ -131,10 +138,17 @@
                                 <a th:href="|@{/board/read(bno=${dto.bno})}&${link}|">
                                 [[${dto.title}]]
                                 </a>
+<!--                                댓글 갯수-->
                                 <span class="badge progress-bar-success"
                                 style="background-color: crimson">
                                     [[${dto.replyCount}]]
                                 </span>
+<!--                                첨부된 이미지 출력 하기-->
+                                <div th:if="${dto.boardImages != null && dto.boardImages.size()>0}">
+                                    <img style="width: 100px" th:each="boardImage: ${dto.boardImages}"
+                                         th:src="|/view/s_${boardImage.uuid}_${boardImage.fileName}|">
+
+                                </div>
                             </td>
                             <td>[[${dto.writer}]]</td>
                             <td>[[${#temporals.format(dto.regDate,'yyyy-MM-dd HH:mm:ss')}]]</td>

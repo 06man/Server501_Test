@@ -1,6 +1,7 @@
 package com.busanit501.boot501.repository.search;
 
 import com.busanit501.boot501.domain.Board;
+import com.busanit501.boot501.dto.BoardListAllDTO;
 import com.busanit501.boot501.dto.BoardListReplyCountDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,5 +22,8 @@ public interface BoardSearch {
     // 즉 조회를 못해요, 자바로 인스턴스로 ,
     // 그래서, 2개의 테이블을 연결 조인(외부조인? 댓글 null 일수도 있기때문에)
     Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types, String keyword, Pageable pageable);
+
+    // 게시글 + 댓글 갯수 + 첨부 이미지
+    Page<BoardListAllDTO> searchWithAll(String[] types, String keyword, Pageable pageable);
 
 }
