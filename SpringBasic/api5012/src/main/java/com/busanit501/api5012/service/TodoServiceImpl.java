@@ -25,7 +25,9 @@ public class TodoServiceImpl implements TodoService {
     @Override
     @Transactional
     public Long register(TodoDTO todoDTO) {
+        log.info("TodoServiceImpl , todoDTO : " + todoDTO);
         Todo todo = modelMapper.map(todoDTO, Todo.class); // 오타 수정
+        log.info("TodoServiceImpl , todo : " + todo);
         Long tno = todoRepository.save(todo).getTno(); // getTno() 오타 수정
         return tno;
     }

@@ -21,10 +21,20 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void joinMember(APIUser apiUser) {
+        // 🔹 아이디 중복 확인
+        if (apiUserRepository.existsByMid(apiUser.getMid())) {
+            throw new RuntimeException("이미 사용 중인 아이디입니다.");
+        }
         APIUser apiUser2 = APIUser.builder()
                 .mid(apiUser.getMid())
                 .mpw(passwordEncoder.encode(apiUser.getMpw())) // 비밀번호 암호화
                 .build();
         apiUserRepository.save(apiUser2);
+    }
+
+    @Override
+    public boolean checkMember(String mid) {
+        boolean check = apiUserRepository.existsByMid(mid);
+        return check;
     }
 }

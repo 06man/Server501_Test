@@ -7,5 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface MemberService {
      void joinMember(APIUser apiUser);
+     boolean checkMember(String mid);
 
 }
