@@ -9,10 +9,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,6 +54,32 @@ public class TodoServiceImpl implements TodoService {
                 .build();
     }
 
+    @Override
+    public List<TodoDTO> list2(int size, Long cursor) {
+        Pageable pageable = PageRequest.of(0, size, Sort.by("tno").descending());
+        Page<Todo> pageResult;
+
+        if (cursor == null) {
+            pageResult = todoRepository.findAll(pageable);
+        } else {
+            pageResult = todoRepository.findByTnoLessThan(cursor, pageable);
+        }
+
+        return pageResult.getContent()
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+    // ✅ Entity → DTO 변환
+    private TodoDTO toDTO(Todo todo) {
+        return TodoDTO.builder()
+                .tno(todo.getTno())
+                .title(todo.getTitle())
+                .dueDate(todo.getDueDate())
+                .writer(todo.getWriter())
+                .complete(todo.isComplete())
+                .build();
+    }
     @Override
     public void remove(Long tno) {
         todoRepository.deleteById(tno);

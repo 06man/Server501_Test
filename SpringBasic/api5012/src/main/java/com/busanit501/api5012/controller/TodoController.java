@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -39,8 +40,19 @@ public class TodoController {
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public PageResponseDTO<TodoDTO> list(PageRequestDTO pageRequestDTO) {
-        return todoService.list(pageRequestDTO);
+        log.info("Received list: {}", pageRequestDTO);
+        PageResponseDTO<TodoDTO> result = todoService.list(pageRequestDTO);
+        return result;
     }
+
+    @GetMapping(value = "/list2", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<TodoDTO> list2(@RequestParam(defaultValue = "10") int size,
+                               @RequestParam(required = false) Long cursor) {
+        log.info("Received list cursor: {}", cursor);
+        List<TodoDTO> result = todoService.list2(size, cursor);
+        return result;
+    }
+
     @DeleteMapping(value = "/{tno}")
     public Map<String, String> delete(@PathVariable Long tno) {
         todoService.remove(tno);
@@ -50,6 +62,7 @@ public class TodoController {
     @PutMapping(value = "/{tno}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, String> modify(@PathVariable("tno") Long tno, @RequestBody TodoDTO todoDTO) {
         // 경로 변수 tno와 요청 본문의 tno가 다를 경우를 방지하기 위해 DTO에 경로 변수 tno를 설정합니다.
+        log.info("Received modify: {}", todoDTO);
         todoDTO.setTno(tno);
         todoService.modify(todoDTO);
         return Map.of("result", "success");
