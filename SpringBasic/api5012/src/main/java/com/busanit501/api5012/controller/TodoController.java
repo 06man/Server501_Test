@@ -2,6 +2,7 @@ package com.busanit501.api5012.controller;
 
 import com.busanit501.api5012.dto.PageRequestDTO;
 import com.busanit501.api5012.dto.PageResponseDTO;
+import com.busanit501.api5012.dto.PageResponseDTO2;
 import com.busanit501.api5012.dto.TodoDTO;
 import com.busanit501.api5012.service.TodoService;
 import lombok.RequiredArgsConstructor;
@@ -46,10 +47,13 @@ public class TodoController {
     }
 
     @GetMapping(value = "/list2", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<TodoDTO> list2(@RequestParam(defaultValue = "10") int size,
-                               @RequestParam(required = false) Long cursor) {
+    public PageResponseDTO2<TodoDTO> list2(@RequestParam(defaultValue = "10") int size,
+                                           @RequestParam(required = false) Long cursor) {
         log.info("Received list cursor: {}", cursor);
-        List<TodoDTO> result = todoService.list2(size, cursor);
+        // ✅ cursor가 null일 때 첫 번째 데이터부터 조회하도록 처리
+//        Long cursorValue = (cursor == null) ? todoService.getMaxTno() : cursor;
+        PageResponseDTO2<TodoDTO> result = todoService.list2(size, cursor);
+        log.info("Received list cursor result: {}", result);
         return result;
     }
 

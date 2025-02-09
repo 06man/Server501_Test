@@ -27,6 +27,8 @@ public class PageResponseDTO<E> {
     private boolean next;
 
     private List<E> dtoList;
+    private Long nextCursor; // ✅ 다음 커서 (다음 페이지 요청 시 사용할 ID)
+    private boolean hasNext; // ✅ 다음 데이터 존재 여부
 
     @Builder(builderMethodName = "withAll")
     public PageResponseDTO(PageRequestDTO pageRequestDTO, List<E> dtoList, int total) {
@@ -47,5 +49,14 @@ public class PageResponseDTO<E> {
 
         this.prev = this.start > 1;
         this.next = total > this.end * this.size;
+
+
+    }
+
+    @Builder(builderMethodName = "withAll2")
+    public PageResponseDTO(List<E> dtoList, Long nextCursor, boolean hasNext) {
+        this.dtoList = dtoList;
+        this.nextCursor = nextCursor;
+        this.hasNext = hasNext;
     }
 }
