@@ -19,7 +19,6 @@ public class PageResponseDTO2<E> {
     @Builder
     public PageResponseDTO2(List<E> dtoList, Long nextCursor, boolean hasNext, int total) {
         this.dtoList = dtoList;
-        this.dtoList = dtoList;
         this.nextCursor = nextCursor;
         this.hasNext = hasNext;
         this.total = total;

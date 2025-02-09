@@ -1,10 +1,7 @@
 package com.busanit501.api5012.service;
 
 import com.busanit501.api5012.domain.Todo;
-import com.busanit501.api5012.dto.PageRequestDTO;
-import com.busanit501.api5012.dto.PageResponseDTO;
-import com.busanit501.api5012.dto.PageResponseDTO2;
-import com.busanit501.api5012.dto.TodoDTO;
+import com.busanit501.api5012.dto.*;
 import com.busanit501.api5012.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -56,51 +53,79 @@ public class TodoServiceImpl implements TodoService {
                 .build();
     }
 
+    // 검색 적용 전, 커서 기반 페이지 네이션 코드,
+
+//    @Override
+//    public PageResponseDTO2<TodoDTO> list2(int size, Long cursor) {
+//
+//        Pageable pageable = PageRequest.of(0, size, Sort.by("tno").descending());
+//        Page<Todo> pageResult;
+//
+//
+//        // ✅ cursor가 null이면 가장 큰 tno부터 조회
+//        if (cursor == null) {
+//            Long maxTno = getMaxTno(); // 최신 tno 가져오기
+//            log.info("TodoserviceImple cursor null,  findByTnoLessThanEqual: ");
+//            pageResult = todoRepository.findByTnoLessThanEqual(maxTno, pageable);
+//        } else {
+//            pageResult = todoRepository.findByTnoLessThan(cursor, pageable);
+//            log.info("TodoserviceImple cursor null X,  findByTnoLessThan: ");
+//        }
+//
+//        List<TodoDTO> dtoList = pageResult.getContent()
+//                .stream()
+//                .map(this::toDTO)
+//                .collect(Collectors.toList());
+//
+//        // ✅ 다음 페이지의 커서 설정 (마지막 데이터의 tno 사용)
+//        Long nextCursor = dtoList.isEmpty() ? null : dtoList.get(dtoList.size() - 1).getTno();
+//
+//        // ✅ 다음 데이터 존재 여부 확인
+//        boolean hasNext = dtoList.size() == size; // 받아온 데이터 크기가 요청한 size와 같으면 다음 데이터가 있음
+//
+//        return PageResponseDTO2.<TodoDTO>builder()
+//                .dtoList(dtoList)
+//                .nextCursor(nextCursor)
+//                .hasNext(hasNext)
+//                .total((int) todoRepository.count()) // ✅ 전체 개수 반환
+//                .build();
+//    }
+//    // ✅ Entity → DTO 변환
+//    private TodoDTO toDTO(Todo todo) {
+//        return TodoDTO.builder()
+//                .tno(todo.getTno())
+//                .title(todo.getTitle())
+//                .dueDate(todo.getDueDate())
+//                .writer(todo.getWriter())
+//                .complete(todo.isComplete())
+//                .build();
+//    }
+
+    // 검색 적용 후, 커서 기반 페이지 네이션 코드,
     @Override
-    public PageResponseDTO2<TodoDTO> list2(int size, Long cursor) {
-
-        Pageable pageable = PageRequest.of(0, size, Sort.by("tno").descending());
-        Page<Todo> pageResult;
+    public PageResponseDTO2<TodoDTO> list2(PageRequestDTO2 pageRequestDTO) {
 
 
-        // ✅ cursor가 null이면 가장 큰 tno부터 조회
-        if (cursor == null) {
-            Long maxTno = getMaxTno(); // 최신 tno 가져오기
-            log.info("TodoserviceImple cursor null,  findByTnoLessThanEqual: ");
-            pageResult = todoRepository.findByTnoLessThanEqual(maxTno, pageable);
-        } else {
-            pageResult = todoRepository.findByTnoLessThan(cursor, pageable);
-            log.info("TodoserviceImple cursor null X,  findByTnoLessThan: ");
-        }
+        // ✅ QueryDSL 기반 검색 메서드 호출
+        Page<TodoDTO> pageResult = todoRepository.list2(pageRequestDTO);
 
-        List<TodoDTO> dtoList = pageResult.getContent()
-                .stream()
-                .map(this::toDTO)
-                .collect(Collectors.toList());
+        List<TodoDTO> dtoList = pageResult.getContent();
 
         // ✅ 다음 페이지의 커서 설정 (마지막 데이터의 tno 사용)
         Long nextCursor = dtoList.isEmpty() ? null : dtoList.get(dtoList.size() - 1).getTno();
 
         // ✅ 다음 데이터 존재 여부 확인
-        boolean hasNext = dtoList.size() == size; // 받아온 데이터 크기가 요청한 size와 같으면 다음 데이터가 있음
+        boolean hasNext = dtoList.size() == pageRequestDTO.getSize(); // 받아온 데이터 크기가 요청한 size와 같으면 다음 데이터가 있음
 
         return PageResponseDTO2.<TodoDTO>builder()
                 .dtoList(dtoList)
                 .nextCursor(nextCursor)
                 .hasNext(hasNext)
-                .total((int) todoRepository.count()) // ✅ 전체 개수 반환
+                .total((int) pageResult.getTotalElements()) // ✅ 전체 개수 반환
                 .build();
     }
-    // ✅ Entity → DTO 변환
-    private TodoDTO toDTO(Todo todo) {
-        return TodoDTO.builder()
-                .tno(todo.getTno())
-                .title(todo.getTitle())
-                .dueDate(todo.getDueDate())
-                .writer(todo.getWriter())
-                .complete(todo.isComplete())
-                .build();
-    }
+
+
     @Override
     public void remove(Long tno) {
         todoRepository.deleteById(tno);
