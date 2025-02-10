@@ -1,4 +1,4 @@
-package com.busanit501.api5012.dto.ai.tools;
+package com.busanit501.api5012.dto.ai.image;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)  // ✅ 예기치 않은 필드는 무시
-public class ToolsPredictionResponseDTO {
+public class AiPredictionResponseDTO {
 
     @JsonProperty("prediction")  // ✅ Flask 응답의 "prediction" 필드 추가
     private String prediction;

@@ -3,7 +3,6 @@ package com.busanit501.api5012.controller.ai;
 import com.busanit501.api5012.dto.ai.stock.StockPredictionRequestDTO;
 import com.busanit501.api5012.dto.ai.stock.StockDataResponseDTO;
 import com.busanit501.api5012.dto.ai.stock.StockResultPredictionResponseDTO;
-import com.busanit501.api5012.dto.ai.tools.ToolsPredictionResponseDTO;
 import com.busanit501.api5012.service.ai.StockPredictionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

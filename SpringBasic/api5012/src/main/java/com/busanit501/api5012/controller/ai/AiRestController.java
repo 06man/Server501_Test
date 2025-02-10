@@ -1,13 +1,10 @@
 package com.busanit501.api5012.controller.ai;
 
-import com.busanit501.api5012.dto.ai.tools.ToolsPredictionResponseDTO;
+import com.busanit501.api5012.dto.ai.image.AiPredictionResponseDTO;
 import com.busanit501.api5012.service.ai.AiUploadService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -15,21 +12,23 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/ai")
 @Log4j2
-public class AiToolsRestController {
+public class AiRestController {
 
     private final AiUploadService aiUploadService;
 
     @Autowired
-    public AiToolsRestController(AiUploadService aiUploadService) {
+    public AiRestController(AiUploadService aiUploadService) {
         this.aiUploadService = aiUploadService;
     }
 
-    @PostMapping("/tool_predict")
-    public ToolsPredictionResponseDTO uploadImage(@RequestParam(value = "image", required = false) MultipartFile image) throws IOException {
+    @PostMapping("/predict/{teamNo}")
+    public AiPredictionResponseDTO uploadImage(
+            @PathVariable int teamNo,
+            @RequestParam(value = "image", required = false) MultipartFile image) throws IOException {
         // Django 서버로 이미지 전송 및 응답 처리
         //
         log.info("image 확인 : " + image);
-        ToolsPredictionResponseDTO responseDTO = aiUploadService.sendImageToDjangoServer(image.getBytes(), image.getOriginalFilename());
+        AiPredictionResponseDTO responseDTO = aiUploadService.sendImageToDjangoServer(image.getBytes(), image.getOriginalFilename(), teamNo);
 
         // PredictionResponseDTO 객체를 JSON으로 반환
         return responseDTO;
