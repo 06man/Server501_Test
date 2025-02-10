@@ -2,6 +2,7 @@ package com.busanit501.api5012.service.ai;
 
 import com.busanit501.api5012.dto.ai.stock.StockPredictionRequestDTO;
 import com.busanit501.api5012.dto.ai.stock.StockDataResponseDTO;
+import com.busanit501.api5012.dto.ai.stock.StockResultPredictionResponseDTO;
 import com.busanit501.api5012.dto.ai.tools.ToolsPredictionResponseDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +22,7 @@ public class StockPredictionServiceImpl implements StockPredictionService {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final String FLASK_SERVER_URL = "http://localhost:5000";
 
-    private ToolsPredictionResponseDTO sendPredictionRequest(String endpoint, StockPredictionRequestDTO requestDTO) throws IOException, JsonProcessingException {
+    private StockResultPredictionResponseDTO sendPredictionRequest(String endpoint, StockPredictionRequestDTO requestDTO) throws IOException, JsonProcessingException {
         // JSON 변환
         String jsonRequest = objectMapper.writeValueAsString(requestDTO);
 
@@ -37,22 +38,22 @@ public class StockPredictionServiceImpl implements StockPredictionService {
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected response code: " + response);
             }
-            return objectMapper.readValue(response.body().string(), ToolsPredictionResponseDTO.class);
+            return objectMapper.readValue(response.body().string(), StockResultPredictionResponseDTO.class);
         }
     }
 
     @Override
-    public ToolsPredictionResponseDTO predictWithRNN(StockPredictionRequestDTO requestDTO) throws IOException {
+    public StockResultPredictionResponseDTO predictWithRNN(StockPredictionRequestDTO requestDTO) throws IOException {
         return sendPredictionRequest("/predict1", requestDTO);
     }
 
     @Override
-    public ToolsPredictionResponseDTO predictWithLSTM(StockPredictionRequestDTO requestDTO) throws IOException {
+    public StockResultPredictionResponseDTO predictWithLSTM(StockPredictionRequestDTO requestDTO) throws IOException {
         return sendPredictionRequest("/predict2", requestDTO);
     }
 
     @Override
-    public ToolsPredictionResponseDTO predictWithGRU(StockPredictionRequestDTO requestDTO) throws IOException {
+    public StockResultPredictionResponseDTO predictWithGRU(StockPredictionRequestDTO requestDTO) throws IOException {
         return sendPredictionRequest("/predict3", requestDTO);
     }
 
@@ -68,6 +69,7 @@ public class StockPredictionServiceImpl implements StockPredictionService {
                 throw new IOException("Unexpected response code: " + response);
             }
             return Arrays.asList(objectMapper.readValue(response.body().string(), StockDataResponseDTO[].class));
+
         }
     }
 }

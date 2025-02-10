@@ -2,9 +2,11 @@ package com.busanit501.api5012.controller.ai;
 
 import com.busanit501.api5012.dto.ai.stock.StockPredictionRequestDTO;
 import com.busanit501.api5012.dto.ai.stock.StockDataResponseDTO;
+import com.busanit501.api5012.dto.ai.stock.StockResultPredictionResponseDTO;
 import com.busanit501.api5012.dto.ai.tools.ToolsPredictionResponseDTO;
 import com.busanit501.api5012.service.ai.StockPredictionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/ai2")
 @RequiredArgsConstructor
+@Log4j2
 public class AiSamsungStockController {
 
     private final StockPredictionService stockPredictionService;
@@ -23,7 +26,7 @@ public class AiSamsungStockController {
 //}
 //📌 요청 URL: POST http://localhost:8080/api/ai2/predict/rnn
     @PostMapping("/predict/rnn")
-    public ResponseEntity<ToolsPredictionResponseDTO> predictWithRNN(@RequestBody StockPredictionRequestDTO requestDTO) throws IOException {
+    public ResponseEntity<StockResultPredictionResponseDTO> predictWithRNN(@RequestBody StockPredictionRequestDTO requestDTO) throws IOException {
         return ResponseEntity.ok(stockPredictionService.predictWithRNN(requestDTO));
     }
 
@@ -33,7 +36,7 @@ public class AiSamsungStockController {
 //    }
 //📌 요청 URL: POST http://localhost:8080/api/ai2/predict/lstm
     @PostMapping("/predict/lstm")
-    public ResponseEntity<ToolsPredictionResponseDTO> predictWithLSTM(@RequestBody StockPredictionRequestDTO requestDTO) throws IOException {
+    public ResponseEntity<StockResultPredictionResponseDTO> predictWithLSTM(@RequestBody StockPredictionRequestDTO requestDTO) throws IOException {
         return ResponseEntity.ok(stockPredictionService.predictWithLSTM(requestDTO));
     }
 
@@ -43,7 +46,8 @@ public class AiSamsungStockController {
 //    }
 //📌 요청 URL: POST http://localhost:8080/api/ai2/predict/gru
     @PostMapping("/predict/gru")
-    public ResponseEntity<ToolsPredictionResponseDTO> predictWithGRU(@RequestBody StockPredictionRequestDTO requestDTO) throws IOException {
+    public ResponseEntity<StockResultPredictionResponseDTO> predictWithGRU(@RequestBody StockPredictionRequestDTO requestDTO) throws IOException {
+        log.info("predictWithGRU requestDTO : {}", requestDTO);
         return ResponseEntity.ok(stockPredictionService.predictWithGRU(requestDTO));
     }
 
