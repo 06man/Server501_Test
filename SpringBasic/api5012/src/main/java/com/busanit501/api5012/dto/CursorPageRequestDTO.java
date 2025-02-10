@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PageRequestDTO2 {
+public class CursorPageRequestDTO {
 
     @Builder.Default
     private int size = 10;  // ✅ 한 번에 불러올 데이터 개수

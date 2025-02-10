@@ -1,7 +1,6 @@
 package com.busanit501.api5012.service;
 
 import com.busanit501.api5012.dto.PredictionResponseDTO;
-import com.busanit501.api5012.service.ImageUploadService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
@@ -11,7 +10,7 @@ import java.io.IOException;
 
 @Service
 @Log4j2
-public class ImageUploadServiceImpl implements ImageUploadService {
+public class AiUploadServiceImpl implements AiUploadService {
 
     private final OkHttpClient client = new OkHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper(); // JSON 파싱을 위한 ObjectMapper

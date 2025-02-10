@@ -3,8 +3,7 @@ package com.busanit501.api5012.repository.search;
 import com.busanit501.api5012.domain.QTodo;
 import com.busanit501.api5012.domain.Todo;
 import com.busanit501.api5012.dto.PageRequestDTO;
-import com.busanit501.api5012.dto.PageRequestDTO2;
-import com.busanit501.api5012.dto.PageResponseDTO2;
+import com.busanit501.api5012.dto.CursorPageRequestDTO;
 import com.busanit501.api5012.dto.TodoDTO;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
@@ -67,7 +66,7 @@ public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSea
     }
 
     @Override
-    public Page<TodoDTO> list2(PageRequestDTO2 pageRequestDTO) {
+    public Page<TodoDTO> list2(CursorPageRequestDTO pageRequestDTO) {
         QTodo todo = QTodo.todo;
         JPQLQuery<Todo> query = from(todo);
 

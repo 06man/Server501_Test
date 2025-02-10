@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -44,11 +43,11 @@ public class TodoController {
     }
 
     @GetMapping(value = "/list2", produces = MediaType.APPLICATION_JSON_VALUE)
-    public PageResponseDTO2<TodoDTO> list2(PageRequestDTO2 pageRequestDTO) {
+    public CursorPageResponseDTO<TodoDTO> list2(CursorPageRequestDTO pageRequestDTO) {
         log.info("Received list cursor: {}", pageRequestDTO.getCursor());
         // ✅ cursor가 null일 때 첫 번째 데이터부터 조회하도록 처리
 //        Long cursorValue = (cursor == null) ? todoService.getMaxTno() : cursor;
-        PageResponseDTO2<TodoDTO> result = todoService.list2(pageRequestDTO);
+        CursorPageResponseDTO<TodoDTO> result = todoService.list2(pageRequestDTO);
         log.info("Received list cursor result: {}", result);
         return result;
     }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @ToString
-public class PageResponseDTO2<E> {
+public class CursorPageResponseDTO<E> {
 
     private List<E> dtoList;
     private Long nextCursor; // ✅ 다음 커서 (다음 페이지 요청 시 사용할 ID)
@@ -17,7 +17,7 @@ public class PageResponseDTO2<E> {
 
 
     @Builder
-    public PageResponseDTO2(List<E> dtoList, Long nextCursor, boolean hasNext, int total) {
+    public CursorPageResponseDTO(List<E> dtoList, Long nextCursor, boolean hasNext, int total) {
         this.dtoList = dtoList;
         this.nextCursor = nextCursor;
         this.hasNext = hasNext;

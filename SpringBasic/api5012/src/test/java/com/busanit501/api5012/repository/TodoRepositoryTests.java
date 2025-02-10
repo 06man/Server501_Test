@@ -2,7 +2,7 @@ package com.busanit501.api5012.repository;
 
 import com.busanit501.api5012.domain.Todo;
 import com.busanit501.api5012.dto.PageRequestDTO;
-import com.busanit501.api5012.dto.PageRequestDTO2;
+import com.busanit501.api5012.dto.CursorPageRequestDTO;
 import com.busanit501.api5012.dto.TodoDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -52,7 +52,7 @@ public class TodoRepositoryTests {
         log.info("✅ [Test] 특정 조건(기간, 완료 여부, 키워드) + 커서 기반 페이지네이션 테스트");
 
         // ✅ PageRequestDTO2 생성 (검색 조건 포함)
-        PageRequestDTO2 pageRequestDTO = PageRequestDTO2.builder()
+        CursorPageRequestDTO pageRequestDTO = CursorPageRequestDTO.builder()
                 .size(size)
                 .cursor(cursor)
                 .from(LocalDate.of(2022, 10, 1)) // 2022년 10월 1일부터
