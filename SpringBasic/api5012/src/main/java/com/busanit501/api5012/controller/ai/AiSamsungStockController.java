@@ -49,6 +49,8 @@ public class AiSamsungStockController {
 
 //    ✅ 삼성전자 주식 데이터 조회 (GET)
 //📌 요청 URL: GET http://localhost:8080/api/ai2/stock-data?period=5d
+    // 예시) period=1d, period=5d, period=1mo, period=3mo, period=6mo, period=1y
+
     @GetMapping("/stock-data")
     public ResponseEntity<List<StockDataResponseDTO>> getStockData(@RequestParam String period) throws IOException {
         return ResponseEntity.ok(stockPredictionService.getStockData(period));
