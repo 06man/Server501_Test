@@ -1,6 +1,6 @@
-package com.busanit501.api5012.service;
+package com.busanit501.api5012.service.ai;
 
-import com.busanit501.api5012.dto.PredictionResponseDTO;
+import com.busanit501.api5012.dto.ai.tools.ToolsPredictionResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
@@ -17,7 +17,7 @@ public class AiUploadServiceImpl implements AiUploadService {
 
     @Override
     @Transactional
-    public PredictionResponseDTO sendImageToDjangoServer(byte[] imageBytes, String filename) throws IOException {
+    public ToolsPredictionResponseDTO sendImageToDjangoServer(byte[] imageBytes, String filename) throws IOException {
 
         log.info("sendImageToDjangoServer filename : " + filename);
         // 이미지 파일을 MultipartBody로 구성
@@ -46,7 +46,7 @@ public class AiUploadServiceImpl implements AiUploadService {
             log.info("responseBody : " + responseBody);
 
             // 응답을 PredictionResponseDTO 객체로 변환
-            return objectMapper.readValue(responseBody, PredictionResponseDTO.class);
+            return objectMapper.readValue(responseBody, ToolsPredictionResponseDTO.class);
         }
     }
 }

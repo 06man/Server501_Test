@@ -1,12 +1,10 @@
-package com.busanit501.api5012.dto;
+package com.busanit501.api5012.dto.ai.tools;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.Map;
-
 @Data
-public class PredictionResponseDTO {
+public class ToolsPredictionResponseDTO {
 
     private String filename; // Flask 응답의 filename 필드
 

@@ -1,7 +1,7 @@
-package com.busanit501.api5012.controller;
+package com.busanit501.api5012.controller.ai;
 
-import com.busanit501.api5012.dto.PredictionResponseDTO;
-import com.busanit501.api5012.service.AiUploadService;
+import com.busanit501.api5012.dto.ai.tools.ToolsPredictionResponseDTO;
+import com.busanit501.api5012.service.ai.AiUploadService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,21 +15,21 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/ai")
 @Log4j2
-public class AiRestController {
+public class AiToolsRestController {
 
     private final AiUploadService aiUploadService;
 
     @Autowired
-    public AiRestController(AiUploadService aiUploadService) {
+    public AiToolsRestController(AiUploadService aiUploadService) {
         this.aiUploadService = aiUploadService;
     }
 
     @PostMapping("/tool_predict")
-    public PredictionResponseDTO uploadImage(@RequestParam(value = "image", required = false) MultipartFile image) throws IOException {
+    public ToolsPredictionResponseDTO uploadImage(@RequestParam(value = "image", required = false) MultipartFile image) throws IOException {
         // Django 서버로 이미지 전송 및 응답 처리
         //
         log.info("image 확인 : " + image);
-        PredictionResponseDTO responseDTO = aiUploadService.sendImageToDjangoServer(image.getBytes(), image.getOriginalFilename());
+        ToolsPredictionResponseDTO responseDTO = aiUploadService.sendImageToDjangoServer(image.getBytes(), image.getOriginalFilename());
 
         // PredictionResponseDTO 객체를 JSON으로 반환
         return responseDTO;
