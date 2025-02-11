@@ -32,4 +32,19 @@ public class AiPredictionResponseDTO {
 
     @JsonProperty("download_url")
     private String downloadUrl; // YOLO 결과물의 다운로드 URL
+
+    @JsonProperty("message")
+    private String message; // YOLO 결과물의 message
+
+    @JsonProperty("request_id")
+    private String requestId; // YOLO 결과물의 requestId
+
+    @JsonProperty("file_type")
+    private String fileType; // YOLO 결과물의 file_type
+
+    @JsonProperty("status_url")
+    private String statusUrl; // YOLO 결과물의 status_url
+
+
+
 }
