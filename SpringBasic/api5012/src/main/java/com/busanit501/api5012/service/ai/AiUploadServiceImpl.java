@@ -41,13 +41,17 @@ public class AiUploadServiceImpl implements AiUploadService {
         log.info("🚀 Django 서버에 요청 전송: {}", djangoUrl);
 
         log.info("sendImageToDjangoServer filename : " + filename);
+
+        // ✅ 파일 확장자 확인 (이미지 vs 동영상)
+        MediaType mediaType = isVideoFile(filename) ? MediaType.parse("video/mp4") : MediaType.parse("image/jpeg");
+
         // 이미지 파일을 MultipartBody로 구성
-        RequestBody fileBody = RequestBody.create(imageBytes, MediaType.parse("image/jpeg"));
+        RequestBody fileBody = RequestBody.create(imageBytes, mediaType );
 
         // Multipart request body
         MultipartBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("image", filename, fileBody)
+                .addFormDataPart( "image", filename, fileBody) // ✅ 동영상인 경우 "video" 필드 사용
                 .build();
 
         // Request 객체 생성
@@ -69,5 +73,11 @@ public class AiUploadServiceImpl implements AiUploadService {
             // 응답을 PredictionResponseDTO 객체로 변환
             return objectMapper.readValue(responseBody, AiPredictionResponseDTO.class);
         }
+    }
+
+    private boolean isVideoFile(String filename) {
+        String lowerCaseFilename = filename.toLowerCase();
+        return lowerCaseFilename.endsWith(".mp4") || lowerCaseFilename.endsWith(".avi")
+                || lowerCaseFilename.endsWith(".mov") || lowerCaseFilename.endsWith(".mkv");
     }
 }
