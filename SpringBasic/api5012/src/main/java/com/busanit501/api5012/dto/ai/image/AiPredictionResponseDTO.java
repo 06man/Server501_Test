@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)  // ✅ 예기치 않은 필드는 무시
 public class AiPredictionResponseDTO {
@@ -22,5 +26,10 @@ public class AiPredictionResponseDTO {
     @JsonProperty("predicted_class")
     private String predictedClass; // Flask 응답의 predicted_class 필드
 
+    // ✅ Flask 응답의 이미지 또는 동영상 파일 URL
+    @JsonProperty("file_url")
+    private String fileUrl;  // YOLO 결과물의 미리보기 URL
 
+    @JsonProperty("download_url")
+    private String downloadUrl; // YOLO 결과물의 다운로드 URL
 }

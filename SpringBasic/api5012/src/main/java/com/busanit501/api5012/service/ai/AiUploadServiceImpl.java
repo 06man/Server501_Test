@@ -32,6 +32,9 @@ public class AiUploadServiceImpl implements AiUploadService {
             case 3:
                 djangoUrl = "http://localhost:5000/predict/team3";
                 break;
+            case 4:
+                djangoUrl = "http://localhost:5000/predict/yolo";
+                break;
             default:
                 throw new IllegalArgumentException("❌ 지원되지 않는 팀 번호입니다: " + teamNo);
         }

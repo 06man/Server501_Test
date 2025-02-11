@@ -56,6 +56,7 @@ public class AiSamsungStockController {
 
     @GetMapping("/stock-data")
     public ResponseEntity<List<StockDataResponseDTO>> getStockData(@RequestParam String period) throws IOException {
+        log.info("predictWithGRU period : {}", period);
         return ResponseEntity.ok(stockPredictionService.getStockData(period));
     }
 }
