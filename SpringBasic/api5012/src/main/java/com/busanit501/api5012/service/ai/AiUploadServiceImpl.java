@@ -6,18 +6,25 @@ import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import okhttp3.*;
 import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 
 @Service
 @Log4j2
 public class AiUploadServiceImpl implements AiUploadService {
 
-    private final OkHttpClient client = new OkHttpClient();
+    //    private final OkHttpClient client = new OkHttpClient();
+    private final OkHttpClient client = new OkHttpClient.Builder()
+            .connectTimeout(120, java.util.concurrent.TimeUnit.SECONDS) // ✅ 연결 타임아웃
+            .readTimeout(120, java.util.concurrent.TimeUnit.SECONDS)    // ✅ 읽기 타임아웃
+            .writeTimeout(120, java.util.concurrent.TimeUnit.SECONDS)   // ✅ 쓰기 타임아웃
+            .build();
+
     private final ObjectMapper objectMapper = new ObjectMapper(); // JSON 파싱을 위한 ObjectMapper
 
     @Override
     @Transactional
-    public AiPredictionResponseDTO sendImageToDjangoServer(byte[] imageBytes, String filename,  int teamNo) throws IOException {
+    public AiPredictionResponseDTO sendImageToDjangoServer(byte[] imageBytes, String filename, int teamNo) throws IOException {
 
         String djangoUrl;
 
@@ -46,12 +53,12 @@ public class AiUploadServiceImpl implements AiUploadService {
         MediaType mediaType = isVideoFile(filename) ? MediaType.parse("video/mp4") : MediaType.parse("image/jpeg");
 
         // 이미지 파일을 MultipartBody로 구성
-        RequestBody fileBody = RequestBody.create(imageBytes, mediaType );
+        RequestBody fileBody = RequestBody.create(imageBytes, mediaType);
 
         // Multipart request body
         MultipartBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart( "image", filename, fileBody) // ✅ 동영상인 경우 "video" 필드 사용
+                .addFormDataPart("image", filename, fileBody) // ✅ 동영상인 경우 "video" 필드 사용
                 .build();
 
         // Request 객체 생성
