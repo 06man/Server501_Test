@@ -31,15 +31,19 @@ public class AiUploadServiceImpl implements AiUploadService {
         // ✅ 팀 번호에 따라 URL 분기
         switch (teamNo) {
             case 1:
+//                djangoUrl = "http://43.200.40.31:5000/predict/team1";
                 djangoUrl = "http://localhost:5000/predict/team1";
                 break;
             case 2:
+//                djangoUrl = "http://43.200.40.31:5000/predict/team2";
                 djangoUrl = "http://localhost:5000/predict/team2";
                 break;
             case 3:
+//                djangoUrl = "http://43.200.40.31:5000/predict/team3";
                 djangoUrl = "http://localhost:5000/predict/team3";
                 break;
             case 4:
+//                djangoUrl = "http://43.200.40.31:5000/predict/yolo";
                 djangoUrl = "http://localhost:5000/predict/yolo";
                 break;
             default:

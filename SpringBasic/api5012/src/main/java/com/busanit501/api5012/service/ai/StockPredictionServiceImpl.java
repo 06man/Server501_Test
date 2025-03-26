@@ -19,6 +19,7 @@ public class StockPredictionServiceImpl implements StockPredictionService {
 
     private final OkHttpClient client = new OkHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
+//    private final String FLASK_SERVER_URL = "http://43.200.40.31:5000";
     private final String FLASK_SERVER_URL = "http://localhost:5000";
 
     private StockResultPredictionResponseDTO sendPredictionRequest(String endpoint, StockPredictionRequestDTO requestDTO) throws IOException, JsonProcessingException {
