@@ -45,6 +45,10 @@ public class AiPredictionResponseDTO {
     @JsonProperty("status_url")
     private String statusUrl; // YOLO 결과물의 status_url
 
+    @JsonProperty("s3_url")
+    private String s3Url; // YOLO 결과물의 status_url
 
+    @JsonProperty("original_url")
+    private String originalUrl; // YOLO 결과물의 status_url
 
 }
